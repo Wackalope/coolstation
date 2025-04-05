@@ -16,7 +16,7 @@
 	icon_state = "mw"
 	density = 1
 	anchored = 1
-	flags = FPRINT | FLUID_SUBMERGE | TGUI_INTERACTIVE | TABLEPASS
+	flags = FPRINT | FLUID_SUBMERGE | TGUI_INTERACTIVE | TABLEPASS | SOUND_UPDATE
 	object_flags = CAN_BE_LIFTED
 	/// Current number of eggs inside the microwave
 	var/egg_amount = 0
@@ -60,6 +60,14 @@
 	throw_speed = 2
 	throw_range = 3
 	throwforce = 15
+
+	var/microwavechannel = null
+
+	proc/finshed()
+		var/stopsound = sound(null, wait = 0, channel = src.microwavechannel, repeat = 0)
+		for(var/client/C in clients)
+			C << stopsound
+		playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 
 	throw_end(list/params, turf/thrown_from)
 		. = ..()
@@ -296,7 +304,10 @@ obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			/// If cook was pressed in the menu
 			if(operation == 1)
 				src.visible_message("<span class='notice'>The microwave turns on.</span>")
-				playsound(src.loc, 'sound/machines/microwave_start.ogg', 50, 0)
+				playsound(src.loc, 'sound/machines/microwave_start.ogg', 8, 0)
+				SPAWN_DBG(0.5 SECONDS)
+					src.microwavechannel = playsound(src.loc, 'sound/machines/microwave_loop.ogg', 10, 0, repeat=1, source_atom = src)
+
 				var/diceinside = 0
 				for(var/obj/item/dice/D in src.contents)
 					if(!diceinside)
@@ -367,7 +378,7 @@ obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
 				return
 			src.icon_state = "mw"
 			if(!isnull(src.being_cooked))
-				playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
+				src.finished()
 				if(istype(src.being_cooked, /obj/item/reagent_containers/food/snacks/burger/humanburger))
 					src.being_cooked.name = "[humanmeat_name] [src.being_cooked.name]"
 				if(istype(src.being_cooked, /obj/item/reagent_containers/food/snacks/donkpocket))
