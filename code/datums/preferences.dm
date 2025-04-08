@@ -82,6 +82,8 @@ datum/preferences
 	var/tgui_fancy = TRUE
 	var/tgui_lock = FALSE
 
+	var/chui/window/preferences/chuiwindow
+
 	var/tooltip_option = TOOLTIP_ALWAYS
 
 	var/regex/character_name_validation = null //This regex needs to match the name in order to consider it a valid name
@@ -1023,6 +1025,10 @@ datum/preferences
 
 	proc/ShowChoices(mob/user)
 		src.ui_interact(user)
+		if(!src.chuiwindow)
+			src.chuiwindow = new /chui/window/preferences(src, src.preview)
+		chuiwindow.Subscribe(user.client)
+
 
 	proc/ResetAllPrefsToMed(mob/user)
 		src.job_favorite = null
@@ -1999,3 +2005,27 @@ var/global/list/female_screams = list("female", "femalescream1", "femalescream2"
 /proc/crap_checkbox(var/checked)
 	if (checked) return "&#9745;"
 	else return "&#9744;"
+
+
+
+/chui/window/preferences
+	name = "Character Creator"
+	windowSize = "350x500"
+	//user.client << browse_rsc('browserassets/css/clothingbooth.css')
+	//user.client << browse_rsc('browserassets/js/clothingbooth.js')
+	//user.client << browse(replacetext(replacetext(replacetext(grabResource("html/clothingbooth.html"), "!!BOOTH_LIST!!", clothingbooth_json), "!!SRC_REF!!", "\ref[src]"), "!!PREVIEW_ID!!", src.preview.preview_id), "window=ClothingBooth;size=600x600;can_resize=1;can_minimize=1;")
+	css = list('browserassets/css/clothingbooth.css')
+	js = list('browserassets/js/clothingbooth.js')
+
+	var/datum/character_preview/preview = null
+
+	New(var/atom/charactercreatoratom, var/datum/character_preview/_preview = null)
+		src.preview = _preview
+		..()
+
+
+	GetBody()
+		var/html = replacetext(replacetext(replacetext(grabResource("html/clothingbooth.html"), "!!BOOTH_LIST!!", clothingbooth_json), "!!SRC_REF!!", "\ref[src]"), "!!PREVIEW_ID!!", src.preview.preview_id)
+		return html
+
+

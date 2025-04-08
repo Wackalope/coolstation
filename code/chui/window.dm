@@ -17,6 +17,12 @@ chui/window
 	//It is automatically changed to the datum type in New()
 	var/chui/theme/theme = "base"
 
+	//A list of JS files to include in the window
+	var/list/js = list()
+
+	//A list of CSS files to include in the window
+	var/list/css = list()
+
 	//This is the atom the window is attached to. Can be set in New()
 	//If set, Chui will use it to determine whether or not the viewer
 	//is both in range and is fully conscious to be using the window and
@@ -66,8 +72,9 @@ chui/window
 	//Do not call directly.
 	//Called to generate HTML for a client and desired body text.
 	proc/generate(var/client/victim, var/body)
-		var/list/params = list( "js" = list(), "css" = list(), "title" = src.name, data = list( "ref" = "\ref[src]", "flags" = flags ) )//todo, better this.
+		var/list/params = list( "js" = src.js, "css" = src.css, "title" = src.name, data = list( "ref" = "\ref[src]", "flags" = flags ) )//todo, better this.
 		return theme.generateHeader(params) + theme.generateBody( body, params ) + theme.generateFooter()
+
 
 	//Subscribe a client to use this window.
 	//Chui will open the window on their client and have its content set appropriately.
