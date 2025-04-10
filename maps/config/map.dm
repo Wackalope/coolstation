@@ -88,6 +88,9 @@
 #elif defined(MAP_OVERRIDE_SPIRIT)
 #include "spirit.dm"
 
+#elif defined(MAP_OVERRIDE_TUMBLEWEED)
+#include "tumbleweed.dm"
+
 //Entry below is the "default" map
 #else
 #include "standard.dm"

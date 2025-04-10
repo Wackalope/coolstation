@@ -44,7 +44,8 @@ var/global/list/mapNames = list(
 	"Wrestlemap" = 		list("id" = "WRESTLEMAP", 	"settings" = "wrestlemap", 		"playerPickable" = ASS_JAM),
 	"pod_wars" = 		list("id" = "POD_WARS", 	"settings" = "pod_wars", 		"playerPickable" = 0),
 	"blank" = 			list("id" = "BLANK", 		"settings" = "", 				"playerPickable" = 0),
-	"blank_underwater" =  list("id" = "BLANK_UNDERWATER", "settings" = "", "playerPickable" = 0)
+	"blank_underwater" =  list("id" = "BLANK_UNDERWATER", "settings" = "", "playerPickable" = 0),
+	"TUMBLEWEED" = list("id" = "TUMBLEWEED", "settings" = "tumbleweed", "playerPickable" = 1),
 )
 
 /obj/landmark/map
@@ -282,6 +283,43 @@ var/global/list/mapNames = list(
 		"the escape arm" = list(/area/station/hallway/secondary/exit),
 		"the dank ass observatory" = list(/area/station/crew_quarters/observatory),
 		"the chapel" = list(/area/station/chapel/sanctuary))
+
+
+/datum/map_settings/tumbleweed
+	name = "TUMBLEWEED"
+	walls = /turf/wall/
+	rwalls = /turf/wall/r_wall/
+	auto_walls = 1
+	job_limits_from_landmarks = TRUE
+	goonhub_map = "https://wiki.coolstation.space/wiki/Chunk"
+
+	windows = /obj/window/auto
+	windows_thin = /obj/window
+	rwindows = /obj/window/reinforced
+	rwindows_thin = /obj/window/reinforced
+	windows_crystal = /obj/window/crystal
+	windows_rcrystal = /obj/window/crystal/reinforced
+	window_layer_full = COG2_WINDOW_LAYER
+	window_layer_north = GRILLE_LAYER+0.1
+	window_layer_south = FLY_LAYER+1
+	auto_windows = 1
+
+	ext_airlocks = /obj/machinery/door/airlock/external
+	airlock_style = "fart butt old stuff"
+	firelock_style = /obj/machinery/door/firedoor/border_only
+
+	escape_centcom = /area/shuttle/escape/centcom/destiny
+	escape_outpost = /area/shuttle/escape/outpost/destiny
+	escape_transit = /area/shuttle/escape/transit/destiny
+	escape_station = /area/shuttle/escape/station/destiny
+	escape_def = SHUTTLE_NORTH
+	escape_dir = NORTH
+
+	merchant_left_centcom = /area/shuttle/merchant_shuttle/left_centcom/cogmap
+	merchant_left_station = /area/shuttle/merchant_shuttle/left_station/cogmap
+	merchant_right_centcom = /area/shuttle/merchant_shuttle/right_centcom/cogmap
+	merchant_right_station = /area/shuttle/merchant_shuttle/right_station/cogmap
+
 
 /datum/map_settings/bayoubend
 	name = "BAYOUBEND"
