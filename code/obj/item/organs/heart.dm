@@ -168,3 +168,11 @@
 		<br><span class='bold'>###=-</span></span>"}
 	else
 		return null // give the standard description
+
+/obj/item/organ/heart/cyber/emagged
+	name = "open source cyberheart"
+	desc = "A cybernetic heart. It keeps sparking and oozing a strange fluid."
+	emagged = 1
+	New()
+		..()
+		take_damage(rand(10,20),rand(10,20))

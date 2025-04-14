@@ -78,3 +78,11 @@
 	on_removal()
 		. = ..()
 		overloading = 0
+
+/obj/item/organ/liver/cyber/emagged
+	name = "open source liver"
+	desc = "A 3d printed liver, it has a weird crusty texture."
+	emagged = 1
+	New()
+		..()
+		take_damage(rand(10,20),rand(10,20))

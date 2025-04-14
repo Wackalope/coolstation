@@ -1402,8 +1402,8 @@ Other Coolstation servers: Not Yet!!!</span>"})
 	desc = "An admin can click on this to set stuff up."
 	density = 0
 	anchored = 1
-	icon = 'icons/mob/inhand/hand_general.dmi'
-	icon_state = "DONGS"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "shop"
 	layer = EFFECTS_LAYER_4
 	var/tmp/set_up = FALSE
 	var/tmp/copy_mode = FALSE
@@ -1491,7 +1491,7 @@ Other Coolstation servers: Not Yet!!!</span>"})
 		src.price_text.maptext_width = 132
 		src.price_text.maptext_x = -50
 		src.price_text.maptext_y = -8
-		src.price_text.maptext = "<span class='c vb sh xfont'><font color=green>[price > 0 ? "$[price]" : "FREE"]</font></span>"
+		src.price_text.maptext = "<span class='c vb sh xfont'><font color=green>[price > 0 ? "₺[price]" : "FREE"]</font></span>"
 		src.vis_contents += src.price_text
 		src.price_text.appearance_flags = TILE_BOUND | RESET_COLOR | RESET_ALPHA | KEEP_APART | PIXEL_SCALE
 
@@ -1625,7 +1625,7 @@ Other Coolstation servers: Not Yet!!!</span>"})
 		src.price_text.maptext_width = 132
 		src.price_text.maptext_x = -50
 		src.price_text.maptext_y = -8
-		src.price_text.maptext = "<span class='c vb sh xfont'><font color=green>[price > 0 ? "$[price]" : "FREE"]</font></span>"
+		src.price_text.maptext = "<span class='c vb sh xfont'><font color=green>[price > 0 ? "₺[price]" : "FREE"]</font></span>"
 		src.vis_contents += src.price_text
 		src.price_text.appearance_flags = TILE_BOUND | RESET_COLOR | RESET_ALPHA | KEEP_APART | PIXEL_SCALE
 
@@ -1649,3 +1649,79 @@ Other Coolstation servers: Not Yet!!!</span>"})
 		. = ..()
 		pixel_x = 0
 		pixel_y = 0
+
+/*
+
+   ___  _ __ __ _  __ _ _ __  ___
+  / _ \| '__/ _` |/ _` | '_ \/ __|
+ | (_) | | | (_| | (_| | | | \__ \
+  \___/|_|  \__, |\__,_|_| |_|___/
+             __/ |
+            |___/
+
+*/
+
+/obj/configurable_credit_store/premade/organpart_mid
+	price = 550
+	type_to_spawn = /obj/item/organ/heart
+
+	New()
+		price += rand(-3, 6) * 25
+		limit_total = rand(3, 6)
+		type_to_spawn = pick(/obj/item/organ/heart, /obj/item/organ/lung/left, /obj/item/organ/lung/right, /obj/item/organ/kidney/left, /obj/item/organ/kidney/right, /obj/item/organ/liver, /obj/item/organ/spleen, /obj/item/organ/eye/cyber/nightvision)
+		pixel_x = 0
+		pixel_y = 0
+		. = ..()
+
+/obj/configurable_credit_store/premade/organpart_low
+	price = 300
+	type_to_spawn = /obj/item/organ/heart
+
+	New()
+		price += rand(-3, 6) * 15
+		limit_total = rand(7, 12)
+		type_to_spawn = pick(/obj/item/organ/appendix, /obj/item/organ/intestines, /obj/item/organ/stomach, /obj/item/organ/pancreas, /obj/item/organ/kidney/left, /obj/item/organ/kidney/right, /obj/item/organ/appendix/cyber, /obj/item/organ/eye/left, /obj/item/organ/eye/right)
+		pixel_x = 0
+		pixel_y = 0
+		. = ..()
+
+/obj/configurable_credit_store/premade/organpart_high
+	price = 10000
+	type_to_spawn = /obj/item/organ/heart
+
+	New()
+		price += rand(-3, 6) * 500
+		limit_total = rand(1, 2)
+		type_to_spawn = pick(/obj/item/organ/eye/cyber/thermal, /obj/item/organ/eye/cyber/ecto, /obj/item/organ/eye/cyber/laser, /obj/item/organ/liver/cyber/emagged, /obj/item/organ/liver/cyber, /obj/item/organ/heart/cyber/emagged, /obj/item/organ/heart/cyber)
+		pixel_x = 0
+		pixel_y = 0
+		. = ..()
+
+/*
+   __ _ _   _ _ __  ___  ___
+  / _` | | | | '_ \/ __|/ _ \
+ | (_| | |_| | | | \__ \  __/
+  \__, |\__,_|_| |_|___/\___|
+   __/ |
+  |___/
+*/
+/*
+/obj/configurable_credit_store/premade/gunse_parts_juicer
+	price = 250
+	type_to_spawn = /obj/item/gun_parts/barrel/juicer
+
+	New()
+		price += rand(-3, 6) * 50
+		limit_total = 1
+		type_to_spawn = pick()
+		. = ..()
+
+/obj/configurable_credit_store/premade/gunse_parts_mixed
+	price = 150
+	type_to_spawn = /obj/item/gun_parts/barrel/juicer
+	New()
+		price += rand(-3, 6) * 50
+		limit_total = 1
+		type_to_spawn = pick()
+		. = ..()
+*/
