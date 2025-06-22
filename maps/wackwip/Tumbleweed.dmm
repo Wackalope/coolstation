@@ -61,6 +61,10 @@
 /obj/wingrille_spawn/reinforced,
 /turf/floor/airless/plating,
 /area/radiostation)
+"cf" = (
+/obj/stool/bar,
+/turf/floor,
+/area/space)
 "cg" = (
 /obj/machinery/drainage/big,
 /obj/machinery/shower{
@@ -1516,10 +1520,6 @@
 /obj/grille/catwalk/bob,
 /turf/floor/plating/airless/asteroid/dark,
 /area/radiostation)
-"Cv" = (
-/obj/table/reinforced/bar/auto,
-/turf/space,
-/area/space)
 "CC" = (
 /obj/indestructible/shuttle_corner{
 	dir = 4;
@@ -1655,6 +1655,10 @@
 	},
 /turf/floor/black,
 /area/radiostation)
+"EY" = (
+/obj/table/reinforced,
+/turf/floor,
+/area/space)
 "Fg" = (
 /obj/stool/bench/sauna,
 /turf/floor/yellow,
@@ -2239,6 +2243,11 @@
 	},
 /turf/floor,
 /area/radiostation)
+"Om" = (
+/obj/table/reinforced,
+/obj/stool/bench/auto,
+/turf/floor,
+/area/space)
 "OH" = (
 /obj/machinery/light/small/floor/red,
 /turf/floor,
@@ -2389,6 +2398,10 @@
 /obj/firedoor_spawn,
 /turf/floor,
 /area/radiostation)
+"Tm" = (
+/obj/stool/bench/auto,
+/turf/floor,
+/area/space)
 "Tq" = (
 /obj/machinery/light/fluorescent/cool,
 /obj/grille/catwalk/bob,
@@ -65946,15 +65959,15 @@ zL
 aJ
 aJ
 aJ
-aJ
-aJ
+cf
+cf
 aJ
 aJ
 aJ
 aJ
 zL
 zL
-aJ
+Tm
 aJ
 aJ
 aJ
@@ -66250,16 +66263,16 @@ KV
 KV
 VE
 VE
-aJ
+cf
 aJ
 aJ
 aJ
 zL
 zL
+EY
 aJ
 aJ
-aJ
-aJ
+Tm
 aJ
 aJ
 aJ
@@ -66553,19 +66566,19 @@ aJ
 aJ
 vO
 vO
-aJ
-aJ
-aJ
-zL
-zL
-zL
-aJ
-aJ
-aJ
-aJ
+cf
 aJ
 aJ
 zL
+zL
+Tm
+aJ
+Tm
+EY
+Tm
+aJ
+aJ
+Tm
 zL
 zL
 WB
@@ -66855,7 +66868,7 @@ aJ
 aJ
 aJ
 vO
-aJ
+cf
 aJ
 aJ
 zL
@@ -66863,11 +66876,11 @@ zL
 zL
 aJ
 aJ
+Tm
 aJ
 aJ
 aJ
-aJ
-aJ
+Om
 zL
 zL
 WB
@@ -67157,7 +67170,7 @@ aJ
 aJ
 aJ
 vO
-aJ
+cf
 aJ
 aJ
 aJ
@@ -67459,7 +67472,7 @@ aJ
 aJ
 vO
 vO
-aJ
+cf
 aJ
 aJ
 aJ
@@ -67760,7 +67773,7 @@ aJ
 KV
 vO
 vO
-aJ
+cf
 aJ
 aJ
 aJ
@@ -68060,8 +68073,8 @@ zL
 aJ
 aJ
 aJ
-aJ
-aJ
+cf
+cf
 aJ
 aJ
 aJ
@@ -69563,7 +69576,7 @@ WB
 WB
 WB
 WB
-Cv
+WB
 WB
 WB
 WB
