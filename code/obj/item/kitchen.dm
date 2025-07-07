@@ -1033,6 +1033,28 @@ TRAYS
 		else
 			return ..()
 
+/obj/item/plate/arriba
+	name = "Arriba!™ Ware Plate"
+	desc = "Its a disarmingly vibrant looking plate"
+	stackable = FALSE
+
+/obj/item/plate/arriba/red
+	icon_state = "arriba-red"
+/obj/item/plate/arriba/yellow
+	icon_state = "arriba-yellow"
+/obj/item/plate/arriba/green
+	icon_state = "arriba-green"
+/obj/item/plate/arriba/blue
+	icon_state = "arriba-blue"
+/obj/item/plate/arriba/pink
+	icon_state = "arriba-pink"
+/obj/item/plate/arriba/rad
+	icon_state = "arriba-rad"
+	desc = "Its a disarmingly vibrant looking plate, this one feels a little warm??"
+	New()
+		..()
+		setMaterial(getMaterial("cerenkite"))
+
 /obj/item/plate/tray //this is the big boy!
 	name = "serving tray"
 	desc = "It's a big flat tray for serving food upon."
@@ -1330,7 +1352,7 @@ TRAYS
 		user.update_inhands()
 
 	attackby(obj/item/weapon as obj,mob/user as mob)
-		if(istype(weapon,/obj/item/plate) && !(istype(weapon,/obj/item/plate/tray)))
+		if(istype_exact(weapon,/obj/item/plate))
 			var/obj/item/plate/p = weapon
 			if(!p.ordered_contents.len)
 				if(!(platenum >= platemax))
@@ -1403,7 +1425,7 @@ TRAYS
 			qdel(src)
 
 	MouseDrop_T(atom/movable/a as mob|obj, mob/user as mob)
-		if(istype(a, /obj/item/plate))
+		if(istype_exact(a, /obj/item/plate))
 			if(src.platenum >= platemax)
 				boutput(user,"<span class='alert'><b>The plates are piled too high!</b></span>")
 				return

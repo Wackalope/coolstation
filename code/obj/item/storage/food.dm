@@ -26,6 +26,12 @@
 	spawn_contents = list(/obj/item/plate = 4,\
 	/obj/item/reagent_containers/food/drinks/bowl = 3)
 
+/obj/item/storage/box/arriba
+	name = "Arriba!™ Ware Box"
+	icon_state = "arriba"
+	desc = "A box of festive looking plates, one wonders how they made the colors so vibrant..."
+	spawn_contents = list(/obj/item/plate/arriba/red,/obj/item/plate/arriba/yellow,/obj/item/plate/arriba/green,/obj/item/plate/arriba/blue,/obj/item/plate/arriba/pink,/obj/item/plate/arriba/rad)
+
 /obj/item/storage/box/donkpocket_kit
 	name = "\improper Donk-Pockets box"
 	desc = "Remember to fully heat prior to serving.  Product will cool if not eaten within seven minutes."
