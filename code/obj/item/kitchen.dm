@@ -1053,7 +1053,8 @@ TRAYS
 	desc = "Its a disarmingly vibrant looking plate, this one feels a little warm??"
 	New()
 		..()
-		setMaterial(getMaterial("cerenkite"))
+		setMaterial(getMaterial("cerenkite"), FALSE, FALSE, FALSE)
+
 
 /obj/item/plate/tray //this is the big boy!
 	name = "serving tray"
