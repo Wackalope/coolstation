@@ -2248,6 +2248,9 @@
 /obj/stool/bench/auto,
 /turf/floor,
 /area/space)
+"Ou" = (
+/turf/floor/plating/damaged1,
+/area/radiostation)
 "OH" = (
 /obj/machinery/light/small/floor/red,
 /turf/floor,
@@ -46916,7 +46919,7 @@ rc
 rc
 rc
 rc
-rc
+Ou
 qk
 Mi
 TJ
