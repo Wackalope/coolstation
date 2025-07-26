@@ -43,6 +43,7 @@
 			qdel(P)
 
 
+
 /* ._.-'~'-._.-'~'-._.-'~'-._.-'~'-._.-'~'-._.-'~'-._.-'~'-._. */
 /*-=-=-=FUCK I AM TIRED OF MAPING WITH NON-PATHED FLOORS-=-=-=-*/
 /*-=-=-I GUESS I'LL DO THIS FOR EVERY FUCKING FLOOR EVER-=-=-=-*/
@@ -152,6 +153,14 @@
 /turf/floor/grime
 	icon_state = "floorgrime"
 	permadirty = 1
+
+/turf/floor/random
+
+	New()
+		..()
+		if(prob(15))
+			icon = 'icons/turf/randomfloors.dmi'
+			icon_state = "[rand(1,32)]"
 
 /////////////////////////////////////////
 
@@ -538,6 +547,8 @@
 	other
 		dir = 4
 
+/turf/floor/sunset
+	icon_state = "sunset"
 /////////////////////////////////////////
 
 /turf/floor/circuit
