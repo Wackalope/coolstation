@@ -13,6 +13,9 @@
 #elif defined(MAP_OVERRIDE_CLARION)
 #include "clarion.dm"
 
+#elif defined(MAP_OVERRIDE_COOKIE)
+#include "cookie.dm"
+
 #elif defined(MAP_OVERRIDE_BOBMAP)
 #include "bobmap.dm"
 

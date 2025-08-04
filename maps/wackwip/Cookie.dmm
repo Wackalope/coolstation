@@ -2389,6 +2389,12 @@
 	dir = 1
 	},
 /area/space)
+"yC" = (
+/obj/landmark/map{
+	name = "COOKIE"
+	},
+/turf/space,
+/area/space)
 "yD" = (
 /obj/table/tool_cart/prepared,
 /turf/floor/industrial,
@@ -5527,7 +5533,7 @@ gU
 gU
 gU
 gU
-gU
+yC
 "}
 (2,1,1) = {"
 eQ
