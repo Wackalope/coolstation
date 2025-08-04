@@ -45,3 +45,14 @@
 	anchored = 1.0
 	opacity = 0
 	density = 0
+
+/obj/phone_sign
+	desc = "A simple depiction of a phone."
+	name = "phone sign"
+	icon = 'icons/obj/decals/wallsigns.dmi'
+	icon_state = "phone"
+	anchored = 1.0
+	density = 0
+	opacity = 0
+	plane = PLANE_NOSHADOW_BELOW
+

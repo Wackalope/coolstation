@@ -1275,6 +1275,12 @@
 	icon = 'icons/obj/decals/posters.dmi'
 	icon_state = "dd"
 
+/obj/decal/poster/wallsign/smoke
+	name = "pro-smoking ad"
+	desc = "A pro-smoking ad, the health benefits of smoking are clearly illustrated in fine print"
+	icon = 'icons/obj/decals/posters.dmi'
+	icon_state = "smoke"
+
 /obj/decal/poster/wallsign/wktv
 	name = "WKTV logo"
 	desc = "the WKTV logo printed on a shitty carpet"
