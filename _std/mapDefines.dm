@@ -35,6 +35,10 @@
 
 #define REVERSED_MAP
 
+#elif defined(MAP_OVERRIDE_NOYADE)
+
+#define UNDERWATER_MAP 1
+
 #elif defined(MAP_OVERRIDE_OSHAN)
 
 #define UNDERWATER_MAP 1
@@ -65,6 +69,11 @@
 #elif defined(MAP_OVERRIDE_CHUNK)
 
 #elif defined(MAP_OVERRIDE_BAYOUBEND)
+
+#elif defined(MAP_OVERRIDE_PERDUTA)
+#define ABOVEWATER_MAP
+#define MAGINDARA_MAP
+#define Z3_IS_A_STATION_LEVEL //Allows AIs to work (mostly) across upper and lower level
 
 #elif defined(MAP_OVERRIDE_SPIRIT)
 
