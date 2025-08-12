@@ -672,6 +672,10 @@
 	},
 /turf/floor/red/checker,
 /area/radiostation)
+"ef" = (
+/mob/living/critter/small_animal/bird/owl/large/hooty,
+/turf/floor/airless/grass/leafy,
+/area/radiostation)
 "eh" = (
 /obj/machinery/shower{
 	dir = 4;
@@ -1556,6 +1560,10 @@
 	},
 /turf/floor,
 /area/radiostation)
+"iI" = (
+/obj/stool/chair/pew/left,
+/turf/floor/airless/grass/leafy,
+/area/radiostation)
 "iK" = (
 /turf/floor/darkblueblack{
 	dir = 1
@@ -1907,6 +1915,11 @@
 "kr" = (
 /obj/wingrille_spawn/hardened,
 /turf/floor/plating/airless,
+/area/radiostation)
+"ks" = (
+/obj/tree1,
+/obj/item/clothing/under/gimmick/owl,
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "ku" = (
 /obj/table/tool_cart/prepared,
@@ -2510,6 +2523,12 @@
 /obj/machinery/networked/artifact_console,
 /turf/floor/black,
 /area/radiostation)
+"oa" = (
+/obj/shrub{
+	dir = 8
+	},
+/turf/space,
+/area/radiostation)
 "od" = (
 /obj/submachine/chef_sink{
 	dir = 1
@@ -2602,6 +2621,10 @@
 	anchored = 1
 	},
 /turf/floor/grey/blackgrime,
+/area/radiostation)
+"oM" = (
+/obj/stone/random,
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "oN" = (
 /obj/securearea{
@@ -2710,6 +2733,15 @@
 /area/radiostation)
 "ps" = (
 /turf/floor/redblack,
+/area/radiostation)
+"pv" = (
+/obj/shrub{
+	icon = 'icons/obj/stationobjs.dmi';
+	icon_state = "plant_small";
+	layer = 3;
+	pixel_y = 18
+	},
+/turf/space,
 /area/radiostation)
 "py" = (
 /obj/decal/tile_edge{
@@ -3038,6 +3070,14 @@
 /obj/item/paper/book/from_file/dwainedummies,
 /turf/floor/plating,
 /area/radiostation)
+"qV" = (
+/obj/shrub{
+	icon = 'icons/obj/stationobjs.dmi';
+	icon_state = "plant";
+	pixel_y = 12
+	},
+/turf/space,
+/area/radiostation)
 "qX" = (
 /obj/machinery/atmospherics/pipe/simple/insulated/cold/vertical,
 /turf/floor/plating/airless,
@@ -3165,6 +3205,10 @@
 "rJ" = (
 /obj/machinery/vending/alcohol,
 /turf/floor/airless/darkpurple/checker,
+/area/radiostation)
+"rK" = (
+/mob/living/critter/small_animal/bird/owl,
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "rL" = (
 /obj/machinery/light/emergencyflashing/alertonly{
@@ -3316,6 +3360,12 @@
 	},
 /obj/table/glass/auto,
 /turf/floor/carpet/nicebrown,
+/area/radiostation)
+"sl" = (
+/obj/owlerysign/owlplaque{
+	pixel_y = -33
+	},
+/turf/floor/plating/airless,
 /area/radiostation)
 "so" = (
 /obj/machinery/computer3/generic/communications{
@@ -3851,6 +3901,15 @@
 /area/radiostation)
 "uT" = (
 /turf/floor/specialroom/bar,
+/area/radiostation)
+"uV" = (
+/obj/shrub{
+	dir = 4;
+	icon = 'icons/obj/stationobjs.dmi';
+	icon_state = "plant";
+	pixel_y = -3
+	},
+/turf/space,
 /area/radiostation)
 "uW" = (
 /obj/decal/tile_edge/line{
@@ -4985,6 +5044,10 @@
 	dir = 1
 	},
 /area/radiostation)
+"By" = (
+/obj/tree1/elm_random,
+/turf/floor/airless/grass/leafy,
+/area/radiostation)
 "Bz" = (
 /turf/wall/color{
 	color = "#365D87"
@@ -5153,6 +5216,12 @@
 "Cx" = (
 /obj/machinery/atmospherics/valve/digital/purge/horizontal,
 /turf/floor/plating/airless,
+/area/radiostation)
+"Cz" = (
+/obj/shrub{
+	dir = 8
+	},
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "CA" = (
 /obj/window/reinforced/west{
@@ -5574,6 +5643,17 @@
 	},
 /turf/floor/wood/six,
 /area/radiostation)
+"EG" = (
+/obj/shrub{
+	dir = 8;
+	icon = 'icons/obj/stationobjs.dmi';
+	icon_state = "plant";
+	pixel_x = -5
+	},
+/turf/floor/blue/side{
+	dir = 8
+	},
+/area/radiostation)
 "EI" = (
 /obj/machinery/light/fluorescent/ceiling,
 /turf/floor,
@@ -5702,6 +5782,12 @@
 "Fl" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/north,
 /turf/floor/grey/blackgrime,
+/area/radiostation)
+"Fm" = (
+/obj/shrub{
+	dir = 6
+	},
+/turf/space,
 /area/radiostation)
 "Fo" = (
 /obj/machinery/atmospherics/pipe/simple/insulated/horizontal,
@@ -5947,6 +6033,13 @@
 	icon_state = "4-8"
 	},
 /turf/floor/airless/black/grime,
+/area/radiostation)
+"GD" = (
+/obj/shrub{
+	dir = 1;
+	icon_state = "shrub"
+	},
+/turf/space,
 /area/radiostation)
 "GF" = (
 /turf/floor/purpleblack{
@@ -6376,6 +6469,10 @@
 "IM" = (
 /turf/floor,
 /area/space)
+"IN" = (
+/obj/item/clothing/mask/owl_mask,
+/turf/floor/airless/grass/leafy,
+/area/radiostation)
 "IQ" = (
 /obj/window/reinforced/east,
 /obj/machinery/computer/arcade{
@@ -6677,6 +6774,10 @@
 "Kh" = (
 /obj/bookshelf/long/end_left,
 /turf/floor/wood/eight,
+/area/radiostation)
+"Kk" = (
+/obj/stool/chair/pew/right,
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "Km" = (
 /obj/machinery/phone/wall{
@@ -7089,6 +7190,10 @@
 /obj/machinery/door/airlock,
 /obj/decal/fakeobjects/firelock_broken,
 /turf/floor/carpet/grime3,
+/area/radiostation)
+"Mv" = (
+/obj/stone,
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "Mz" = (
 /obj/table/reinforced/auto{
@@ -7705,6 +7810,12 @@
 	},
 /turf/floor/black/grime,
 /area/radiostation)
+"Qw" = (
+/obj/shrub{
+	dir = 6
+	},
+/turf/floor/airless/grass/leafy,
+/area/radiostation)
 "Qy" = (
 /obj/table/glass/auto,
 /turf/floor/red/checker,
@@ -7782,6 +7893,12 @@
 "Rb" = (
 /obj/window/reinforced/east,
 /turf/floor,
+/area/radiostation)
+"Rc" = (
+/obj/shrub{
+	dir = 10
+	},
+/turf/space,
 /area/radiostation)
 "Rf" = (
 /obj/decal/tile_edge/line/black{
@@ -7948,6 +8065,12 @@
 "RU" = (
 /obj/machinery/door/airlock,
 /turf/floor,
+/area/radiostation)
+"RV" = (
+/obj/shrub{
+	dir = 10
+	},
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "RX" = (
 /obj/decal/tile_edge/line/black{
@@ -8783,6 +8906,16 @@
 /obj/stool/barber_chair,
 /turf/floor/airless/grime,
 /area/radiostation)
+"Xf" = (
+/obj/shrub{
+	desc = "It's probably not suspicious that this plant is not only still alive, but thriving.";
+	dir = 8;
+	icon = 'icons/obj/stationobjs.dmi';
+	icon_state = "plant";
+	tag = "icon-plant (NORTH)"
+	},
+/turf/space,
+/area/radiostation)
 "Xh" = (
 /obj/submachine/laundry_machine{
 	pixel_x = -9;
@@ -8892,6 +9025,9 @@
 "XJ" = (
 /obj/table/reinforced/auto,
 /turf/floor/bluewhite,
+/area/radiostation)
+"XK" = (
+/turf/floor/airless/grass/leafy,
 /area/radiostation)
 "XL" = (
 /obj/railing{
@@ -33680,10 +33816,10 @@ BY
 uO
 uO
 BY
-HZ
-HZ
-HZ
-HZ
+BY
+BY
+BY
+BY
 HZ
 HZ
 HZ
@@ -33897,9 +34033,9 @@ HZ
 HZ
 HZ
 HZ
+uV
 HZ
-HZ
-HZ
+oa
 HZ
 HZ
 HZ
@@ -33982,11 +34118,11 @@ BY
 ul
 BY
 BY
-HZ
-HZ
-HZ
-HZ
-HZ
+Kk
+XK
+rK
+BY
+BY
 HZ
 HZ
 HZ
@@ -34199,9 +34335,9 @@ HZ
 HZ
 HZ
 HZ
+qV
 HZ
-HZ
-HZ
+Rc
 HZ
 HZ
 HZ
@@ -34284,11 +34420,11 @@ uO
 uO
 uO
 BY
-HZ
-HZ
-HZ
-HZ
-HZ
+iI
+IN
+ks
+XK
+BY
 HZ
 HZ
 HZ
@@ -34501,9 +34637,9 @@ HZ
 HZ
 HZ
 HZ
+Xf
 HZ
-HZ
-HZ
+Fm
 HZ
 HZ
 HZ
@@ -34586,11 +34722,11 @@ uO
 uO
 uO
 BY
-HZ
-HZ
-HZ
-HZ
-HZ
+XK
+XK
+XK
+Qw
+BY
 HZ
 HZ
 HZ
@@ -34803,9 +34939,9 @@ HZ
 HZ
 HZ
 HZ
+pv
 HZ
-HZ
-HZ
+GD
 HZ
 HZ
 HZ
@@ -34886,13 +35022,13 @@ BY
 BY
 uO
 uO
-uO
+sl
 BY
-HZ
-HZ
-HZ
-HZ
-HZ
+rK
+Mv
+rK
+ef
+BY
 HZ
 HZ
 HZ
@@ -35189,12 +35325,12 @@ BY
 uO
 uO
 uO
+LO
+XK
+XK
+RV
+XK
 BY
-HZ
-HZ
-HZ
-HZ
-HZ
 HZ
 HZ
 HZ
@@ -35492,11 +35628,11 @@ uO
 uO
 uO
 BY
-HZ
-HZ
-HZ
-HZ
-HZ
+rK
+XK
+XK
+oM
+BY
 HZ
 HZ
 HZ
@@ -35794,11 +35930,11 @@ uO
 uO
 uO
 BY
-HZ
-HZ
-HZ
-HZ
-HZ
+Cz
+XK
+XK
+By
+BY
 HZ
 HZ
 HZ
@@ -36097,10 +36233,10 @@ uO
 uO
 BY
 BY
-HZ
-HZ
-HZ
-HZ
+XK
+XK
+rK
+BY
 HZ
 HZ
 HZ
@@ -36400,9 +36536,9 @@ uO
 uO
 BY
 BY
-HZ
-HZ
-HZ
+BY
+BY
+BY
 HZ
 HZ
 HZ
@@ -36702,7 +36838,7 @@ uO
 uO
 uO
 BY
-HZ
+BY
 HZ
 HZ
 HZ
@@ -47554,7 +47690,7 @@ iO
 ZG
 rZ
 rZ
-rZ
+EG
 BY
 BY
 EM
@@ -55089,7 +55225,7 @@ BY
 BY
 BY
 BY
-HZ
+BY
 BY
 uO
 uO
@@ -55391,7 +55527,7 @@ uO
 BY
 uO
 uO
-HZ
+uO
 BY
 uO
 uO
@@ -55693,7 +55829,7 @@ uO
 BY
 uO
 uO
-HZ
+uO
 BY
 uO
 uO
@@ -55995,7 +56131,7 @@ uO
 BY
 uO
 uO
-HZ
+uO
 BY
 uO
 uO
@@ -56297,7 +56433,7 @@ uO
 BY
 uO
 uO
-HZ
+uO
 BY
 uO
 uO
@@ -56599,8 +56735,8 @@ uO
 BY
 uO
 uO
-HZ
 uO
+BY
 uO
 uO
 BY
@@ -56901,8 +57037,8 @@ uO
 BY
 uO
 uO
-HZ
 uO
+BY
 uO
 uO
 BY
@@ -57203,8 +57339,8 @@ uO
 BY
 uO
 uO
-HZ
 uO
+BY
 uO
 uO
 BY
@@ -57505,8 +57641,8 @@ uO
 BY
 BY
 BY
-HZ
-uO
+BY
+BY
 uO
 uO
 BY
@@ -57807,7 +57943,7 @@ uO
 BY
 uO
 uO
-HZ
+uO
 uO
 uO
 uO
