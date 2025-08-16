@@ -11962,10 +11962,6 @@
 /obj/disposalpipe/segment/horizontal,
 /turf/floor/white,
 /area/station/medical/medbay/treatment)
-"lCo" = (
-/obj/decal/cleanable/bigchallenges,
-/turf/wall,
-/area/station/crew_quarters/observatory)
 "lDl" = (
 /obj/disposalpipe/segment/bent/west,
 /turf/floor/plating,
@@ -61381,7 +61377,7 @@ klx
 klx
 ffD
 nDP
-lCo
+klx
 klx
 klx
 klx
