@@ -2204,3 +2204,8 @@ IIIIIIIIII      TTTTTTTTTTT              SSSSSSSSSSSSSSS        PPPPPPPPPP      
 	small
 		color = "#A3DCFF" //stolen from glass mat
 		random_icon_states = list("grit1", "grit2", "grit3", "grit4")
+/obj/decal/cleanable/grime
+	name = "grime"
+	desc = "you shouldn't be able to read me"
+	icon = 'icons/obj/decals/cleanables.dmi'
+	icon_state = "grime"
