@@ -384,6 +384,8 @@ var/f_color_selector_handler/F_Color_Selector
 		ghost_notifier = new /datum/ghost_notification_controller()
 		Z_LOG_DEBUG("Preload", "  respawn_controller")
 		respawn_controller = new /datum/respawn_controls()
+		Z_LOG_DEBUG("Preload", "  train_spotter")
+		train_spotter = new /datum/train_controller()
 
 		Z_LOG_DEBUG("Preload", "hydro_controls set_up")
 		hydro_controls.set_up()
@@ -708,6 +710,7 @@ var/f_color_selector_handler/F_Color_Selector
 	Z_LOG_DEBUG("World/Init", "Setting up process scheduler...")
 	processScheduler.setup()
 
+	UPDATE_TITLE_STATUS("Initializing map")
 	Z_LOG_DEBUG("World/Init", "Running map-specific initialization...")
 	map_settings.init()
 
@@ -822,7 +825,7 @@ var/f_color_selector_handler/F_Color_Selector
 #endif
 	var/newround = 'sound/misc/NewRound.ogg'
 	if (prob(40))
-		newround = pick('sound/misc/NewRound2.ogg', 'sound/misc/NewRound3.ogg', 'sound/misc/NewRound4.ogg', 'sound/misc/NewRound5.ogg', 'sound/misc/NewRound6.ogg', 'sound/misc/NewRound7.ogg', 'sound/misc/NewRound8.ogg', 'sound/misc/NewRound9.ogg', 'sound/misc/TimeForANewRound.ogg')
+		newround = pick('sound/misc/NewRound0.ogg','sound/misc/NewRound1.ogg','sound/misc/NewRound2.ogg', 'sound/misc/NewRound3.ogg', 'sound/misc/NewRound4.ogg', 'sound/misc/NewRound5.ogg', 'sound/misc/NewRound6.ogg', 'sound/misc/NewRound7.ogg', 'sound/misc/NewRound8.ogg', 'sound/misc/NewRound9.ogg', 'sound/misc/TimeForANewRound.ogg')
 
 	SPAWN_DBG(world.tick_lag)
 		for (var/client/C)
