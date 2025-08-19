@@ -1076,15 +1076,41 @@ DEFINE_FLOORS(marble/border_wb,
 	name = "stairs"
 	icon_state = "Stairs_alone"
 
-	Entered(atom/A as mob|obj)
-		if (istype(A, /obj/stool/chair/comfy/wheelchair))
-			var/obj/stool/chair/comfy/wheelchair/W = A
-			if (!W.lying && prob(40))
-				if (W.stool_user && W.stool_user.m_intent == "walk")
-					return ..()
-				else
-					W.fall_over(src)
+	Entered(atom/movable/AM as mob|obj, atom/oldLoc)
+		if(AM.event_handler_flags & STAIR_ANIM && !AM.throwing)
+			if(AM.dir & src.dir)
+				animate_stairs(AM)
+				if (istype(AM, /obj/stool/chair))
+					var/obj/stool/chair/W = AM
+					if (W.stool_user && W.stool_user.m_intent == "walk")
+						return ..()
+					else
+						var/turf/target = get_edge_target_turf(W, src.dir)
+						W.fall_over(src)
+						W.throw_at(target, 1, 0.2, end_throw_callback = list(src, PROC_REF(i_warned_you_about)))
+			else
+				animate_stairs(AM)
+				if (istype(AM, /obj/stool/chair))
+					var/obj/stool/chair/W = AM
+					if(W.stool_user)
+						if(prob(W.stool_user.m_intent == "walk" ? 80 : 99))
+							if(prob(20))
+								W.stool_user.changeStatus("weakened", 1 SECONDS)
+							SPAWN_DBG(rand(1,2))
+								step(W, src.dir)
+					else if(prob(70))
+						SPAWN_DBG(rand(1,2))
+							var/turf/floor/stairs/stairs = get_turf(W)
+							if(istype(stairs))
+								step(W, stairs.dir)
 		..()
+
+	proc/i_warned_you_about(var/datum/thrown_thing/thr)
+		if(istype(get_turf(thr.thing), /turf/floor/stairs))
+			animate_stairs(thr.thing)
+			thr.range++
+			thr.speed += 0.1
+			return TRUE
 
 /turf/floor/stairs/wide
 	icon_state = "Stairs_wide"

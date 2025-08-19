@@ -11962,6 +11962,10 @@
 /obj/disposalpipe/segment/horizontal,
 /turf/floor/white,
 /area/station/medical/medbay/treatment)
+"lCo" = (
+/obj/decal/cleanable/gang_graffiti/bigchallenges,
+/turf/wall,
+/area/station/crew_quarters/observatory)
 "lDl" = (
 /obj/disposalpipe/segment/bent/west,
 /turf/floor/plating,
@@ -16844,6 +16848,15 @@
 /obj/storage/closet/fire,
 /turf/floor/plating,
 /area/station/maintenance/central)
+"qsQ" = (
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/decal/cleanable/gang_graffiti/bigchallenges,
+/turf/wall,
+/area/station/crew_quarters/observatory)
 "qum" = (
 /obj/disposalpipe/segment/bent/east,
 /turf/floor,
@@ -61377,7 +61390,7 @@ klx
 klx
 ffD
 nDP
-klx
+lCo
 klx
 klx
 klx

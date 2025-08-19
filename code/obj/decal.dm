@@ -435,7 +435,7 @@ obj/decal/fakeobjects
 	layer = OBJ_LAYER
 
 /obj/decal/slipmat
-	name = "Anti Slip mat"
+	name = "anti slip mat"
 	desc = "A ratty rubber mat that protects you from slipping. Probably."
 	density = 0
 	anchored = 1
@@ -444,7 +444,7 @@ obj/decal/fakeobjects
 	layer = OBJ_LAYER
 
 /obj/decal/slipmat/torn
-	name = "Torn anti slip mat"
+	name = "torn anti slip mat"
 	icon_state = "slipmat_torn"
 
 /obj/decal/alienflower
@@ -658,12 +658,12 @@ obj/decal/fakeobjects
 	var/strike_time = 1 SECOND
 	var/volume = 50
 
-	New()
+	New(atom/newLoc, var/y_offset)
 		..()
-		src.pixel_y =  abs(src.height * 32)
+		src.pixel_y = abs(src.height * 32) + y_offset
 		if(src.volume)
 			playsound(src, pick(big_explosions), 50, TRUE, extrarange = 10, flags = SOUND_IGNORE_SPACE)
-		animate(src, time = src.strike_time / 8, pixel_y = abs(src.height * 16 - 8), flags = ANIMATION_PARALLEL)
+		animate(src, time = src.strike_time / 8, pixel_y = abs(src.height * 16 - 8) + y_offset, flags = ANIMATION_PARALLEL)
 		animate(time = src.strike_time / 8, transform = matrix(1,src.height,MATRIX_SCALE))
 		animate_ripple(src,8,shake_intensity,0.2)
 		SPAWN_DBG(strike_time)
@@ -682,3 +682,11 @@ obj/decal/fakeobjects
 	volume = 0
 	alpha = 128
 
+/obj/decal/myliemural
+	name = "floor mural"
+	desc = "Someone, presumably the owner of this office, has painted a massive wine glass across the floor."
+	icon = 'icons/obj/large/128x160.dmi'
+	icon_state = "myliemural"
+	bound_height = 160
+	bound_width = 128
+	plane = PLANE_NOSHADOW_BELOW
