@@ -127,7 +127,7 @@
 	onMaterialChanged()
 		..()
 		if(istype(src.material))
-			pressure_resistance = floor((material.getProperty("density") + material.getProperty("density")) / 2)
+			//pressure_resistance = floor((material.getProperty("density") + material.getProperty("density")) / 2)
 			throwforce = floor(max(material.getProperty("hard"),1) / 8)
 			throwforce = max(throwforce, initial(throwforce))
 			quality = src.material.quality
@@ -516,6 +516,7 @@
 /obj/overlay
 	name = "overlay"
 	anchored = TRUE
+	pass_unstable = FALSE
 	mat_changename = 0
 	mat_changedesc = 0
 	density = 0
