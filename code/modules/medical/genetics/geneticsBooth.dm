@@ -39,7 +39,7 @@
 	icon_state = "genebooth"
 	pass_unstable = TRUE
 	pixel_x = -3
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	event_handler_flags = USE_FLUID_ENTER | USE_CANPASS
 	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
@@ -97,7 +97,7 @@
 		workingoverlay.pixel_y = 2
 		workingoverlay.layer = src.layer + 0.1
 
-		MAKE_DEFAULT_RADIO_PACKET_COMPONENT("pda", FREQ_PDA)
+		MAKE_SENDER_RADIO_PACKET_COMPONENT("pda", FREQ_PDA)
 
 	disposing()
 		STOP_TRACKING

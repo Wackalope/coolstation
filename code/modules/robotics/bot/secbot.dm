@@ -60,7 +60,7 @@
 	icon_state = "secbot0"
 	layer = 5.0 //TODO LAYER
 	density = 0
-	anchored = 0
+	anchored = UNANCHORED
 	luminosity = 2
 	req_access = list(access_security)
 	var/weapon_access = access_carrypermit
@@ -252,7 +252,7 @@
 
 		MAKE_DEFAULT_RADIO_PACKET_COMPONENT("control", control_freq)
 		MAKE_DEFAULT_RADIO_PACKET_COMPONENT("beacon", beacon_freq)
-		MAKE_DEFAULT_RADIO_PACKET_COMPONENT("pda", FREQ_PDA)
+		MAKE_SENDER_RADIO_PACKET_COMPONENT("pda", FREQ_PDA)
 
 	speak(var/message, var/sing, var/just_float)
 		if (src.emagged >= 2)
@@ -602,7 +602,7 @@
 			src.icon_state = "secbot[src.on][(src.on && src.emagged >= 2) ? "-wild" : null]"
 		if (src.target.getStatusDuration("weakened"))
 			mode = SECBOT_AGGRO
-			src.anchored = 1
+			src.anchored = ANCHORED
 			src.target_lastloc = M.loc
 			src.KillPathAndGiveUp(KPAGU_CLEAR_PATH)
 		return
@@ -817,7 +817,7 @@
 
 	// look for a criminal in range of the bot
 	proc/look_for_perp()
-		src.anchored = 0
+		src.anchored = UNANCHORED
 		for(var/mob/living/carbon/C in view(7, get_turf(src))) //Let's find us a criminal
 			if ((C.stat) || (C.hasStatus("handcuffed")))
 				continue
@@ -859,7 +859,7 @@
 
 			var/datum/signal/signal = get_free_signal()
 			signal.source = src
-			signal.data["sender"] = src.botnet_id
+			signal.data["sender"] = src.net_id
 			signal.data["command"] = "text_message"
 			signal.data["sender_name"] = src
 			signal.data["group"] = list(MGD_SECURITY, MGA_ARREST)
@@ -974,7 +974,7 @@
 
 	KillPathAndGiveUp(var/give_up = KPAGU_CLEAR_PATH)
 		. = ..()
-		src.anchored = 0
+		src.anchored = UNANCHORED
 		src.icon_state = "secbot[src.on][(src.on && src.emagged >= 2) ? "-wild" : null]"
 		if(give_up == KPAGU_RETURN_TO_GUARD || give_up == KPAGU_CLEAR_ALL)
 			src.oldtarget_name = src.target?.name
@@ -1022,7 +1022,7 @@
 	proc/find_nearest_beacon()
 		nearest_beacon = null
 		new_destination = "__nearest__"
-		post_signal(beacon_freq, "findbeacon", "patrol")
+		post_signal_multiple("beacon", list("findbeacon" = "patrol", "address_tag" = "patrol"))
 		awaiting_beacon = 1
 		SPAWN_DBG(1 SECOND)
 			awaiting_beacon = 0
@@ -1044,7 +1044,7 @@
 	// beacons will return a signal giving their locations
 	proc/set_destination(var/new_dest)
 		new_destination = new_dest
-		post_signal(beacon_freq, "findbeacon", "patrol")
+		post_signal_multiple("beacon", list("findbeacon" = new_dest || "patrol", "address_tag" = new_dest || "patrol"))
 		awaiting_beacon = 1
 
 	// receive a radio signal
@@ -1159,7 +1159,7 @@
 	proc/post_signal_multiple(var/freq, var/list/keyval)
 		var/datum/signal/signal = get_free_signal()
 		signal.source = src
-		signal.data["sender"] = src.botnet_id
+		signal.data["sender"] = src.net_id
 		for(var/key in keyval)
 			signal.data[key] = keyval[key]
 		SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, signal, null, freq)
@@ -1297,7 +1297,7 @@
 				signal.data["group"] = list(MGD_SECURITY, MGA_ARREST)
 				signal.data["address_1"] = "00000000"
 				signal.data["message"] = message2send
-				SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, signal, null, "pda")
+				SEND_SIGNAL(src.master, COMSIG_MOVABLE_POST_RADIO_PACKET, signal, null, "pda")
 
 			switch(master.mode)
 				if(SECBOT_AGGRO)

@@ -4,7 +4,7 @@ obj/machinery/air_sensor
 	name = "Gas Sensor"
 	desc = "A device that detects the composition of the air nearby."
 
-	anchored = 1
+	anchored = ANCHORED
 
 	var/id_tag
 	var/frequency = FREQ_ATMOS2
@@ -64,5 +64,5 @@ obj/machinery/air_sensor
 
 	New()
 		..()
-		MAKE_DEFAULT_RADIO_PACKET_COMPONENT(null, frequency)
+		MAKE_SENDER_RADIO_PACKET_COMPONENT(null, frequency)
 

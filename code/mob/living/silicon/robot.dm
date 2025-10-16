@@ -1213,7 +1213,7 @@
 							if (prob(40))
 								var/turf/T = get_edge_target_turf(user, user.dir)
 								if (isturf(T))
-									src.visible_message("<span class='alert'><B>[user] savagely punches [src], sending them flying!</B></span>")
+									src.visible_message("<span class='alert'><B>[user] savagely punches [src], sending [him_or_her(src)] flying!</B></span>")
 									src.throw_at(T, 10, 2)
 						/*if (user.glove_weaponcheck())
 							user.energyclaws_attack(src)*/
@@ -2133,8 +2133,8 @@
 	proc/borg_death_alert(modifier = ROBOT_DEATH_MOD_NONE)
 		var/message = null
 		var/net_id = generate_net_id(src)
-		var/frequency = 1149
-		var/datum/component/packet_connected/radio/radio_connection = MAKE_DEFAULT_RADIO_PACKET_COMPONENT(null, frequency)
+		var/frequency = FREQ_PDA
+		var/datum/component/packet_connected/radio/radio_connection = MAKE_SENDER_RADIO_PACKET_COMPONENT(null, frequency)
 		var/area/myarea = get_area(src)
 
 		switch(modifier)

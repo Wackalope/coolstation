@@ -82,7 +82,7 @@ WET FLOOR SIGN
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "tsunami"
 	alpha = 175
-	anchored = 1
+	anchored = ANCHORED
 
 	New(var/_loc, var/atom/target)
 		..()
@@ -711,6 +711,10 @@ WET FLOOR SIGN
 				"<span class='notice'>You wipe down [target] with [src].</span>")
 				if (src.reagents.has_reagent("water"))
 					target.clean_forensic()
+				if (istype(target, /obj/item/reagent_containers/food/drinks/))
+					var/obj/item/reagent_containers/food/drinks/d = target
+					if(d.drank_from)
+						d.drank_from = null
 				src.reagents.reaction(target, TOUCH, 5)
 				src.reagents.remove_any(5)
 				JOB_XP(user, "Janitor", 3)
@@ -853,7 +857,7 @@ WET FLOOR SIGN
 	throw_spin = 0
 	var/currentSelection = "wet"
 	var/ownerKey = null
-	anchored = 0
+	anchored = UNANCHORED
 
 	attack_hand(mob/user)
 		if(user.key != ownerKey && ownerKey != null)
@@ -915,7 +919,7 @@ WET FLOOR SIGN
 	icon_state = "holo-wet"
 	alpha = 230
 	pixel_y = 16
-	anchored = 1
+	anchored = ANCHORED
 	layer = EFFECTS_LAYER_BASE
 	var/datum/light/light
 	var/obj/holoparticles/holoparticles
@@ -951,7 +955,7 @@ WET FLOOR SIGN
 	name = ""
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "holoparticles"
-	anchored = 1
+	anchored = ANCHORED
 	alpha= 230
 	pixel_y = 14
 	layer = EFFECTS_LAYER_BASE
@@ -1287,7 +1291,7 @@ WET FLOOR SIGN
 			playsound(master, "sound/effects/suck.ogg", 40, TRUE, 0, 0.5)
 
 /obj/effect/suck
-	anchored = 2
+	anchored = ANCHORED_TECHNICAL
 	mouse_opacity = FALSE
 	plane = PLANE_NOSHADOW_BELOW
 	icon = 'icons/effects/effects.dmi'

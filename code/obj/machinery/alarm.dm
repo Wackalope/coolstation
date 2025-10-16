@@ -6,7 +6,7 @@
 	name = "Air Monitor"
 	icon = 'icons/obj/machines/monitors.dmi'
 	icon_state = "alarm0"
-	anchored = 1.0
+	anchored = ANCHORED
 	var/skipprocess = 0 //Experimenting
 	var/alarm_frequency = FREQ_ALARM
 	var/alarm_zone = null
@@ -22,8 +22,8 @@
 
 /obj/machinery/alarm/New()
 	..()
-	MAKE_DEFAULT_RADIO_PACKET_COMPONENT("alarm", alarm_frequency)
-	MAKE_DEFAULT_RADIO_PACKET_COMPONENT("control", control_frequency) // seems to be unused?
+	MAKE_SENDER_RADIO_PACKET_COMPONENT("alarm", alarm_frequency)
+	MAKE_SENDER_RADIO_PACKET_COMPONENT("control", control_frequency) // seems to be unused?
 
 	if(!alarm_zone)
 		var/area/A = get_area(loc)

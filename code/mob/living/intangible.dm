@@ -5,8 +5,9 @@
 	density = 0
 	canmove = 1
 	blinded = 0
-	anchored = 1
+	anchored = ANCHORED
 	event_handler_flags = USE_CANPASS
+	pass_unstable = PRESERVE_CACHE
 
 	New()
 		. = ..()

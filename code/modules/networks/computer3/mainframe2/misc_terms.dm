@@ -12,7 +12,7 @@
 // Generic testing appartus
 
 /obj/machinery/networked
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	icon = 'icons/obj/machines/networked.dmi'
 	var/net_id = null
@@ -104,7 +104,7 @@
 /obj/machinery/networked/storage
 	name = "Databank"
 	desc = "A networked data storage device."
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	icon_state = "tapedrive0"
 	device_tag = "PNET_DATA_BANK"
@@ -691,7 +691,7 @@
 /obj/machinery/networked/storage/bomb_tester
 	name = "Explosive Simulator"
 	desc = "A networked device designed to simulate and analyze explosions.  Takes two tanks."
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	icon_state = "bomb_scanner0"
 	base_icon_state = "bomb_scanner"
@@ -920,7 +920,7 @@
 
 			vrbomb = new
 			vrbomb.set_loc(B)
-			vrbomb.anchored = 1
+			vrbomb.anchored = ANCHORED
 			vrbomb.tester = src
 
 			var/obj/item/device/timer/T = new
@@ -1053,7 +1053,7 @@
 
 /obj/machinery/networked/nuclear_charge
 	name = "Nuclear Charge"
-	anchored = 2
+	anchored = ANCHORED_TECHNICAL
 	density = 1
 	icon_state = "net_nuke0"
 	desc = "A nuclear charge used as a self-destruct device. Uh oh!"
@@ -1374,7 +1374,7 @@
 /obj/machinery/networked/radio
 	name = "Network Radio"
 	desc = "A networked radio interface."
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	icon_state = "net_radio"
 	device_tag = "PNET_PR6_RADIO"
@@ -1396,8 +1396,8 @@
 		SPAWN_DBG(0.5 SECONDS)
 
 			if (radio_controller)
-				frequencies["[FREQ_AIRLOCK_REMOTE]"] = MAKE_DEFAULT_RADIO_PACKET_COMPONENT("[FREQ_AIRLOCK_REMOTE]", FREQ_AIRLOCK_REMOTE)
-				frequencies["[FREQ_WLNET]"] = MAKE_DEFAULT_RADIO_PACKET_COMPONENT("f[FREQ_WLNET]", FREQ_WLNET)
+				add_frequency(FREQ_AIRLOCK_REMOTE)
+				add_frequency(FREQ_WLNET)
 
 			if(!src.link)
 				var/turf/T = get_turf(src)
@@ -1405,6 +1405,10 @@
 				if(test_link && !DATA_TERMINAL_IS_VALID_MASTER(test_link, test_link.master))
 					src.link = test_link
 					src.link.master = src
+
+	proc/add_frequency(newFreq)
+		frequencies["[newFreq]"] = MAKE_DEFAULT_RADIO_PACKET_COMPONENT("[newFreq]", newFreq)
+		get_radio_connection_by_id(src, "[newFreq]").update_all_hearing(TRUE)
 
 	attack_hand(mob/user as mob)
 		if(..() || (status & (NOPOWER|BROKEN)))
@@ -1537,7 +1541,7 @@
 						var/datum/signal/rsignal = get_free_signal()
 						rsignal.source = src
 						rsignal.data = list("address_1"=target, "command"="ping_reply", "device"=src.device_tag, "netid"=src.net_id, "net"="[net_number]", "sender" = src.net_id)
-						SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, signal, null, connection_id)
+						SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, rsignal, null, connection_id)
 					else
 						src.post_status(target, "command", "ping_reply", "device", src.device_tag, "netid", src.net_id, "net", "[net_number]")
 				return
@@ -1628,7 +1632,7 @@
 						if ("add")
 							var/newFreq = "[round(max(1000, min(text2num(data["_freq"]), 1500)))]"
 							if (newFreq && !(newFreq in frequencies))
-								frequencies[newFreq] = MAKE_DEFAULT_RADIO_PACKET_COMPONENT("f[newFreq]", newFreq)
+								add_frequency(newFreq)
 
 						if ("remove")
 							var/newFreq = "[round(max(1000, min(text2num(data["_freq"]), 1500)))]"
@@ -1663,7 +1667,7 @@
 				rsignal.data["sender"] = src.net_id
 
 				SPAWN_DBG(0)
-					SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, signal, transmission_range, "f[newFreq]")
+					SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, rsignal, transmission_range, "f[newFreq]")
 					flick("net_radio-blink", src)
 				src.post_status(target,"command","term_message","data","command=status&status=success")
 
@@ -1692,7 +1696,7 @@
 /obj/machinery/networked/printer
 	name = "Printer"
 	desc = "A networked printer.  It's designed to print."
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	deconstruct_flags = DECON_SCREWDRIVER | DECON_WRENCH | DECON_WIRECUTTERS | DECON_MULTITOOL | DECON_DESTRUCT
 	icon_state = "printer0"
@@ -2154,7 +2158,7 @@
 /obj/machinery/networked/storage/scanner
 	name = "Scanner"
 	desc = "A networked drum scanner.  It's designed to...scan documents."
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	icon_state = "scanner0"
 	deconstruct_flags = DECON_DESTRUCT
@@ -2742,7 +2746,7 @@
 
 	dir = 2
 	layer = NOLIGHT_EFFECTS_LAYER_BASE
-	anchored = 1.0
+	anchored = ANCHORED
 	flags = TABLEPASS
 	event_handler_flags = USE_HASENTERED | USE_FLUID_ENTER
 
@@ -2797,7 +2801,7 @@
 	//var/obj/beam/ir_beam/next = null
 	var/obj/machinery/networked/secdetector/master = null
 	//var/limit = 24
-	anchored = 1.0
+	anchored = ANCHORED
 	flags = TABLEPASS
 	event_handler_flags = USE_HASENTERED | USE_FLUID_ENTER
 
@@ -3219,7 +3223,7 @@
 	//var/obj/beam/h7_beam/next = null
 	var/obj/machinery/networked/h7_emitter/master = null
 	limit = 48
-	anchored = 1.0
+	anchored = ANCHORED
 	flags = TABLEPASS
 	var/datum/light/light
 

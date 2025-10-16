@@ -6,7 +6,7 @@
 	icon = 'icons/obj/machines/computer.dmi'
 	icon_state = "computer_generic"
 	density = 1
-	anchored = 1.0
+	anchored = ANCHORED
 	var/base_icon_state = "computer_generic"
 	var/temp = "<b>Thinktronic BIOS V2.1</b><br>"
 	var/temp_add = null
@@ -86,7 +86,7 @@
 			icon_state = "datasec"
 			base_icon_state = "datasec"
 			setup_starting_peripheral1 = /obj/item/peripheral/network/powernet_card
-			setup_starting_peripheral2 = /obj/item/peripheral/network/radio/locked/pda
+			setup_starting_peripheral2 = /obj/item/peripheral/network/radio/locked/pda/transmit_only
 			setup_starting_program = /datum/computer/file/terminal_program/secure_records
 
 			console_upper
@@ -156,7 +156,7 @@
 
 			setup_starting_program = /datum/computer/file/terminal_program/engine_control
 			setup_starting_peripheral1 = /obj/item/peripheral/network/powernet_card
-			setup_starting_peripheral2 = /obj/item/peripheral/network/radio/locked/pda
+			setup_starting_peripheral2 = /obj/item/peripheral/network/radio/locked/pda/transmit_only
 			setup_drive_size = 48
 
 			console_upper
@@ -170,7 +170,7 @@
 			manta_computer
 				icon = 'icons/obj/large/32x96.dmi'
 				icon_state = "nuclearcomputer"
-				anchored = 2
+				anchored = ANCHORED_TECHNICAL
 				density = 1
 				bound_height = 96
 				bound_width = 32
@@ -722,7 +722,7 @@ function lineEnter (ev)
 			A.mainboard.integrated_floppy = src.setup_has_internal_disk
 
 
-			A.anchored = 1
+			A.anchored = ANCHORED
 			//dispose()
 			src.dispose()
 

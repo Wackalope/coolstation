@@ -44,9 +44,10 @@ var/mutable_appearance/fluid_ma
 	desc = "It's a free-flowing liquid state of matter!"
 	icon = 'icons/obj/fluid.dmi'
 	icon_state = "15"
-	anchored = 1
+	anchored = ANCHORED
 	mouse_opacity = 1
 	layer = FLUID_LAYER
+	pass_unstable = FALSE
 
 	event_handler_flags = USE_HASENTERED
 

@@ -1,5 +1,5 @@
 var/global/datum/controller/gameticker/ticker
-var/global/current_state = GAME_STATE_WORLD_INIT
+var/global/current_state = GAME_STATE_MAP_LOAD
 /* -- moved to _setup.dm
 #define GAME_STATE_PREGAME		1
 #define GAME_STATE_SETTING_UP	2
@@ -561,6 +561,7 @@ var/global/current_state = GAME_STATE_WORLD_INIT
 					ircmsg["msg"] = "Server would have restarted now, but the restart has been delayed[game_end_delayer ? " by [game_end_delayer]" : null]."
 					ircbot.export("admin", ircmsg)
 				else
+
 					// Put together a package of score data that we can hand off to the discord bot
 					var/list/roundend_score = list(
 						"map" = getMapNameFromID(map_setting),
@@ -579,7 +580,7 @@ var/global/current_state = GAME_STATE_WORLD_INIT
 						"doinks"   = doinkssparked,
 						"clowns"   = clownabuse
 						)
-					ircbot.event("roundend", list("score" = roundend_score))
+					ircbot.event("roundend", roundend_score)
 					//logTheThing("debug", null, null, "Zamujasa: [world.timeofday] REBOOTING THE SERVER!!!!!!!!!!!!!!!!!")
 					Reboot_server()
 

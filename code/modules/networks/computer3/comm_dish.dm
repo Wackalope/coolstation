@@ -2,7 +2,7 @@
 	name = "Communications dish"
 	icon = 'icons/mob/hivebot.dmi'
 	icon_state = "def_radar"
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	var/list/messagetitle = list()
 	var/list/messagetext = list()
@@ -10,7 +10,7 @@
 	var/net_id = null
 	var/obj/machinery/power/data_terminal/link = null
 	//Radio inter-dish communications
-	var/frequency = "0000"
+	var/frequency = FREQ_COMM_DISH
 	var/list/cargo_logs = list()
 
 	mats = 25

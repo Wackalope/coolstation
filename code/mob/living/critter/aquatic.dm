@@ -13,8 +13,6 @@ ABSTRACT_TYPE(/mob/living/critter/aquatic)
 	icon = 'icons/mob/sea_critter.dmi'
 	density = 0
 	hand_count = 1
-	can_disarm = 1
-	can_help = 1
 	butcherable = 1
 
 	is_npc = 1
@@ -174,7 +172,7 @@ ABSTRACT_TYPE(/mob/living/critter/aquatic)
 	// todo: skinresult of scales, custom_brain_type of fish egg item (caviar?)
 
 	throws_can_hit_me = 0
-	ai = null
+	ai_type = /datum/aiHolder/aquatic/fish
 
 	var/swimming_away = 0
 
@@ -191,7 +189,6 @@ ABSTRACT_TYPE(/mob/living/critter/aquatic)
 
 /mob/living/critter/aquatic/fish/New()
 	..()
-	src.ai = new /datum/aiHolder/aquatic/fish(src)
 	animate_bumble(src)
 
 	/*SPAWN_DBG(0)
@@ -374,9 +371,6 @@ ABSTRACT_TYPE(/mob/living/critter/aquatic)
 	base_move_delay = 1
 	density = 1
 	hand_count = 2
-	can_disarm = 1
-	can_help = 1
-	can_grab = 1
 	can_throw = 1
 	can_choke = 1
 	pet_text = "pokes"

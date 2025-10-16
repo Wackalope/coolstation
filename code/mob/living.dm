@@ -33,6 +33,7 @@
 	var/mob/living/ai_target = null
 	var/list/mob/living/ai_target_old = list()
 	var/is_npc = 0
+	var/ai_type
 
 	var/move_laying = null
 	var/static/mutable_appearance/speech_bubble = living_speech_bubble
@@ -81,6 +82,9 @@
 	var/can_throw = 1
 
 	var/grounded_for_projectiles = FALSE
+
+	/// Currently used only in critter setup. Mylie plans to make this an actual thing.
+	var/hand_count = 0
 
 	var/last_heard_name = null
 	var/last_chat_color = null
@@ -145,10 +149,9 @@
 	if (blood_id)
 		all_blood_reagents |= blood_id
 
-//	if (src.use_stamina)
-//		src.stamina_bar = new(src)
-		//stamina bar gets added to the hud in subtypes human and critter... im sorry.
-		//eventual hud merger pls
+	if(src.ai_type)
+		src.is_npc = TRUE
+		src.ai = new ai_type(src)
 
 	SPAWN_DBG(0)
 		src.get_static_image()
@@ -196,6 +199,8 @@
 /mob/living/death(gibbed)
 	#define VALID_MOB(M) (!isVRghost(M) && !isghostcritter(M) && !inafterlife(M))
 	src.remove_ailments()
+	for (var/obj/item/implant/H in src.implant)
+		H.on_death()
 	if (src.key) statlog_death(src, gibbed)
 	if (src.client && ticker.round_elapsed_ticks >= 12000 && VALID_MOB(src))
 		var/num_players = 0
@@ -2148,9 +2153,14 @@ var/global/icon/human_static_base_idiocy_bullshit_crap = icon('icons/mob/human.d
 								secbot.threatlevel = 2
 								secbot.EngageTarget(src)
 
+						for (var/mob/living/critter/robotic/bot/securitron/secbot in target_turf) // punt that beepsky (was_harmed handles anger)
+							src.visible_message("<span class='alert'><b>[src]</b> kicks [secbot] like the football!</span>")
+							var/atom/throw_target = get_edge_target_turf(secbot, target_dir)
+							secbot.throw_at(throw_target, 6, 2)
+
 						if (dive_attack_hit)
-							dive_attack_hit.was_harmed(src, special = "slidekick")
 							dive_attack_hit.TakeDamageAccountArmor("chest", damage, 0, 0, DAMAGE_BLUNT)
+							dive_attack_hit.was_harmed(src, special = "slidekick")
 							playsound(src, 'sound/impact_sounds/Generic_Hit_2.ogg', 50, 1, -1)
 							for (var/mob/O in AIviewers(src))
 								O.show_message("<span class='alert'><B>[src] slides into [dive_attack_hit]!</B></span>", 1)
@@ -2374,12 +2384,17 @@ var/global/icon/human_static_base_idiocy_bullshit_crap = icon('icons/mob/human.d
 	var/dist = GET_DIST(src, target)
 	if(src.abilityHolder)
 		for(var/datum/targetable/ability in src.abilityHolder.abilities)
-			if(ability.attack_mobs && dist <= ability.max_range && ability.cooldowncheck() && !ability.handleCast(target, params))
+			if(ability.attack_mobs && dist <= ability.ai_range && ability.cooldowncheck() && !ability.handleCast(target, params))
 				return 1
 	return 0
 
+/// a "valid target" is POSSIBLE to attack - this should return true for anything you want it to defend itself from, as well
 /mob/living/proc/ai_is_valid_target(mob/M)
 	return M != src
+
+/// the higher the returned value, the better the target is. assume that the target is valid.
+/mob/living/proc/ai_rate_target(mob/M)
+	return 1
 
 /mob/living/proc/reduce_lifeprocess_on_death() //used for AI mobs we dont give a dang about them after theyre dead
 	remove_lifeprocess(/datum/lifeprocess/blood)

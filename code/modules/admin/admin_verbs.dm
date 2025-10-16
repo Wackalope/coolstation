@@ -134,6 +134,7 @@ var/list/admin_verbs = list(
 		/client/proc/cmd_admin_show_player_compids,
 
 		//movement
+		/client/proc/Jump,
 		/client/proc/jump_to_area,
 		/client/proc/jumptomob,
 		/client/proc/jtm,
@@ -432,6 +433,7 @@ var/list/admin_verbs = list(
 		/client/proc/dereplace_space,
 		/client/proc/ghostdroneAll,
 		/client/proc/showPregameHTML,
+		/client/proc/dbg_radio_controller,
 
 		/client/proc/call_proc,
 		/client/proc/call_proc_all,
@@ -453,6 +455,9 @@ var/list/admin_verbs = list(
 		/client/proc/toggle_extra_verbs,
 		/client/proc/cmd_randomize_look,
 		/client/proc/temporary_deadmin_self,
+
+		/client/proc/save_body_persist,
+		/client/proc/load_body_persist,
 
 		//player management
 		// /client/proc/export_banlist,
@@ -802,7 +807,7 @@ var/list/special_pa_observing_verbs = list(
 	return
 
 /client/proc/jump_to_area()
-	set name = "Jump"
+	set name = "Jump Menu"
 	SET_ADMIN_CAT(ADMIN_CAT_SELF)
 	if (src.holder)
 		src.holder.jump_to(usr)

@@ -9,7 +9,7 @@
 #define MAX_FAILED_CLONE_TICKS 200 // vOv
 
 /obj/machinery/clonepod
-	anchored = 1
+	anchored = ANCHORED
 	name = "cloning pod"
 	desc = "An electronically-lockable pod for growing organic tissue."
 	density = 1
@@ -80,7 +80,7 @@
 
 		if (!src.net_id)
 			src.net_id = generate_net_id(src)
-		MAKE_DEFAULT_RADIO_PACKET_COMPONENT("pda", FREQ_PDA)
+		MAKE_SENDER_RADIO_PACKET_COMPONENT("pda", FREQ_PDA)
 
 		if (current_state <= GAME_STATE_PREGAME && src.z == Z_LEVEL_STATION)
 			object_flags |= ROUNDSTART_CLONER_PART
@@ -827,7 +827,7 @@
 	desc = "A tank resembling a rather large blender, designed to recover biomatter for use in cloning."
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "grinder0"
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	mats = 10
 	var/list/pods = null // cloning pods we're tied to

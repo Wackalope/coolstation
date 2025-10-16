@@ -235,7 +235,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade)
 				if (istype(X, /obj))
 					var/area/t = get_area(X)
 					if(t?.sanctuary) continue
-					if (prob(50) && X:anchored != 2)
+					if (prob(50) && X:anchored != ANCHORED_TECHNICAL)
 						step_towards(X,src)
 		qdel(src)
 		return
@@ -304,7 +304,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade)
 			gen.set_active(1)
 			gen.state = 3
 			gen.power = 250
-			gen.anchored = 1
+			gen.anchored = ANCHORED
 			icon_state = "Field_Gen +a"
 		qdel(src)
 
@@ -431,7 +431,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 		if (T)
 			explosion(src, T, -1, -1, -0.25, 1)
 			var/obj/overlay/O = new/obj/overlay(get_turf(T))
-			O.anchored = 1
+			O.anchored = ANCHORED
 			O.name = "Explosion"
 			O.layer = NOLIGHT_EFFECTS_LAYER_BASE
 			O.icon = 'icons/effects/64x64.dmi'
@@ -482,7 +482,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 			explosion_new(src, T, 5.0, 2)
 			playsound(T, "sound/weapons/grenade.ogg", 25, 1)
 			var/obj/overlay/O = new/obj/overlay(get_turf(T))
-			O.anchored = 1
+			O.anchored = ANCHORED
 			O.name = "Explosion"
 			O.layer = NOLIGHT_EFFECTS_LAYER_BASE
 			O.icon = 'icons/effects/64x64.dmi'
@@ -560,7 +560,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 			pulse.icon = 'icons/effects/effects.dmi'
 			pulse.icon_state = "emppulse"
 			pulse.name = "emp pulse"
-			pulse.anchored = 1
+			pulse.anchored = ANCHORED
 			SPAWN_DBG(2 SECONDS)
 				if (pulse) qdel(pulse)
 
@@ -922,7 +922,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 
 	prearmed
 		armed = 1
-		anchored = 1
+		anchored = ANCHORED
 
 		New()
 			SPAWN_DBG(0)
@@ -1012,7 +1012,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 			..()
 		prearmed
 			armed = 1
-			anchored = 1
+			anchored = ANCHORED
 
 			New()
 				SPAWN_DBG(0)
@@ -1041,7 +1041,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 
 /obj/item/gimmickbomb/owlgib/prearmed
 	armed = 1
-	anchored = 1
+	anchored = ANCHORED
 
 	New()
 		SPAWN_DBG(0)
@@ -1050,7 +1050,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 
 /obj/item/gimmickbomb/owlclothes/prearmed
 	armed = 1
-	anchored = 1
+	anchored = ANCHORED
 
 	New()
 		SPAWN_DBG(0)
@@ -1069,7 +1069,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 	icon_state = "firework"
 	opacity = 0
 	density = 0
-	anchored = 0.0
+	anchored = UNANCHORED
 	force = 1.0
 	throwforce = 1.0
 	throw_speed = 1
@@ -1279,7 +1279,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 					src.icon_state = "bcharge2"
 					user.u_equip(src)
 					src.set_loc(get_turf(target))
-					src.anchored = 1
+					src.anchored = ANCHORED
 					src.state = 1
 
 					// Yes, please (Convair880).
@@ -1380,7 +1380,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 					src.icon_state = "bcharge2"
 					user.u_equip(src)
 					src.set_loc(get_turf(target))
-					src.anchored = 1
+					src.anchored = ANCHORED
 					src.state = 1
 
 					// Yes, please (Convair880).
@@ -1417,7 +1417,7 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 				O.name = "Thermite"
 				O.desc = "A searing wall of flames."
 				O.icon = 'icons/effects/fire.dmi'
-				O.anchored = 1
+				O.anchored = ANCHORED
 				O.layer = TURF_EFFECTS_LAYER
 				O.color = "#ff9a3a"
 				var/datum/light/point/light = new
@@ -1949,22 +1949,23 @@ ABSTRACT_TYPE(/obj/item/old_grenade/projectile)
 /mob/proc/blowthefuckup(var/strength = 1,var/visible_message = 1) // similar proc for mobs
 	var/T = get_turf(src)
 	if(visible_message) src.visible_message("<span class='alert'>[src] explodes!</span>")
-	var/sqstrength = sqrt(strength)
-	var/shrapnel_range = 3 + sqstrength
-	for (var/mob/living/carbon/human/M in view(T, shrapnel_range))
-		if(check_target_immunity(M)) continue
-		if (M != src)
-			M.TakeDamage("chest", 15/M.get_ranged_protection(), 0)
-			if (M.get_ranged_protection()>=1.5)
-				boutput(M, "<span class='alert'><b>Your armor blocks the chunks of [src.name]!</b></span>")
-			else
-				var/obj/item/implant/projectile/shrapnel/implanted = new /obj/item/implant/projectile/shrapnel(M)
-				implanted.owner = M
-				M.implant += implanted
-				implanted.implanted(M, null, 25 * sqstrength)
-				boutput(M, "<span class='alert'><b>You are struck by chunks of [src.name]!</b></span>")
-				if (!M.stat)
-					M.emote("scream")
+	if(strength)
+		var/sqstrength = sqrt(strength)
+		var/shrapnel_range = 3 + sqstrength
+		for (var/mob/living/carbon/human/M in view(T, shrapnel_range))
+			if(check_target_immunity(M)) continue
+			if (M != src)
+				M.TakeDamage("chest", 15/M.get_ranged_protection(), 0)
+				if (M.get_ranged_protection()>=1.5)
+					boutput(M, "<span class='alert'><b>Your armor blocks the chunks of [src.name]!</b></span>")
+				else
+					var/obj/item/implant/projectile/shrapnel/implanted = new /obj/item/implant/projectile/shrapnel(M)
+					implanted.owner = M
+					M.implant += implanted
+					implanted.implanted(M, null, 25 * sqstrength)
+					boutput(M, "<span class='alert'><b>You are struck by chunks of [src.name]!</b></span>")
+					if (!M.stat)
+						M.emote("scream")
 
 	explosion_new(src, T, strength, 1)
 	src.gib()

@@ -15,6 +15,7 @@ var/list/ai_move_scheduled = list()
 	var/move_reverse = 0
 	var/move_side = 0 //merge with reverse later ok messy
 	var/move_frustration = 0
+	var/move_frustration_increase = 1
 	var/frustration_turn = 0
 
 	var/move_shuffle_at_target = 0 // chance to shuffle when at the right distance
@@ -130,6 +131,9 @@ var/list/ai_move_scheduled = list()
 		owner.move_dir = 0 //Fuck you wander task
 
 	proc/move_step()
+		SHOULD_NOT_SLEEP(TRUE)
+		if(GET_COOLDOWN(src.owner, "ACTION_BLOCKING_AI_MOVEMENT"))
+			return
 		var/atom/old_loc = src.owner.loc
 		var/turn = src.frustration_turn
 		// lil janky, but process_move returns a truthy value when movement was successful
@@ -174,14 +178,25 @@ var/list/ai_move_scheduled = list()
 			if(shuffling)
 				src.next_move_shuffle = world.time + rand(6,14) DECI SECONDS
 			if(src.owner?.loc == old_loc)
-				src.move_frustration++
+				src.move_frustration += src.move_frustration_increase
 			else
 				src.move_frustration = 0
 				if (src.frustration_turn && prob(20))
 					src.frustration_turn = 0
 
 	proc/was_harmed(obj/item/W, mob/M)
-		.=0
+		if(src.owner.ai_is_valid_target(M))
+			src.target = M
+			return TRUE
+		return FALSE
+
+	proc/disable()
+		src.enabled = FALSE
+		src.stop_move()
+
+	proc/enable()
+		src.enabled = TRUE
+		src.interrupt()
 
 /datum/aiTask
 	var/name = "task"
@@ -229,7 +244,7 @@ var/list/ai_move_scheduled = list()
 			var/required_goals = null // find all targets
 			if(score_by_distance_only)
 				required_goals = 1 // we only need to find the first one
-			var/list/atom/paths_found = get_path_to(holder.owner, targets, max_distance=max_dist*2, mintargetdist=distance_from_target, move_through_space=move_through_space, required_goals=required_goals)
+			var/list/atom/paths_found = get_path_to(holder.owner, targets, max_distance=max_dist*2, mintargetdist=distance_from_target, move_through_space=move_through_space, required_goals=required_goals, do_doorcheck=TRUE)
 			if(score_by_distance_only)
 				if(length(paths_found))
 					. = paths_found[1]

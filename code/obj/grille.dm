@@ -18,7 +18,7 @@
 	var/list/connects_to_turf = list(/turf/wall/auto, /turf/wall/auto/reinforced, /turf/shuttle/wall, /turf/wall)
 	var/list/connects_to_obj = list(/obj/indestructible/shuttle_corner,	/obj/grille/, /obj/machinery/door, /obj/window)
 	text = "<font color=#aaa>+"
-	anchored = 1
+	anchored = ANCHORED
 	flags = FPRINT | CONDUCT | USEDELAY
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	layer = GRILLE_LAYER
@@ -83,6 +83,7 @@
 		icon_state = "catwalk"
 		var/icon_base = "catwalk"
 		density = 0
+		pass_unstable = FALSE
 		desc = "This doesn't look very safe at all!"
 		layer = CATWALK_LAYER
 		shock_when_entered = 0
@@ -669,7 +670,7 @@
 
 		for(var/obj/cable/C in T)
 			if(C.d1 == 0)
-				return C.netnum
+				return C.get_netnumber()
 
 		return 0
 

@@ -8,10 +8,11 @@
 	density = 0
 	canmove = 0
 	blinded = 0
-	anchored = 1
+	anchored = ANCHORED
 	alpha = 180
 	stat = 0
 	suicide_can_succumb = 0
+	pass_unstable = PRESERVE_CACHE
 	var/autofree = 0
 	var/firstfortune = 1
 	var/free = 0

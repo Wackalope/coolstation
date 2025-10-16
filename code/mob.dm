@@ -103,7 +103,7 @@
 	var/wiped = 1 //giving new mobs the benefit of the doubt (does nothing, but varediting admins (and Murray) will see your shame)
 	var/nutrition = 100
 	var/losebreath = 0.0
-	var/intent = null
+	var/intent = INTENT_HELP
 	var/shakecamera = 0
 	var/a_intent = "help"
 	var/m_intent = "run"
@@ -233,6 +233,10 @@
 	var/last_move_dir = null
 
 	var/datum/aiHolder/ai = null
+	/// if set to an a_intent, ai should prioritize that one
+	var/ai_a_intent = null
+	/// used for load balancing mob_ai ticks
+	var/ai_tick_schedule = null
 
 	var/last_pulled_time = 0
 
@@ -265,6 +269,7 @@
 	src.update_name_tag()
 	src.vis_contents += src.name_tag
 	START_TRACKING
+	src.ai_tick_schedule = rand(0,30)
 	. = ..()
 
 /// do you want your mob to have custom hairstyles and stuff? don't use spawns but set all of those properties here
@@ -675,11 +680,11 @@
 							break
 						M.throw_at(source, 20, 3)
 						LAGCHECK(LAG_MED)
-					sleep(5 SECONDS)
-					src.now_pushing = 0
+					SPAWN_DBG(5 SECONDS)
+						src.now_pushing = 0
 
-					if (tmob) //Wire: Fix for: Cannot modify null.now_pushing
-						tmob.now_pushing = 0
+						if (tmob) //Wire: Fix for: Cannot modify null.now_pushing
+							tmob.now_pushing = 0
 
 					return
 
@@ -687,6 +692,7 @@
 			if (tmob.a_intent == "help" && src.a_intent == "help" && tmob.canmove && src.canmove && !tmob.buckled && !src.buckled && !src.throwing && !tmob.throwing && !(src.pulling && src.pulling.density)) // mutual brohugs all around!
 				var/turf/oldloc = src.loc
 				var/turf/newloc = tmob.loc
+				src.skip_loc_change_updates = TRUE
 
 				src.set_loc(newloc)
 				tmob.set_loc(oldloc)
@@ -699,6 +705,7 @@
 				tmob.deliver_move_trigger("swap")
 				tmob.update_grab_loc()
 				src.now_pushing = 0
+				src.skip_loc_change_updates = FALSE
 
 				return
 
@@ -727,7 +734,9 @@
 			else if (locate(/obj/hotspot) in victim.loc)
 				logTheThing("combat", src, victim, "pushes [constructTarget(victim,"combat")] into a fire.")
 
+		src.skip_loc_change_updates = TRUE
 		step(src,t)
+		src.skip_loc_change_updates = FALSE
 		AM.OnMove(src)
 		//src.OnMove(src) //dont do this here - this Bump() is called from a process_move which sould be calling onmove for us already
 		AM.glide_size = src.glide_size
@@ -1299,6 +1308,10 @@
 			return src.l_hand
 		else
 			return src.r_hand
+
+/mob/living/critter/equipped()
+	var/datum/handHolder/active_hand = src.get_active_hand()
+	return active_hand.item
 
 /mob/proc/equipped_list(check_for_magtractor = 1)
 	. = list()
@@ -2049,7 +2062,7 @@
 		logTheThing("combat", src, null, "is taken by the floor cluwne at [log_loc(src)].")
 		src.transforming = 1
 		src.canmove = 0
-		src.anchored = 1
+		src.anchored = ANCHORED
 		src.mouse_opacity = 0
 
 		var/mob/living/carbon/human/cluwne/floor/floorcluwne = null
@@ -2953,7 +2966,7 @@
 	SPAWN_DBG(0.7 SECONDS) //Length of animation.
 		newbody.set_loc(animation.loc)
 		qdel(animation)
-		newbody.anchored = 1 // Stop running into the lava every half second jeez!
+		newbody.anchored = ANCHORED // Stop running into the lava every half second jeez!
 		sleep(4 SECONDS)
 		reset_anchored(newbody)
 
@@ -2968,7 +2981,7 @@
 		logTheThing("combat", src, null, "is damned to hell from [log_loc(src)].")
 		src.transforming = 1
 		src.canmove = 0
-		src.anchored = 1
+		src.anchored = ANCHORED
 		src.mouse_opacity = 0
 
 		var/mob/living/carbon/human/satan/satan = new /mob/living/carbon/human/satan
