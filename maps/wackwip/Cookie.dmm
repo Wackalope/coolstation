@@ -35,7 +35,6 @@
 /turf/floor/terrazzo,
 /area/radiostation)
 "af" = (
-/obj/item/device/radio/intercom/engineering,
 /obj/machinery/light/fluorescent/ceiling/red,
 /obj/decal/tile_edge/line/black{
 	dir = 10;
@@ -9543,12 +9542,6 @@
 /obj/machinery/vending/janitor,
 /turf/floor/specialroom/arcade,
 /area/radiostation)
-"BK" = (
-/obj/item/device/radio/intercom/AI{
-	broadcasting = 0
-	},
-/turf/floor,
-/area/radiostation)
 "BL" = (
 /obj/decal/tile_edge/line/black{
 	icon_state = "line2";
@@ -9666,7 +9659,6 @@
 /turf/floor,
 /area/radiostation)
 "Cc" = (
-/obj/item/device/radio/intercom/security,
 /obj/machinery/light/fluorescent/ceiling/red,
 /obj/decal/tile_edge/line/black{
 	dir = 6;
@@ -10245,7 +10237,6 @@
 /turf/floor/specialroom/bar,
 /area/radiostation)
 "DE" = (
-/obj/item/device/radio/intercom/science,
 /obj/decal/tile_edge/line/black{
 	icon_state = "line1"
 	},
@@ -13396,7 +13387,9 @@
 /turf/floor/carpet/nicebrown,
 /area/radiostation)
 "MJ" = (
-/obj/noticeboard/persistent,
+/obj/noticeboard/persistent{
+	persistent_id = "library_cookie"
+	},
 /turf/floor/wood/eight,
 /area/radiostation)
 "MK" = (
@@ -13674,9 +13667,6 @@
 /turf/floor/longtile/red,
 /area/radiostation)
 "Nz" = (
-/obj/item/device/radio/intercom/AI{
-	broadcasting = 0
-	},
 /obj/decal/tile_edge/line/black{
 	icon_state = "line1"
 	},
@@ -15664,7 +15654,8 @@
 	pixel_x = -4
 	},
 /obj/noticeboard/persistent{
-	pixel_y = 33
+	pixel_y = 33;
+	persistent_id = "evidence_cookie"
 	},
 /obj/item/storage/box/biohazard_bags{
 	pixel_y = 4;
@@ -57135,7 +57126,7 @@ Vt
 EM
 ot
 iO
-BK
+EM
 EM
 EM
 EM

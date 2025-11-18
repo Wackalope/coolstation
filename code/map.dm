@@ -274,6 +274,24 @@ var/global/list/mapNames = list(
 	escape_def = SHUTTLE_NORTH
 	escape_dir = NORTH
 
+	merchant_left_centcom = /area/shuttle/merchant_shuttle/left_centcom/cogmap
+	merchant_left_station = /area/shuttle/merchant_shuttle/left_station/cogmap
+	merchant_right_centcom = /area/shuttle/merchant_shuttle/right_centcom/cogmap
+	merchant_right_station = /area/shuttle/merchant_shuttle/right_station/cogmap
+
+	valid_nuke_targets = list("the main security room" = list(/area/station/security/main),
+		"the central research sector hub" = list(/area/station/science/lobby),
+		"the cargo bay" = list(/area/station/quartermaster/cargobay),
+		"the engineering control room" = list(/area/station/engine/engineering, /area/station/engine/power),
+		"the medbay" = list(/area/station/medical/medbay, /area/station/medical/medbay/surgery, /area/station/medical/medbay/pharmacy, /area/station/medical/medbay/treatment ),
+		"the bar" = list(/area/station/crew_quarters/bar),
+		"the EVA storage" = list(/area/station/ai_monitored/storage/eva),
+		"the robotics lab" = list(/area/station/medical/robotics),
+		"the bridge" = list(/area/station/bridge),
+		"the escape arm" = list(/area/station/hallway/secondary/exit),
+		"the dank ass observatory" = list(/area/station/crew_quarters/observatory),
+		"the chapel" = list(/area/station/chapel/sanctuary))
+
 /datum/map_settings/bayoubend
 	name = "BAYOUBEND"
 	walls = /turf/wall/
@@ -398,83 +416,6 @@ var/global/list/mapNames = list(
 		"the escape arm" = list(/area/station/hallway/secondary/exit),
 		"the dank ass observatory" = list(/area/station/crew_quarters/observatory),
 		"the chapel" = list(/area/station/chapel/sanctuary))
-
-/datum/map_settings/bayoubend
-	name = "BAYOUBEND"
-	walls = /turf/wall/
-	rwalls = /turf/wall/r_wall/
-	auto_walls = 0
-	job_limits_from_landmarks = TRUE
-	arrivals_type = MAP_SPAWN_CRYO
-	goonhub_map = "https://wiki.coolstation.space/wiki/File:Bayoubendmapimage.png"
-
-	windows = /obj/window/auto
-	windows_thin = /obj/window
-	rwindows = /obj/window/reinforced
-	rwindows_thin = /obj/window/reinforced
-	windows_crystal = /obj/window/crystal
-	windows_rcrystal = /obj/window/crystal/reinforced
-	window_layer_full = COG2_WINDOW_LAYER
-	window_layer_north = GRILLE_LAYER+0.1
-	window_layer_south = FLY_LAYER+1
-	auto_windows = 1
-	qm_supply_type = "shuttle"
-	//shuttle_map_turf = /turf/floor/airless/engine/caution
-
-	ext_airlocks = /obj/machinery/door/airlock/external
-	airlock_style = "fart butt old stuff"
-	firelock_style = /obj/machinery/door/firedoor/border_only
-
-	merchant_left_centcom = /area/shuttle/merchant_shuttle/left_centcom/destiny
-	merchant_left_station = /area/shuttle/merchant_shuttle/left_station/destiny
-
-	//Bayou's only got the one merchant dock so maybe have go to the same either way?
-	merchant_right_centcom = /area/shuttle/merchant_shuttle/left_centcom/destiny
-	merchant_right_station = /area/shuttle/merchant_shuttle/left_station/destiny
-
-	escape_centcom = /area/shuttle/escape/centcom/donut2
-	escape_outpost = /area/shuttle/escape/outpost/donut2
-	escape_transit = /area/shuttle/escape/transit/donut2
-	escape_station = /area/shuttle/escape/station/donut2
-	escape_def = SHUTTLE_WEST
-	escape_dir = WEST
-
-	valid_nuke_targets = list("the main security room" = list(/area/station/security/main),
-		"research sector" = list(/area/station/science/lobby),
-		"the logistics bay" = list(/area/station/quartermaster/cargobay),
-		"the engineering control room" = list(/area/station/engine/engineering, /area/station/engine/power),
-		"the robotics workshop" = list(/area/station/medical/robotics),
-		"the bridge" = list(/area/station/bridge),
-		"the departures wing" = list(/area/station/hallway/secondary/exit),
-		"the chapel" = list(/area/station/chapel/sanctuary),
-		"the medbay" = list(/area/station/medical/medbay, /area/station/medical/medbay/surgery, /area/station/medical/medbay/pharmacy, /area/station/medical/medbay/treatment ),
-		"the cafeteria" = list(/area/station/crew_quarters/bar))
-
-	job_limits_override = list(
-		/datum/job/logistics/miner = 0,
-		/datum/job/logistics/scrapper = 3,
-		/datum/job/civilian/rancher = 0,
-		/datum/job/medical/pathologist = 0,
-		/datum/job/logistics/janitor = 1
-	)
-
-	init()
-		..()
-		SPAWN_DBG(10) // this sucks so much ass but it just- idk.
-			var/area/m_shuttle = locate(/area/shuttle/mining/station)
-			if(m_shuttle)
-				m_shuttle.filler_turf = "/turf/floor/airless/engine/caution"
-			var/area/c_shuttle = locate(/area/shuttle/cargo/station)
-			if(c_shuttle)
-				c_shuttle.filler_turf = "/turf/floor/airless/engine/caution"
-
-			var/area/t_shuttle_r = locate(/area/shuttle/merchant_shuttle/right_station)
-			if(t_shuttle_r)
-				t_shuttle_r.filler_turf = "/turf/floor/airless/engine/caution"
-			var/area/t_shuttle_l = locate(/area/shuttle/merchant_shuttle/left_station)
-			if(t_shuttle_l)
-				t_shuttle_l.filler_turf = "/turf/floor/airless/engine/caution"
-
 
 /datum/map_settings/cogmap
 	name = "COGMAP"
