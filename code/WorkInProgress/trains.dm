@@ -298,15 +298,17 @@ ABSTRACT_TYPE(/datum/train_preset)
 			src.my_conductor.potential_crushes.Add(AM)
 			var/turf/target = get_turf(AM)
 			var/y_variance = get_dir(src, AM) & NORTH ? 1 : -1
-			if(ON_COOLDOWN(AM, "trainvacuumsucc", 0.6 SECONDS)) // hit twice within 0.6 seconds, excluding the 0.1 second invuln, to get sucked under
+			if(ON_COOLDOWN(AM, "trainvacuumsucc", 2 SECONDS)) // hit twice within 2 seconds, excluding the 0.1 second invuln, to get sucked under
 				AM.set_loc(locate(target.x, clamp(target.y + y_variance, 1, world.maxy - 1), target.z))
-			y_variance = y_variance * rand(-4, 15)
-			if(src.my_conductor.train_direction & EAST)
-				target = locate(min(target.x + 40, world.maxx-1), clamp(target.y + y_variance, 1, world.maxy - 1), target.z)
-			if(src.my_conductor.train_direction & WEST)
-				target = locate(max(target.x - 40, 1), clamp(target.y + y_variance, 1, world.maxy - 1), target.z)
-			src.visible_message("[AM] gets clipped by \the [src.my_conductor.basic_name]!")
-			AM.throw_at(target, floor(5 / src.my_conductor.movement_delay), 2.5 / src.my_conductor.movement_delay)
+				src.visible_message("[AM] gets pulled under \the [src.my_conductor.basic_name]!")
+			else
+				y_variance = y_variance * rand(-4, 15)
+				if(src.my_conductor.train_direction & EAST)
+					target = locate(min(target.x + 40, world.maxx-1), clamp(target.y + y_variance, 1, world.maxy - 1), target.z)
+				if(src.my_conductor.train_direction & WEST)
+					target = locate(max(target.x - 40, 1), clamp(target.y + y_variance, 1, world.maxy - 1), target.z)
+				src.visible_message("[AM] gets clipped by \the [src.my_conductor.basic_name]!")
+				AM.throw_at(target, floor(5 / src.my_conductor.movement_delay), 2.5 / src.my_conductor.movement_delay)
 			shake_camera(L, 4 / src.my_conductor.movement_delay, 5 / src.my_conductor.movement_delay)
 			random_brute_damage(L, rand(10, 15) / src.my_conductor.movement_delay, TRUE)
 			L.changeStatus("stunned", 2 SECONDS / src.my_conductor.movement_delay)
@@ -441,8 +443,8 @@ ABSTRACT_TYPE(/datum/train_preset)
 	var/train_id = 0 // the id of this train
 	var/train_ram_width_bonus = 0 // additional x width of the front hitbox
 	var/train_ram_height_bonus = 1 // additional y height of the front hitbox, usually static
-#if defined(MAP_OVERRIDE_CRAG)
-	var/train_front_y = 163 // the lowest y coordinate in the trains front hitbox
+#ifdef RAILWAY_Y
+	var/train_front_y = RAILWAY_Y // the lowest y coordinate in the trains front hitbox
 	var/train_z = 1 // the z level the train is on
 #else
 	var/train_front_y = 0 // the lowest y coordinate in the trains front hitbox

@@ -360,7 +360,7 @@
 	src.material?.triggerOnEntered(src, M)
 
 	//optionally cancel swims
-	if (isliving(M) && M.hasStatus("swimming") && !istype(src, /turf/space/fluid))
+	if (isliving(M) && M.hasStatus("swimming") && !istype(src, /turf/space/fluid/ocean))
 		if (src.active_liquid?.last_depth_level < 3) //Trying to swim into the air
 			actions.start(new/datum/action/swim_coyote_time(), M)
 			//M.delStatus("swimming")
@@ -577,7 +577,7 @@
 	else switch(what)
 		if ("Above Ocean")
 			if(src.z==3)
-				new_turf = new /turf/space/fluid(src, src.turf_persistent)
+				new_turf = new /turf/space/fluid/ocean(src, src.turf_persistent)
 			else
 				new_turf = new /turf/space/magindara(src, src.turf_persistent)
 				var/turf/space/magindara/new_pitfall = new_turf
@@ -587,8 +587,9 @@
 				new_turf = new /turf/floor/plating/gehenna(src, src.turf_persistent)
 			else
 				new_turf = new /turf/space/gehenna/desert(src, src.turf_persistent)
+				new_type = /turf/space/gehenna/desert //sneaking this for opacity check later
 		if ("Ocean")
-			new_turf = new /turf/space/fluid(src, src.turf_persistent)
+			new_turf = new /turf/space/fluid/ocean(src, src.turf_persistent)
 		if ("Floor")
 			new_turf = new /turf/floor(src, src.turf_persistent)
 		if ("MetalFoam")
@@ -639,7 +640,7 @@
 	//example of failure : fire destorying a wall, the fire goes away, the area BEHIND the wall that used to be blocked gets strip()ped and now it leaves a blue glow (negative fire color)
 	if (new_turf.opacity != old_opacity)
 		new_turf.opacity = old_opacity
-		new_turf.RL_SetOpacity(!new_turf.opacity)
+		new_turf.RL_SetOpacity(!new_turf.opacity/*, queue_late = !(new_type == /turf/space/gehenna/desert)*/) //only wall -> desert changes should go early //RL_OPACITY_TODO
 
 
 	if (handle_air)
@@ -876,7 +877,7 @@
 	desc = "Looks normal."
 
 /turf/space/proc/update_icon(starlight_alpha=255)
-	if(!isnull(space_color) && !istype(src, /turf/space/fluid) && !istype(src, /turf/space/gehenna))
+	if(!isnull(space_color) && !istype(src, /turf/space/fluid/ocean) && !istype(src, /turf/space/gehenna))
 		src.color = space_color
 
 	if(fullbright)
@@ -921,7 +922,7 @@ proc/repaint_space(regenerate=TRUE, starlight_alpha)
 		if(regenerate)
 			T.space_color = generate_space_color()
 			regenerate = FALSE
-		if(istype(T, /turf/space/fluid))
+		if(istype(T, /turf/space/fluid/ocean))
 			continue
 		T.update_icon(starlight_alpha)
 
@@ -985,7 +986,7 @@ proc/generate_space_color()
 //	if (locate(/obj/movable, src))
 //		return 1
 
-	//if (!istype(src,/turf/space/fluid))//ignore inertia if we're in the ocean
+	//if (!istype(src,/turf/space/fluid/ocean))//ignore inertia if we're in the ocean
 	if (src.throw_unlimited)//ignore inertia if we're in the ocean (faster but kind of dumb check)
 		if ((ismob(A) && src.x > 2 && src.x < (world.maxx - 1))) //fuck?
 			var/mob/M = A
