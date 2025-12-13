@@ -554,6 +554,58 @@ proc/empty_mouse_params()//TODO MOVE THIS!!!
 	return constructed_name
 
 
+/mob/living/carbon/human/denton
+
+
+
+
+/mob/living/carbon/human/denton/say(var/message)
+	message = copytext(message, 1, MAX_MESSAGE_LEN)
+	switch (message)
+		if("locked")
+			playsound(src.loc, "sound/denton/bathroom.mp3", 22, 0)
+			message = "Why are you locked in the bathroom?"
+		if ("talk")
+			playsound(src.loc, "sound/denton/talkin.mp3", 22, 0)
+			message = "You talkin to me?"
+		if ("job")
+			playsound(src.loc, "sound/denton/job.mp3", 22, 0)
+			message = "Maybe you should try getting a job"
+		if ("majestic")
+			playsound(src.loc, "sound/denton/majestic.mp3", 22, 0)
+			message = "Majestic 12"
+		if ("okay")
+			playsound(src.loc, "sound/denton/okay.mp3", 22, 0)
+			message = "Okay"
+		if ("okayand")
+			playsound(src.loc, "sound/denton/okayand.mp3", 22, 0)
+			message = "Okay, and?"
+		if ("brain")
+			playsound(src.loc, "sound/denton/brain.mp3", 22, 0)
+			message = "I have contamination and mutants in my brain"
+		if ("shame")
+			playsound(src.loc, "sound/denton/shame.mp3", 22, 0)
+			message = "What a shame..."
+		if ("news")
+			playsound(src.loc, "sound/denton/news.mp3", 22, 0)
+			message = "I have some good news for both of you"
+		if ("where")
+			playsound(src.loc, "sound/denton/where.mp3", 22, 0)
+			message = "Where?"
+		if ("fact")
+			playsound(src.loc, "sound/denton/fact.mp3", 22, 0)
+			message = "Do you have a single fact to back that up?"
+		if ("bodybag")
+			playsound(src.loc, "sound/denton/bodybag.mp3", 22, 0)
+			message = "Maybe you should join Majestic 12 in a bodybag"
+		else
+			return
+
+	..()
+
+
+
+
 /mob/living/carbon/human/spacer
 	is_npc = 1
 	uses_mobai = 1
