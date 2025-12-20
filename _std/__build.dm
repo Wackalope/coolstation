@@ -42,7 +42,7 @@
 */
 
 //////////// OPTIONS TO GO FAST
-//#define IM_REALLY_IN_A_FUCKING_HURRY_HERE 1  		// Skip setup for atmos, Z5, don't show changelogs, skip pregame lobby
+#define IM_REALLY_IN_A_FUCKING_HURRY_HERE 1  		// Skip setup for atmos, Z5, don't show changelogs, skip pregame lobby
 //#define GOTTA_GO_FAST_BUT_ZLEVELS_TOO_SLOW 1		// Only include the map Chunk, no other zlevels. Boots way faster
 #define Z_LOG_ENABLE 1  							// Enable additional world.log logging
 
@@ -58,7 +58,7 @@
 
 //////////// DEBUGGING TOGGLES
 
-//#define IM_TESTING_FUCKING_BASIC_MOB_FUNCTIONALITY 1	//force prevent mob spawner landmarks, so you can test movement or damage or whatever without the GODCOCKING MONKEYS TRIPPING YOUR BREAKPOINTS EVERY 2 MILLISECONDS GOD DAMN
+// #define IM_TESTING_BASIC_MOB_FUNCTIONALITY 1	//force prevent mob spawner landmarks and certain automatic bot patrols, so you can test movement or damage or airlocks or whatever without the GODCOCKING MONKEYS TRIPPING YOUR BREAKPOINTS EVERY 2 MILLISECONDS GOD DAMN
 
 // Delete queue debug toggle
 // This is expensive. don't turn it on on the server unless you want things to be bad and slow
@@ -104,28 +104,24 @@
 
 //----------------- Maps that are being maintained and fully playable -----------------//
 //#define MAP_OVERRIDE_BAYOUBEND 	            //low to midpop scrapping map by Klushy225
-<<<<<<< HEAD
 //#define MAP_OVERRIDE_BOBMAP 			//"to be renamed" map by ReginaldHJ
-=======
->>>>>>> 74e370406bc2a1652a7e7bdef092174e7d3fac05
+//#define MAP_OVERRIDE_BAYOUBEND 	            // low to midpop scrapping map by Klushy225
 //#define MAP_OVERRIDE_CHUNK				// Warcrimes tiny map (not Atlas levels of tiny, but usable tiny)
 //#define MAP_OVERRIDE_DONUT2 			// Un-Updated Donut2
 //#define MAP_OVERRIDE_COGMAP 			// Cogmap
 //#define MAP_OVERRIDE_GEHENNA			// Warcrimes WIP do use
-#define MAP_OVERRIDE_CRAG				// secret >:)
+//#define MAP_OVERRIDE_CRAG				// secret >:)
 //#define MAP_OVERRIDE_CLARION			// Destiny/Alt RP
 //#define MAP_OVERRIDE_NOYADE				// how many maps does this slime bitch even have??
 
 //----------------- Maps that are work in progress and not feature complete -----------------//
-//#define MAP_OVERRIDE_BOBMAP 			//"to be renamed" map by ReginaldHJ
-//#define MAP_OVERRIDE_PERDUTA			// Mylie's oceanic oil platform
+//#define MAP_OVERRIDE_BOBMAP 			// "to be renamed" map by ReginaldHJ
+//#define MAP_OVERRIDE_COOKIE				// Wackalope's spess staions
+//#define MAP_OVERRIDE_PERDUTA				// Mylie's oceanic oil platform
 //#define MAP_OVERRIDE_SAXUM				// schwicks terrestrial map!
-<<<<<<< HEAD
 #define MAP_OVERRIDE_COOKIE				// Wack
-=======
 //#define MAP_OVERRIDE_ALTBOX				// a series of bad choices (very unfinished atm)
 
->>>>>>> 74e370406bc2a1652a7e7bdef092174e7d3fac05
 //---------------------- Maps that exist but maybe not up to date --------------------//
 //#define MAP_OVERRIDE_CONSTRUCTION			// Construction mode
 //#define MAP_OVERRIDE_DESTINY			// Destiny/RP
