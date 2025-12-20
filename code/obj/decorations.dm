@@ -1870,3 +1870,15 @@ obj/decoration/ceilingfan
 			icon = 'icons/misc/rstation.dmi'
 			icon_state = "ext-gap"
 
+/obj/decoration/martianvine
+	icon = 'icons/obj/decals/misc.dmi'
+	icon_state = "avine_l1_p"
+	plane = -105
+	layer = TURF_LAYER
+
+	type2
+		icon_state = "avine_l2_p"
+	type3
+		icon_state = "avine_l3_p"
+
+
