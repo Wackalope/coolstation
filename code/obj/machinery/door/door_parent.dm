@@ -890,6 +890,23 @@
 	. = ..()
 	. += " It's [!src.locked ? "un" : null]locked."
 
+/obj/machinery/door/unpowered/airlock/verb/simple_lock(mob/user)
+	set name = "Lock Door"
+	set category = "Local"
+	set src in oview(1)
+
+	if (!src.density || src.operating)
+		boutput(user, "<span class='alert'>You COULD flip the lock on [src] while it's open, but it wouldn't actually accomplish anything!</span>")
+		return
+	if (src.lock_dir)
+		var/checkdir = get_dir(src, user)
+		if (!(checkdir & src.lock_dir))
+			boutput(user, "<span class='alert'>[src]'s lock isn't on this side!</span>")
+			return
+	src.locked = !src.locked
+	src.visible_message("<span class='notice'><B>[user] [!src.locked ? "un" : null]locks [src].</B></span>")
+	return
+
 /obj/machinery/door/unpowered/airlock/attackby(obj/item/I as obj, mob/user as mob)
 	if (I) // eh, this'll work well enough.
 		src.material?.triggerOnHit(src, I, user, 1)
