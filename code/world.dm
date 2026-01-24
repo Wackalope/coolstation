@@ -497,12 +497,11 @@ var/f_color_selector_handler/F_Color_Selector
 		var/datum/tgs_revision_information/rev = TgsRevision()
 		vcs_revision = rev.commit
 
-		var/datum/tgs_api/v5/api = TGS_READ_GLOBAL(tgs)
-		if(api)
-			api.reboot_mode = TGS_REBOOT_MODE_RESTART
 
-
-	lobby_titlecard = new /datum/titlecard()
+	if (config && (config.env == "pud"))
+		lobby_titlecard = new /datum/titlecard/dev()
+	else
+		lobby_titlecard = new /datum/titlecard()
 
 	lobby_titlecard.set_agreement_html() //only need to do this here i think, it's otherwise pretty static
 	lobby_titlecard.set_pregame_html()
@@ -906,8 +905,9 @@ var/f_color_selector_handler/F_Color_Selector
 		world.Reboot()
 
 /world/Reboot()
-	TgsReboot()
+	//TgsReboot()
 	shutdown_logging()
+	world.TgsEndProcess()
 	return ..()
 
 /world/proc/update_status()
