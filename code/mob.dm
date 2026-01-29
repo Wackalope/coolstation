@@ -1795,7 +1795,7 @@
 				else if(A.reagents.maximum_volume - A.reagents.total_volume < transfer_amount)
 					A.reagents.maximum_volume = A.reagents.total_volume + transfer_amount
 			if(A.reagents)
-				src.reagents.trans_to(A, transfer_amount / 25)
+				src.reagents.trans_to(A, transfer_amount)
 			if(isturf(A))
 				var/turf/T = A
 				T.fluid_react(src.reagents, src.reagents.total_volume)//, airborne=prob(10))
