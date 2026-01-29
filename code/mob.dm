@@ -1789,17 +1789,17 @@
 
 		var/transfer_amount = src.reagents.total_volume / length(get_our_fluids_here)
 		for(var/atom/A in get_our_fluids_here)
-			if(isturf(A))
-				var/turf/T = A
-				T.fluid_react(src.reagents, src.reagents.total_volume)//, airborne=prob(10))
-				continue
 			if(istype(A, /obj/decal/cleanable)) // expand reagents
 				if(isnull(A.reagents))
 					A.create_reagents(transfer_amount)
 				else if(A.reagents.maximum_volume - A.reagents.total_volume < transfer_amount)
 					A.reagents.maximum_volume = A.reagents.total_volume + transfer_amount
 			if(A.reagents)
-				src.reagents.trans_to(A, transfer_amount)
+				src.reagents.trans_to(A, transfer_amount / 25)
+			if(isturf(A))
+				var/turf/T = A
+				T.fluid_react(src.reagents, src.reagents.total_volume)//, airborne=prob(10))
+
 
 	for(var/obj/item/implant/I in src) qdel(I)
 

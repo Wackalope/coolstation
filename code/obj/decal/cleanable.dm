@@ -609,6 +609,7 @@ var/list/blood_decal_violent_icon_states = list("floor1", "floor2", "floor3", "f
 	desc = "Grisly..."
 	anchored = UNANCHORED
 	layer = OBJ_LAYER
+	plane = -100
 	icon = 'icons/obj/decals/blood.dmi'
 	icon_state = "gibbl5"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")

@@ -698,6 +698,24 @@ ABSTRACT_TYPE(/mob/living/critter/small_animal)
 		health_brute = 10
 		health_burn = 10
 
+	weakest
+		add_abilities = list()
+		health = 1
+
+		attack_hand(mob/user as mob)
+			if (user.a_intent != INTENT_HARM)
+				..()
+				return
+			if(!isdead(src) && src.health <= 10)
+				..()
+				SPAWN_DBG(0.2 SECONDS)
+					playsound(src.loc, "sound/impact_sounds/roachsquish.ogg", 90, 1, SOUND_RANGE_STANDARD)
+					var/list/virus = src.ailments
+					gibs(src.loc, virus)
+					src.gib(FALSE, TRUE)//I'm crying
+				return
+			..()
+
 /* -------------------- Illegal -------------------- */
 
 /mob/living/critter/small_animal/dog/illegal
@@ -1329,6 +1347,7 @@ var/list/mob_bird_species = list("smallowl" = /mob/living/critter/small_animal/b
 
 	death()
 		src.ClearAllOverlays()
+		playsound(src.loc, "sound/impact_sounds/roachsquish.ogg", 50, 1, SOUND_RANGE_STANDARD)
 		//appears to be missing a dead colorkey
 		//var/image/overlay = image('icons/mob/critter.dmi', "roach_colorkey-dead")
 		//overlay.color = fur_color
@@ -1358,6 +1377,18 @@ var/list/mob_bird_species = list("smallowl" = /mob/living/critter/small_animal/b
 			if ("scream","chitter")
 				return 2
 		return ..()
+
+	attack_hand(mob/user as mob) //I could just play the sound on death but it feels a lot less responsive and satisfying
+		if (user.a_intent != INTENT_HARM)
+			..()
+			return
+		if(!isdead(src) && src.health <= 10)
+			..()
+			SPAWN_DBG(0.2 SECONDS)
+				playsound(src.loc, "sound/impact_sounds/roachsquish.ogg", 50, 1, SOUND_RANGE_STANDARD)
+				src.death()
+			return
+		..()
 
 /* =================================================== */
 /* -------------------- Mothroach -------------------- */

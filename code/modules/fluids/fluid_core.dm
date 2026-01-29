@@ -27,6 +27,7 @@ var/list/stack_into_fluid_but_keep_the_cleanable_ok_thanks = list( //unlike abov
 	"gvomit",\
 	"egg",\
 	"juice_tomato",\
+	"blood",\
 )
 
 ///////////////////
