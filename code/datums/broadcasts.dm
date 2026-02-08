@@ -229,6 +229,10 @@ Look for /datum/directed_broadcast/testing_teevee at the bottom of this file as 
 			on = TRUE
 			icon_state = "transmitter-on"
 		. = ..()
+
+	//cycle_channel(channel_num)
+
+
 /*
 /obj/shitty_radio/finite_demo
 	name = "shittier test radio"
@@ -299,10 +303,16 @@ Look for /datum/directed_broadcast/testing_teevee at the bottom of this file as 
 	//shitcode override but it's a demo object so who cares
 	attack_hand(mob/user)
 		..()
-		if (on)
+		if (station != TR_CAT_TEEVEE_BROADCAST_RECEIVERS)
+			on = TRUE
+			station = TR_CAT_TEEVEE_BROADCAST_RECEIVERS
 			icon_state = "POCteevee-on"
+			SUBSCRIBE_BROADCAST(station, (video_dmi ? video_dmi : 1))
 		else
-			icon_state = "POCteevee"
+			on = TRUE
+			station = TR_CAT_TEEVEE_BROADCAST_RECEIVERS_JERKIN
+			icon_state = "POCteevee-on"
+			SUBSCRIBE_BROADCAST(station, (video_dmi ? video_dmi : 1))
 
 /datum/directed_broadcast/testing
 	id = "demo"
@@ -329,7 +339,7 @@ Look for /datum/directed_broadcast/testing_teevee at the bottom of this file as 
 	)
 
 	broadcast_channels = TR_CAT_FINITE_BROADCAST_RECEIVERS
-*/
+
 /datum/directed_broadcast/queue_test_series
 	id = "Q"
 	loops_remaining = 1
@@ -363,6 +373,8 @@ Look for /datum/directed_broadcast/testing_teevee at the bottom of this file as 
 	default_maptext_colour = "#AAAAAA"
 	priority = 3
 	messages = list("High priority interrupt.")
+
+*/
 
 /datum/directed_broadcast/testing_teevee
 	id = "demo_teevee"
@@ -401,6 +413,22 @@ Look for /datum/directed_broadcast/testing_teevee at the bottom of this file as 
 	)
 	group_messages = TRUE
 	broadcast_channels = TR_CAT_TEEVEE_BROADCAST_RECEIVERS
+
+/datum/directed_broadcast/jerkin_off
+	id = "jerkin_off"
+	priority = 2
+	speakers = list("announcer" = list("Announcer", "#d600d6"), "consumer" = list("Consumer", "#003eb3"))
+	messages = list(\
+		list("*static*", 2 SECONDS, null, "test"),\
+		list("Have you considered jerking off...", 6 SECONDS, "announcer", "cigarettes-A"),\
+		list("Buying jerkoff", 6 SECONDS, "announcer", "cigarettes-A"),\
+		list("Oh, I'd love to jerk off! I'll go do that right now!", 8 SECONDS, "consumer", "cigarettes-B"),\
+		list("jerking off. Available wherever jerks are off.", 10 SECONDS, "announcer", "cigarettes-B"),\
+		list("*static*", 2 SECONDS, null, "test"),\
+	)
+	group_messages = TRUE
+	broadcast_channels = TR_CAT_TEEVEE_BROADCAST_RECEIVERS_JERKIN
+
 
 /datum/directed_broadcast/ad/cigarettes
 	id = "cigarette_ad"
@@ -459,6 +487,13 @@ Look for /datum/directed_broadcast/testing_teevee at the bottom of this file as 
 	group_messages = TRUE
 	broadcast_channels = TR_CAT_TEEVEE_BROADCAST_RECEIVERS
 
+//
+//
+//    ██████ ▄▄   ▄▄ ▄▄▄▄▄ ▄▄▄▄   ▄▄▄▄ ▄▄▄▄▄ ▄▄  ▄▄  ▄▄▄▄ ▄▄ ▄▄
+//    ██▄▄   ██▀▄▀██ ██▄▄  ██▄█▄ ██ ▄▄ ██▄▄  ███▄██ ██▀▀▀ ▀███▀
+//    ██▄▄▄▄ ██   ██ ██▄▄▄ ██ ██ ▀███▀ ██▄▄▄ ██ ▀██ ▀████   █
+//
+
 /datum/directed_broadcast/emergency
 	var/station_name
 	var/emergency_situation
@@ -510,3 +545,116 @@ Look for /datum/directed_broadcast/testing_teevee at the bottom of this file as 
 
 #undef LOOP_INFINITELY
 #undef DEFAULT_BROADCAST_MESSAGE_TIME
+
+
+/* --------------------------------------------------------------------------------------------------------
+
+▄▄▄    ▄▄▄ ▄▄▄▄▄▄▄▄▄     ▄▄▄▄ ▄▄▄▄▄▄▄    ▄▄▄    ▄▄▄  ▄▄▄▄▄▄▄ ▄▄▄▄  ▄▄▄  ▄▄▄▄  ▄▄▄▄▄▄▄
+████▄  ███ ▀▀▀███▀▀▀   ▄█████ ▀▀▀▀████   ████▄  ███ ███▀▀▀▀▀ ▀███  ███  ███▀ █████▀▀▀
+███▀██▄███    ███         ███   ▄▄██▀    ███▀██▄███ ███▄▄     ███  ███  ███   ▀████▄
+███  ▀████    ███         ███     ███▄   ███  ▀████ ███       ███▄▄███▄▄███     ▀████
+███    ███    ███         ███ ███████▀   ███    ███ ▀███████   ▀████▀████▀   ███████▀
+
+ Local and frontier wide news channel, mainly used for propaganda, announcements, and generic PSAs
+ --------------------------------------------------------------------------------------------------------*/
+
+
+/* --------------------------------------------------------------------------------------------------------
+
+▄▄▄▄  ▄▄▄▄                                     ▄▄▄▄▄▄▄ ▄▄                            ▄▄
+▀███  ███▀            ▀▀         ██           ███▀▀▀▀▀ ██                            ██
+ ███  ███  ▀▀█▄ ████▄ ██  ▄█▀█▄ ▀██▀▀ ██ ██   ███      ████▄  ▀▀█▄ ████▄ ████▄ ▄█▀█▄ ██
+ ███▄▄███ ▄█▀██ ██ ▀▀ ██  ██▄█▀  ██   ██▄██   ███      ██ ██ ▄█▀██ ██ ██ ██ ██ ██▄█▀ ██
+  ▀████▀  ▀█▄██ ██    ██▄ ▀█▄▄▄  ██    ▀██▀   ▀███████ ██ ██ ▀█▄██ ██ ██ ██ ██ ▀█▄▄▄ ██
+                                        ██
+                                      ▀▀▀
+ Most programming goes on this channel, expect shitty podcasts, soap operas, "how its made", and lots of ads
+ --------------------------------------------------------------------------------------------------------*/
+
+/datum/directed_broadcast/eaglestoryone
+	id = "mysteries_of_the_frontier_one"
+	speakers = list("narrator" = list("Narrator", "#A2DD77"), "doctorwhitman" = list("Doctor Whitman", "#DDA277"), "specialistvirgil" = list("Specialist Virgil", "#6969BF"), "able" = list("Able", "#d3374c"))
+	messages = list(\
+		list("This cycle's MYSTERIES OF THE FRONTIER is brought to you by", 10 SECONDS, "narrator", "test-A"),\
+		list("Hafgan Heavy Industries, for all your construction and demolition needs", 10 SECONDS, "narrator", "test-A"),\
+		list("When we last left off, Doctor Whitman had successfuly isolated the virus haunting Jamsion Labs", 15 SECONDS, "narrator", "test-B"),\
+		list("We now resume our story", 7 SECONDS, "narrator", "test-B"),\
+		list("Doctor, what in the heavens is that thing!", 10 SECONDS, "specialistvirgil", "test-C"),\
+		list("This, my dear ithilid friend, is our culprit.", 10 SECONDS, "doctorwhitman", "test-C"),\
+		list("ABLE!", 5 SECONDS, "doctorwhitman", "test-C"),\
+		list("Yes Doctor?", 5 SECONDS, "able", "emergency-B"),\
+		list("Can you trace where this came from?", 10 SECONDS, "doctorwhitman", "test-C"),\
+		list("Please transport the specimen to my upload, so I may interface with the object", 15 SECONDS, "able", "test-D"),\
+		list("The Good Doctor and their trusty assistant rushed to the AI's upload room", 15 SECONDS, "narrator", "test-B"),\
+		list("After placing the virus in a safe containment unit, and inserting it into the AI's mainframe", 15 SECONDS, "narrator", "test-D"),\
+		list("Suddenly...", 5 SECONDS, "narrator", "emergency-B"),\
+		list("*sparking noises*", 5 SECONDS, null, "test-C"),\
+		list("Able, ABLE! Are you alright Able?!", 7 SECONDS, "specialistvirgil", "emergency-A"),\
+		list("Join us next cycle for more of Hafgan Heavy Industries's MYSTERIES OF THE FRONTIER", 15 SECONDS, null, "test-D"),\
+	)
+	group_messages = TRUE
+	broadcast_channels = TR_CAT_TEEVEE_BROADCAST_RECEIVERS
+
+//     ▄▄▄  ▄▄▄▄  ▄▄ ▄▄ ▄▄▄▄▄ ▄▄▄▄  ▄▄▄▄▄▄ ▄▄▄▄
+//    ██▀██ ██▀██ ██▄██ ██▄▄  ██▄█▄   ██  ███▄▄
+//    ██▀██ ████▀  ▀█▀  ██▄▄▄ ██ ██   ██  ▄▄██▀
+
+
+/datum/directed_broadcast/ad/hotdogs
+	id = "hotdog_ad"
+	priority = 2
+	speakers = list("Frank" = list("Frank", "#d3374c"))
+	messages = list(\
+		list("*static*", 2 SECONDS, null, "test"),\
+		list("Hey...", 6 SECONDS, "Frank", "hotdogs-A"),\
+		list("Uh, d'you like hotdogs?", 6 SECONDS, "Frank", "hotdogs-A"),\
+		list("If you like hot dogs come to the mall, we're a restaurant that specializes in hot dogs.", 10 SECONDS, "Frank", "hotdogs-A"),\
+		list("It's pretty much all we got. You'd need to bring your own soda or something to drink.", 10 SECONDS, "Frank", "hotdogs-A"),\
+		list("You're not really supposed to do that either but it's whatever.", 7 SECONDS, "Frank", "hotdogs-A"),\
+		list("Come down and get some dogs in you.", 8 SECONDS, "Frank", "hotdogs-B"),\
+		list("Probably safe!", 4 SECONDS, "Frank", "test-D"),\
+		list("*static*", 2 SECONDS, null, "test"),\
+	)
+	group_messages = TRUE
+	broadcast_channels = TR_CAT_TEEVEE_BROADCAST_RECEIVERS
+
+
+/datum/directed_broadcast/ad/cigarettes
+	id = "cigarette_ad"
+	priority = 2
+	speakers = list("hank" = list("Thank", "#A2DD77"), "rachelle" = list("Grachelle", "#DDA277"))
+	messages = list(\
+		list("*static*", 2 SECONDS, null, "test"),\
+		list("Smoke...", 6 SECONDS, "hank", "cigarettes-A"),\
+		list("Smoke cigarettes today!", 6 SECONDS, "hank", "cigarettes-A"),\
+		list("Oh, they're so smooth! I love smoking cigarettes!", 8 SECONDS, "rachelle", "cigarettes-B"),\
+		list("Cigarettes- available at your nearest cigarette vending machine.", 10 SECONDS, "hank", "cigarettes-B"),\
+		list("*static*", 2 SECONDS, null, "test"),\
+	)
+	group_messages = TRUE
+	broadcast_channels = TR_CAT_TEEVEE_BROADCAST_RECEIVERS
+
+
+/* --------------------------------------------------------------------------------------------------------
+
+▄▄▄▄  ▄▄▄  ▄▄▄▄                  ▄▄                   ▄▄▄▄▄▄▄ ▄▄                            ▄▄
+▀███  ███  ███▀             ██   ██                  ███▀▀▀▀▀ ██                            ██
+ ███  ███  ███ ▄█▀█▄  ▀▀█▄ ▀██▀▀ ████▄ ▄█▀█▄ ████▄   ███      ████▄  ▀▀█▄ ████▄ ████▄ ▄█▀█▄ ██
+ ███▄▄███▄▄███ ██▄█▀ ▄█▀██  ██   ██ ██ ██▄█▀ ██ ▀▀   ███      ██ ██ ▄█▀██ ██ ██ ██ ██ ██▄█▀ ██
+  ▀████▀████▀  ▀█▄▄▄ ▀█▄██  ██   ██ ██ ▀█▄▄▄ ██      ▀███████ ██ ██ ▀█▄██ ██ ██ ██ ██ ▀█▄▄▄ ██
+
+ Weather channel for terrestrial maps, disabled while in space ~ possibly plays smooth jazz in the future?
+ --------------------------------------------------------------------------------------------------------*/
+
+
+/* --------------------------------------------------------------------------------------------------------
+
+▄▄▄   ▄▄▄ ▄▄▄  ▄▄▄ ▄▄▄      ▄▄▄   ▄▄▄    ▄▄▄  ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄ ▄▄▄▄  ▄▄▄  ▄▄▄▄   ▄▄▄▄▄   ▄▄▄▄▄▄▄   ▄▄▄   ▄▄▄
+███   ███ ███  ███ ████▄  ▄████   ████▄  ███ ███▀▀▀▀▀ ▀▀▀███▀▀▀ ▀███  ███  ███▀ ▄███████▄ ███▀▀███▄ ███ ▄███▀
+▀███▄███▀ ███  ███ ███▀████▀███   ███▀██▄███ ███▄▄       ███     ███  ███  ███  ███   ███ ███▄▄███▀ ███████
+  ▀███▀   ███▄▄███ ███  ▀▀  ███   ███  ▀████ ███         ███     ███▄▄███▄▄███  ███▄▄▄███ ███▀▀██▄  ███▀███▄
+   ███    ▀██████▀ ███      ███   ███    ███ ▀███████    ███      ▀████▀████▀    ▀█████▀  ███  ▀███ ███  ▀███
+
+ Cooking channel, broadcasts should contain actual lesser known recipies and hints for some secret foods
+ --------------------------------------------------------------------------------------------------------*/
+
