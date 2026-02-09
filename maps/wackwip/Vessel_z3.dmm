@@ -208,6 +208,9 @@
 /obj/decal/poster/wallsign/dont_drugs{
 	pixel_y = 33
 	},
+/obj/table/auto{
+	icon_state = "4"
+	},
 /turf/floor/riveted,
 /area/space)
 "bC" = (
@@ -319,9 +322,6 @@
 /obj/warp_portal,
 /turf/floor/grime,
 /area/space)
-"cr" = (
-/turf/wall/false_wall,
-/area/space)
 "cu" = (
 /obj/machinery/door/airlock/glass/engineering,
 /obj/machinery/door/firedoor/border_only,
@@ -411,10 +411,6 @@
 	},
 /obj/decal/cleanable/rust/jen/grime,
 /turf/floor/airless/carpet/grime,
-/area/space)
-"dM" = (
-/obj/submachine/poster_creator,
-/turf/floor/riveted,
 /area/space)
 "dQ" = (
 /obj/table/reinforced,
@@ -1352,6 +1348,9 @@
 /obj/decal/poster/wallsign/poster_y4ntshitty{
 	pixel_y = 31
 	},
+/obj/table/auto{
+	icon_state = "12"
+	},
 /turf/floor/riveted,
 /area/space)
 "rv" = (
@@ -1786,6 +1785,10 @@
 /obj/machinery/atmospherics/pipe/simple/insulated/cold/southwest,
 /obj/window/reinforced/north,
 /turf/floor/grime,
+/area/space)
+"ym" = (
+/obj/machinery/door/airlock/gannets/security/alt,
+/turf/wall/auto/rivet,
 /area/space)
 "yo" = (
 /obj/stool/chair/office/blue{
@@ -2329,6 +2332,10 @@
 /obj/machinery/atmospherics/pipe/manifold/overfloor/west,
 /turf/floor/engine/vacuum,
 /area/space)
+"Fh" = (
+/obj/machinery/door/airlock/gannets/security/alt,
+/turf/floor/plating,
+/area/space)
 "Fl" = (
 /obj/railing/cool{
 	dir = 4
@@ -2429,6 +2436,9 @@
 	layer = 30.1;
 	plane = -99;
 	pixel_x = 18
+	},
+/obj/table/auto{
+	icon_state = "8"
 	},
 /turf/floor/riveted,
 /area/space)
@@ -2724,6 +2734,7 @@
 	pixel_y = 33;
 	pixel_x = 1
 	},
+/obj/submachine/poster_creator,
 /turf/floor/riveted,
 /area/space)
 "LB" = (
@@ -52467,7 +52478,7 @@ LB
 LB
 LB
 LB
-LB
+ym
 LB
 LB
 LB
@@ -53375,7 +53386,7 @@ LB
 GE
 tL
 rR
-dM
+ho
 LB
 jH
 ad
@@ -54264,11 +54275,11 @@ XF
 ad
 QS
 LB
-TN
-TN
-TN
-TN
-TN
+LB
+LB
+LB
+LB
+LB
 LB
 II
 eg
@@ -54566,9 +54577,9 @@ jH
 Vi
 tV
 LB
-TN
-TN
-TN
+fT
+fT
+fT
 fT
 fT
 LB
@@ -54867,10 +54878,10 @@ LB
 jH
 ad
 tV
-LB
-TN
-TN
-TN
+Bv
+fT
+fT
+fT
 fT
 fT
 Ed
@@ -55170,10 +55181,10 @@ jH
 Vi
 QS
 LB
-TN
-TN
-TN
-fT
+LB
+LB
+LB
+LB
 fT
 fT
 fT
@@ -55475,7 +55486,7 @@ LB
 TN
 TN
 TN
-fT
+LB
 fT
 fT
 fT
@@ -55502,7 +55513,7 @@ LB
 LB
 LB
 LB
-Sy
+LB
 vY
 JM
 va
@@ -55777,7 +55788,7 @@ LB
 TN
 TN
 TN
-fT
+LB
 fT
 fT
 fT
@@ -55804,7 +55815,7 @@ LB
 bp
 Gl
 Gl
-Sy
+LB
 zS
 vz
 gW
@@ -56079,7 +56090,7 @@ LB
 TN
 TN
 TN
-fT
+LB
 fT
 Nt
 Nt
@@ -56106,7 +56117,7 @@ qx
 xM
 Ni
 Ni
-Sy
+LB
 Uw
 vU
 sM
@@ -56381,7 +56392,7 @@ LB
 TN
 TN
 TN
-fT
+LB
 fT
 Nt
 Xh
@@ -56408,12 +56419,12 @@ sO
 yC
 Ni
 Gl
-Sy
-Sy
-Sy
-cr
-Sy
-Sy
+LB
+LB
+LB
+LB
+LB
+LB
 LB
 TN
 TN
@@ -56683,7 +56694,7 @@ LB
 TN
 TN
 TN
-fT
+LB
 fT
 Nt
 iH
@@ -56985,7 +56996,7 @@ LB
 TN
 TN
 TN
-fT
+LB
 fT
 Nt
 SS
@@ -57287,7 +57298,7 @@ LB
 LB
 LB
 LB
-fT
+LB
 fT
 Nt
 Sd
@@ -58203,9 +58214,9 @@ Nt
 Nt
 LB
 LB
+qx
 LB
-LB
-LB
+Fh
 LB
 LB
 LB
