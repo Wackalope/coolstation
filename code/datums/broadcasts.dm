@@ -258,36 +258,13 @@ ABSTRACT_TYPE(/datum/directed_broadcast)
 	priority = 3
 	messages = list("High priority interrupt.")
 
-/datum/directed_broadcast/testing_teevee
-	id = "demo_teevee"
-	speakers = list("hank" = list("Hank", "#A2DD77"), "rachelle" = list("Rachelle", "#DDA277"), "administrator" = list("NT Administrator", "#6969BF"))
-	messages = list(\
-		list("It's another beautiful day in paradise.", 10 SECONDS, "hank", "test-A"),\
-		list("You're listening to a broadcast on TV.", 10 SECONDS, "hank", "test-A"),\
-		list("Oh Hank, isn't it wonderful?", 8 SECONDS, "rachelle", "test-B"),\
-		list("I have absolutely no idea what to do with myself.", 8 SECONDS, "rachelle", "test-B"),\
-		list("We interrupt this programming for an important announcement:", 13 SECONDS, null, "test-C"),\
-		list("DO NOT EAT THE FOOD. It's gone off. Something's gone off.", 10 SECONDS, null, "test-C"),\
-		list("*laugh track*", 10 SECONDS, null, "test-D"),\
-		list("The following program is brought to you by Cigarettes.", 6 SECONDS, null, "cigarettes-B"),\
-		list("Do you know where the fire exists are located?", 10 SECONDS, "administrator", "emergency-B"),\
-		list("Often, ten seconds is all it takes to make the difference...", 10 SECONDS, "administrator", "emergency-B"),\
-		list("Between life and death.", 5 SECONDS, "administrator", "emergency-B"),\
-		list("Speak to your safety officer today.", 10 SECONDS, "administrator", "emergency-B"),\
-		list("*static*", 4 SECONDS, null, "test"),\
-		list("The tape will now rewind.", 7 SECONDS, "administrator", "emergency-A"),\
-		list("*static*", 10 SECONDS, null, "test"),\
-	)//test doesn't exist, which is intentional for testing here
-	group_messages = TRUE
-	broadcast_channels = TR_CAT_TEEVEE_BROADCAST_RECEIVERS
-
 /datum/directed_broadcast/ad
 	id = "generic_ad"
 	loops_remaining = 1
 	priority = DEFAULT_PROGRAMMING_PRIORITY
 	group_messages = TRUE
 	//direct children of this can go both on radios and TVs
-	broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
+	//broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
 	dispose_on_end = TRUE // same ad might play on multiple channels at different times, need to be instantiated
 
 	speakers = list("announcer" = list("Announcer", "#d600d6"), "consumer" = list("Consumer", "#003eb3"))
@@ -384,77 +361,12 @@ ABSTRACT_TYPE(/datum/directed_broadcast)
 		list("Schweewa: A beacon of hope in the darkness of space.", 8 SECONDS, "announcer"),\
 	)
 
-/datum/directed_broadcast/ad/radio_only/dans_noodles //Trying somewhat fast timings with this one cause Dan talks hard and fast. Like Bubs.
-	id = "dans_noodles_ad"
-	speakers = list("announcer" = list("\"Discount Dan\"", "#d600d6"))
-	messages = list(\
-		list("*Peppy music*", 2 SECONDS),\
-		list("Discount Dan's noodle soups!", 3 SECONDS, "announcer"),\
-		list("The warm delight that is nutritionally balanced around your low budget!", 6 SECONDS, "announcer"),\
-		list("And now extra convenient! We break the noodles to splinters before cooking!", 6 SECONDS, "announcer"),\
-		list("That means you get the same great taste with half as much chewing! Buy now!", 6 SECONDS, "announcer"),\
-		list("Discount Dan's noodle soups!", 4 SECONDS, "announcer"),\
-	)
-
 /datum/directed_broadcast/programme
 	priority = DEFAULT_PROGRAMMING_PRIORITY
 	loops_remaining = 1
 	dispose_on_end = TRUE // same programme might play on multiple channels at different times, need to be instantiated
 	broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
 
-ABSTRACT_TYPE(/datum/directed_broadcast/programme/tv_only)
-/datum/directed_broadcast/programme/tv_only
-	broadcast_channels = list(TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
-
-/datum/directed_broadcast/programme/tv_only/eaglestoryone
-	id = "mysteries_of_the_frontier_one"
-	speakers = list("narrator" = list("Narrator", "#A2DD77"), "doctorwhitman" = list("Doctor Whitman", "#DDA277"), "specialistvirgil" = list("Specialist Virgil", "#6969BF"), "able" = list("Able", "#d3374c"))
-	messages = list(\
-		list("This cycle's MYSTERIES OF THE FRONTIER is brought to you by:", 10 SECONDS, "narrator", "test-A"),\
-		list("Hafgan Heavy Industries, for all your construction and demolition needs.", 10 SECONDS, "narrator", "test-A"),\
-		list("When we last left off, Doctor Whitman had successfuly isolated the virus haunting Jamsion Labs.", 15 SECONDS, "narrator", "test-B"),\
-		list("We now resume our story:", 7 SECONDS, "narrator", "test-B"),\
-		list("Doctor, what in the heavens is that thing!", 10 SECONDS, "specialistvirgil", "test-C"),\
-		list("This, my dear ithilid friend, is our culprit.", 10 SECONDS, "doctorwhitman", "test-C"),\
-		list("ABLE!", 5 SECONDS, "doctorwhitman", "test-C"),\
-		list("Yes Doctor?", 5 SECONDS, "able", "emergency-B"),\
-		list("Can you trace where this came from?", 10 SECONDS, "doctorwhitman", "test-C"),\
-		list("Please transport the specimen to my upload, so I may interface with the object", 15 SECONDS, "able", "test-D"),\
-		list("The Good Doctor and their trusty assistant rushed to the AI's upload room", 15 SECONDS, "narrator", "test-B"),\
-		list("After placing the virus in a safe containment unit, and inserting it into the AI's mainframe", 15 SECONDS, "narrator", "test-D"),\
-		list("Suddenly...", 5 SECONDS, "narrator", "emergency-B"),\
-		list("*sparking noises*", 5 SECONDS, null, "test-C"),\
-		list("Able, ABLE! Are you alright Able?!", 7 SECONDS, "specialistvirgil", "emergency-A"),\
-		list("Join us next cycle for more of Hafgan Heavy Industries's MYSTERIES OF THE FRONTIER!", 15 SECONDS, null, "test-D"),\
-	)
-	group_messages = TRUE
-
-ABSTRACT_TYPE(/datum/directed_broadcast/programme/radio_only)
-/datum/directed_broadcast/programme/radio_only
-	broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS)
-
-/datum/directed_broadcast/programme/radio_only/sports1
-	id = "sports_1"
-	speakers = list("stank_dreadful" = list("Stank Dreadful", "#5078cc"), "grendel_weshington" = list("Grendel Weshington", "#ab523c"))
-	messages = list(\
-		list("Welcome back to Frontier Sports, the place where we talk about sports on the frontier!", 8 SECONDS, "stank_dreadful", ""),\
-		list("I am of course Stank Dreadful, better known as \"The Dreadstank\".", 6 SECONDS, "stank_dreadful", ""),\
-		list("And with me is the estimable Grendel Weshington.", 5 SECONDS, "stank_dreadful", ""),\
-		list("Damn right.", 2 SECONDS, "grendel_weshington", ""),\
-		list("First up: in Space Hockey the Old New Montgomery Queefers beat the Appelscha 2 Klootzakken 52-31.", 10 SECONDS, "grendel_weshington", ""),\
-		list("\"Beat\" is bringing it lightly. That second half was a complete clowning by the Queefers.", 7 SECONDS, "stank_dreadful", ""),\
-		list("Well yeah, you let the other team get the jump on you during the mid-game shower and suddenly you're down three players.", 12 SECONDS, "grendel_weshington", ""),\
-		list("Rookie mistake, frankly.", 3 SECONDS, "grendel_weshington", ""),\
-		list("Fair enough. The aftercare was exemplary on the Queefers' part though.", 8 SECONDS, "stank_dreadful", ""),\
-		list("Up next: the inaugural Free and Open Source Squash game.", 6 SECONDS, "stank_dreadful", ""),\
-		list("Day twelve and with no end in sight, as a direct commit to the rulebook accidentally makes it impossible to satisfy any of the win conditions.", 10 SECONDS, "stank_dreadful", ""),\
-		list("That aside, the referees are working hard to score the backlog of plays generated so far.", 9 SECONDS, "stank_dreadful", ""),\
-		list("Have they gotten lawyers involved to sort it out yet?", 6 SECONDS, "grendel_weshington", ""),\
-		list("Not yet, but I'll stank you what:", 5 SECONDS, "stank_dreadful", ""),\
-		list("They better fix this shit fast if FOSS is going to be a sports mainstay.", 10 SECONDS, "stank_dreadful", ""),\
-		list("You must admit though, when it works the sport is downright graceful. A delight to the senses.", 10 SECONDS, "grendel_weshington", ""),\
-		list("So am I.", 3 SECONDS, "stank_dreadful", ""),\
-	)
 
 /datum/directed_broadcast/emergency
 	var/station_name
@@ -507,60 +419,7 @@ ABSTRACT_TYPE(/datum/directed_broadcast/interstitial)
 	priority = DEFAULT_PROGRAMMING_PRIORITY
 	group_messages = TRUE
 	dispose_on_end = TRUE // same interstitial might play on multiple channels at different times, need to be instantiated. Not that it matters as much here
-	broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
-
-/datum/directed_broadcast/interstitial/tv
-	id = "tv_int1"
-	broadcast_channels = list(TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
-
-	messages = list(\
-		list("*Bweoooow*", 1 SECONDS, null, "emergency-B"),\
-		list("This channel brought to you by Nanotrasen.", 3 SECONDS, null, "emergency-B"),\
-		)
-
-/datum/directed_broadcast/interstitial/tv/second
-	id = "tv_int2"
-
-	messages = list(\
-		list("*Bweoooow*", 1 SECONDS, null, "emergency-B"),\
-		list("Nanotrasen TV. For a productive shift.", 3 SECONDS, null, "emergency-B"),\
-		)
-
-/datum/directed_broadcast/interstitial/tv/third
-	id = "tv_int3"
-
-	messages = list(\
-		list("*Bweoooow*", 1 SECONDS, null, "emergency-B"),\
-		list("Nanotrasen TV is sponsored by Nanotrasen.", 3 SECONDS, null, "emergency-B"),\
-		)
-
-/datum/directed_broadcast/interstitial/radio
-	id = "radio_int1"
-	broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS,  TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS)
-
-	messages = list(\
-		list("*pling*", 1 SECONDS),\
-		list("You're listening to radio.", 3 SECONDS),\
-		list("*plong*", 1 SECONDS),\
-		)
-
-/datum/directed_broadcast/interstitial/radio/second
-	id = "radio_int2"
-
-	messages = list(\
-		list("*pling*", 1 SECONDS),\
-		list("Radio. It's better than heaven.", 3 SECONDS),\
-		list("*plong*", 1 SECONDS),\
-		)
-
-/datum/directed_broadcast/interstitial/radio/third
-	id = "radio_int3"
-
-	messages = list(\
-		list("*pling*", 1 SECONDS),\
-		list("Radio. I love it.", 3 SECONDS),\
-		list("*plong*", 1 SECONDS),\
-		)
+	//broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
 
 
 #undef LOOP_INFINITELY
@@ -625,3 +484,246 @@ ABSTRACT_TYPE(/datum/directed_broadcast_scheduler)
 	if (channel in initial(broadcast.broadcast_channels))
 		broadcast_controls.broadcast_start(new broadcast, TRUE, channel, 1, FALSE)
 	*/
+
+/*
+Category Fonts:
+
+Coder Mini
+
+ANSI Compact
+
+https://patorjk.com/software/taag
+
+*/
+
+/* --------------------------------------------------------------------------------------------------------
+
+▄▄▄    ▄▄▄ ▄▄▄▄▄▄▄▄▄     ▄▄▄▄ ▄▄▄▄▄▄▄    ▄▄▄    ▄▄▄  ▄▄▄▄▄▄▄ ▄▄▄▄  ▄▄▄  ▄▄▄▄  ▄▄▄▄▄▄▄
+████▄  ███ ▀▀▀███▀▀▀   ▄█████ ▀▀▀▀████   ████▄  ███ ███▀▀▀▀▀ ▀███  ███  ███▀ █████▀▀▀
+███▀██▄███    ███         ███   ▄▄██▀    ███▀██▄███ ███▄▄     ███  ███  ███   ▀████▄
+███  ▀████    ███         ███     ███▄   ███  ▀████ ███       ███▄▄███▄▄███     ▀████
+███    ███    ███         ███ ███████▀   ███    ███ ▀███████   ▀████▀████▀   ███████▀
+
+ Local and frontier wide news channel, mainly used for propaganda, announcements, and generic PSAs
+ --------------------------------------------------------------------------------------------------------*/
+
+
+//    ▄▄ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄   ▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄▄▄▄▄ ▄▄  ▄▄▄  ▄▄     ▄▄▄▄
+//    ██ ███▄██   ██   ██▄▄  ██▄█▄ ███▄▄   ██   ██   ██   ██ ██▀██ ██    ███▄▄
+//    ██ ██ ▀██   ██   ██▄▄▄ ██ ██ ▄▄██▀   ██   ██   ██   ██ ██▀██ ██▄▄▄ ▄▄██▀
+// 📺═════════════📺═════════════📺═════════════📺═════════════📺═════════════📺 NT13 NEWS
+
+
+/* --------------------------------------------------------------------------------------------------------
+
+▄▄▄▄  ▄▄▄▄                                     ▄▄▄▄▄▄▄ ▄▄                            ▄▄
+▀███  ███▀            ▀▀         ██           ███▀▀▀▀▀ ██                            ██
+ ███  ███  ▀▀█▄ ████▄ ██  ▄█▀█▄ ▀██▀▀ ██ ██   ███      ████▄  ▀▀█▄ ████▄ ████▄ ▄█▀█▄ ██
+ ███▄▄███ ▄█▀██ ██ ▀▀ ██  ██▄█▀  ██   ██▄██   ███      ██ ██ ▄█▀██ ██ ██ ██ ██ ██▄█▀ ██
+  ▀████▀  ▀█▄██ ██    ██▄ ▀█▄▄▄  ██    ▀██▀   ▀███████ ██ ██ ▀█▄██ ██ ██ ██ ██ ▀█▄▄▄ ██
+                                        ██
+                                      ▀▀▀
+ Most programming goes on this channel, expect shitty podcasts, soap operas, "how its made", and lots of ads
+ --------------------------------------------------------------------------------------------------------*/
+
+ABSTRACT_TYPE(/datum/directed_broadcast/programme/variety)
+/datum/directed_broadcast/programme/variety
+	broadcast_channels = TR_CAT_BROADCAST_VARIETY_CHANNEL
+
+//
+// EAGLE STORY
+//
+
+/datum/directed_broadcast/programme/variety/eaglestoryone
+	id = "mysteries_of_the_frontier_one"
+	speakers = list("narrator" = list("Narrator", "#A2DD77"), "doctorwhitman" = list("Doctor Whitman", "#DDA277"), "specialistvirgil" = list("Specialist Virgil", "#6969BF"), "able" = list("Able", "#d3374c"))
+	messages = list(\
+		list("This cycle's MYSTERIES OF THE FRONTIER is brought to you by:", 10 SECONDS, "narrator", "test-A"),\
+		list("Hafgan Heavy Industries, for all your construction and demolition needs.", 10 SECONDS, "narrator", "test-A"),\
+		list("When we last left off, Doctor Whitman had successfuly isolated the virus haunting Jamsion Labs.", 15 SECONDS, "narrator", "test-B"),\
+		list("We now resume our story:", 7 SECONDS, "narrator", "test-B"),\
+		list("Doctor, what in the heavens is that thing!", 10 SECONDS, "specialistvirgil", "test-C"),\
+		list("This, my dear ithilid friend, is our culprit.", 10 SECONDS, "doctorwhitman", "test-C"),\
+		list("ABLE!", 5 SECONDS, "doctorwhitman", "test-C"),\
+		list("Yes Doctor?", 5 SECONDS, "able", "emergency-B"),\
+		list("Can you trace where this came from?", 10 SECONDS, "doctorwhitman", "test-C"),\
+		list("Please transport the specimen to my upload, so I may interface with the object", 15 SECONDS, "able", "test-D"),\
+		list("The Good Doctor and their trusty assistant rushed to the AI's upload room", 15 SECONDS, "narrator", "test-B"),\
+		list("After placing the virus in a safe containment unit, and inserting it into the AI's mainframe", 15 SECONDS, "narrator", "test-D"),\
+		list("Suddenly...", 5 SECONDS, "narrator", "emergency-B"),\
+		list("*sparking noises*", 5 SECONDS, null, "test-C"),\
+		list("Able, ABLE! Are you alright Able?!", 7 SECONDS, "specialistvirgil", "emergency-A"),\
+		list("Join us next cycle for more of Hafgan Heavy Industries's MYSTERIES OF THE FRONTIER!", 15 SECONDS, null, "test-D"),\
+	)
+	group_messages = TRUE
+
+
+//
+// SHLOCK
+//
+
+/datum/directed_broadcast/programme/variety/confusing
+	id = "confusing"
+	speakers = list("hank" = list("Hank", "#A2DD77"), "rachelle" = list("Rachelle", "#DDA277"), "administrator" = list("NT Administrator", "#6969BF"))
+	messages = list(\
+		list("It's another beautiful day in paradise.", 10 SECONDS, "hank", "test-A"),\
+		list("You're listening to a broadcast on TV.", 10 SECONDS, "hank", "test-A"),\
+		list("Oh Hank, isn't it wonderful?", 8 SECONDS, "rachelle", "test-B"),\
+		list("I have absolutely no idea what to do with myself.", 8 SECONDS, "rachelle", "test-B"),\
+		list("We interrupt this programming for an important announcement:", 13 SECONDS, null, "test-C"),\
+		list("DO NOT EAT THE FOOD. It's gone off. Something's gone off.", 10 SECONDS, null, "test-C"),\
+		list("*laugh track*", 10 SECONDS, null, "test-D"),\
+		list("The following program is brought to you by Cigarettes.", 6 SECONDS, null, "cigarettes-B"),\
+		list("Do you know where the fire exists are located?", 10 SECONDS, "administrator", "emergency-B"),\
+		list("Often, ten seconds is all it takes to make the difference...", 10 SECONDS, "administrator", "emergency-B"),\
+		list("Between life and death.", 5 SECONDS, "administrator", "emergency-B"),\
+		list("Speak to your safety officer today.", 10 SECONDS, "administrator", "emergency-B"),\
+		list("*static*", 10 SECONDS, null, "test"),\
+	)
+	group_messages = TRUE
+
+
+//
+// SPORTS
+//
+
+/datum/directed_broadcast/programme/variety/sports1
+	id = "sports_1"
+	speakers = list("stank_dreadful" = list("Stank Dreadful", "#5078cc"), "grendel_weshington" = list("Grendel Weshington", "#ab523c"))
+	messages = list(\
+		list("Welcome back to Frontier Sports, the place where we talk about sports on the frontier!", 8 SECONDS, "stank_dreadful", ""),\
+		list("I am of course Stank Dreadful, better known as \"The Dreadstank\".", 6 SECONDS, "stank_dreadful", ""),\
+		list("And with me is the estimable Grendel Weshington.", 5 SECONDS, "stank_dreadful", ""),\
+		list("Damn right.", 2 SECONDS, "grendel_weshington", ""),\
+		list("First up: in Space Hockey the Old New Montgomery Queefers beat the Appelscha 2 Klootzakken 52-31.", 10 SECONDS, "grendel_weshington", ""),\
+		list("\"Beat\" is bringing it lightly. That second half was a complete clowning by the Queefers.", 7 SECONDS, "stank_dreadful", ""),\
+		list("Well yeah, you let the other team get the jump on you during the mid-game shower and suddenly you're down three players.", 12 SECONDS, "grendel_weshington", ""),\
+		list("Rookie mistake, frankly.", 3 SECONDS, "grendel_weshington", ""),\
+		list("Fair enough. The aftercare was exemplary on the Queefers' part though.", 8 SECONDS, "stank_dreadful", ""),\
+		list("Up next: the inaugural Free and Open Source Squash game.", 6 SECONDS, "stank_dreadful", ""),\
+		list("Day twelve and with no end in sight, as a direct commit to the rulebook accidentally makes it impossible to satisfy any of the win conditions.", 10 SECONDS, "stank_dreadful", ""),\
+		list("That aside, the referees are working hard to score the backlog of plays generated so far.", 9 SECONDS, "stank_dreadful", ""),\
+		list("Have they gotten lawyers involved to sort it out yet?", 6 SECONDS, "grendel_weshington", ""),\
+		list("Not yet, but I'll stank you what:", 5 SECONDS, "stank_dreadful", ""),\
+		list("They better fix this shit fast if FOSS is going to be a sports mainstay.", 10 SECONDS, "stank_dreadful", ""),\
+		list("You must admit though, when it works the sport is downright graceful. A delight to the senses.", 10 SECONDS, "grendel_weshington", ""),\
+		list("So am I.", 3 SECONDS, "stank_dreadful", ""),\
+	)
+
+
+
+//    ▄▄ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄   ▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄▄▄▄▄ ▄▄  ▄▄▄  ▄▄     ▄▄▄▄
+//    ██ ███▄██   ██   ██▄▄  ██▄█▄ ███▄▄   ██   ██   ██   ██ ██▀██ ██    ███▄▄
+//    ██ ██ ▀██   ██   ██▄▄▄ ██ ██ ▄▄██▀   ██   ██   ██   ██ ██▀██ ██▄▄▄ ▄▄██▀
+// 📺═════════════📺═════════════📺═════════════📺═════════════📺═════════════📺 VARIETY CHANNEL
+
+
+
+
+//     ▄▄▄  ▄▄▄▄  ▄▄ ▄▄ ▄▄▄▄▄ ▄▄▄▄  ▄▄▄▄▄▄ ▄▄▄▄
+//    ██▀██ ██▀██ ██▄██ ██▄▄  ██▄█▄   ██  ███▄▄
+//    ██▀██ ████▀  ▀█▀  ██▄▄▄ ██ ██   ██  ▄▄██▀
+// 📺════════════📺═════════════📺════════════📺 VARIETY CHANNEL
+
+ABSTRACT_TYPE(/datum/directed_broadcast/ad/variety)
+/datum/directed_broadcast/ad/variety
+	broadcast_channels = list(TR_CAT_BROADCAST_VARIETY_CHANNEL)
+
+/datum/directed_broadcast/ad/variety/cigarettes
+	id = "cigarette_ad"
+	speakers = list("hank" = list("Thank", "#A2DD77"), "rachelle" = list("Grachelle", "#DDA277"))
+	messages = list(\
+		list("*static*", 2 SECONDS, null, "test"),\
+		list("Smoke...", 6 SECONDS, "hank", "cigarettes-A"),\
+		list("Smoke cigarettes today!", 6 SECONDS, "hank", "cigarettes-A"),\
+		list("Oh, they're so smooth! I love smoking cigarettes!", 8 SECONDS, "rachelle", "cigarettes-B"),\
+		list("Cigarettes- available at your nearest cigarette vending machine.", 10 SECONDS, "hank", "cigarettes-B"),\
+		list("*static*", 2 SECONDS, null, "test"),\
+	)
+
+/datum/directed_broadcast/ad/variety/hotdogs
+	id = "hotdog_ad"
+	speakers = list("Frank" = list("Frank", "#d3374c"))
+	messages = list(\
+		list("*static*", 2 SECONDS, null, "test"),\
+		list("Hey...", 6 SECONDS, "Frank", "hotdogs-A"),\
+		list("Uh, d'you like hotdogs?", 6 SECONDS, "Frank", "hotdogs-A"),\
+		list("If you like hot dogs come to the mall, we're a restaurant that specializes in hot dogs.", 10 SECONDS, "Frank", "hotdogs-A"),\
+		list("It's pretty much all we got. You'd need to bring your own soda or something to drink.", 10 SECONDS, "Frank", "hotdogs-A"),\
+		list("You're not really supposed to do that either but it's whatever.", 7 SECONDS, "Frank", "hotdogs-A"),\
+		list("Come down and get some dogs in you.", 8 SECONDS, "Frank", "hotdogs-B"),\
+		list("Probably safe!", 4 SECONDS, "Frank", "test-D"),\
+		list("*static*", 2 SECONDS, null, "test"),\
+	)
+
+	/datum/directed_broadcast/ad/variety/dans_noodles //Trying somewhat fast timings with this one cause Dan talks hard and fast. Like Bubs.
+	id = "dans_noodles_ad"
+	speakers = list("announcer" = list("\"Discount Dan\"", "#d600d6"))
+	messages = list(\
+		list("*Peppy music*", 2 SECONDS),\
+		list("Discount Dan's noodle soups!", 3 SECONDS, "announcer"),\
+		list("The warm delight that is nutritionally balanced around your low budget!", 6 SECONDS, "announcer"),\
+		list("And now extra convenient! We break the noodles to splinters before cooking!", 6 SECONDS, "announcer"),\
+		list("That means you get the same great taste with half as much chewing! Buy now!", 6 SECONDS, "announcer"),\
+		list("Discount Dan's noodle soups!", 4 SECONDS, "announcer"),\
+	)
+
+
+/*▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃
+
+▄▄▄▄  ▄▄▄  ▄▄▄▄                  ▄▄                   ▄▄▄▄▄▄▄ ▄▄                            ▄▄
+▀███  ███  ███▀             ██   ██                  ███▀▀▀▀▀ ██                            ██
+ ███  ███  ███ ▄█▀█▄  ▀▀█▄ ▀██▀▀ ████▄ ▄█▀█▄ ████▄   ███      ████▄  ▀▀█▄ ████▄ ████▄ ▄█▀█▄ ██
+ ███▄▄███▄▄███ ██▄█▀ ▄█▀██  ██   ██ ██ ██▄█▀ ██ ▀▀   ███      ██ ██ ▄█▀██ ██ ██ ██ ██ ██▄█▀ ██
+  ▀████▀████▀  ▀█▄▄▄ ▀█▄██  ██   ██ ██ ▀█▄▄▄ ██      ▀███████ ██ ██ ▀█▄██ ██ ██ ██ ██ ▀█▄▄▄ ██
+
+ Weather channel for terrestrial maps, disabled while in space ~ possibly plays smooth jazz in the future?
+ ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃*/
+
+//    ▄▄ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄   ▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄▄▄▄▄ ▄▄  ▄▄▄  ▄▄     ▄▄▄▄
+//    ██ ███▄██   ██   ██▄▄  ██▄█▄ ███▄▄   ██   ██   ██   ██ ██▀██ ██    ███▄▄
+//    ██ ██ ▀██   ██   ██▄▄▄ ██ ██ ▄▄██▀   ██   ██   ██   ██ ██▀██ ██▄▄▄ ▄▄██▀
+// 📺═════════════📺═════════════📺═════════════📺═════════════📺═════════════📺 WEATHER CHANNEL
+
+
+
+
+/* --------------------------------------------------------------------------------------------------------
+
+▄▄▄   ▄▄▄ ▄▄▄  ▄▄▄ ▄▄▄      ▄▄▄   ▄▄▄    ▄▄▄  ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄ ▄▄▄▄  ▄▄▄  ▄▄▄▄   ▄▄▄▄▄   ▄▄▄▄▄▄▄   ▄▄▄   ▄▄▄
+███   ███ ███  ███ ████▄  ▄████   ████▄  ███ ███▀▀▀▀▀ ▀▀▀███▀▀▀ ▀███  ███  ███▀ ▄███████▄ ███▀▀███▄ ███ ▄███▀
+▀███▄███▀ ███  ███ ███▀████▀███   ███▀██▄███ ███▄▄       ███     ███  ███  ███  ███   ███ ███▄▄███▀ ███████
+  ▀███▀   ███▄▄███ ███  ▀▀  ███   ███  ▀████ ███         ███     ███▄▄███▄▄███  ███▄▄▄███ ███▀▀██▄  ███▀███▄
+   ███    ▀██████▀ ███      ███   ███    ███ ▀███████    ███      ▀████▀████▀    ▀█████▀  ███  ▀███ ███  ▀███
+
+ Cooking channel, broadcasts should contain actual lesser known recipies and hints for some secret foods
+ --------------------------------------------------------------------------------------------------------*/
+
+//    ▄▄ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄   ▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄▄▄▄▄ ▄▄  ▄▄▄  ▄▄     ▄▄▄▄
+//    ██ ███▄██   ██   ██▄▄  ██▄█▄ ███▄▄   ██   ██   ██   ██ ██▀██ ██    ███▄▄
+//    ██ ██ ▀██   ██   ██▄▄▄ ██ ██ ▄▄██▀   ██   ██   ██   ██ ██▀██ ██▄▄▄ ▄▄██▀
+// 📺═════════════📺═════════════📺═════════════📺═════════════📺═════════════📺 YUM NETWORK
+
+
+//     ▄▄▄  ▄▄▄▄  ▄▄ ▄▄ ▄▄▄▄▄ ▄▄▄▄  ▄▄▄▄▄▄ ▄▄▄▄
+//    ██▀██ ██▀██ ██▄██ ██▄▄  ██▄█▄   ██  ███▄▄
+//    ██▀██ ████▀  ▀█▀  ██▄▄▄ ██ ██   ██  ▄▄██▀
+// 📺════════════📺═════════════📺════════════📺 YUM NETWORK
+
+
+/* --------------------------------------------------------------------------------------------------------
+
+ ▄▄▄▄▄▄▄ ▄▄                         ▄▄   ▄▄▄▄▄▄▄                        ▄▄
+█████▀▀▀ ██                         ██   ███▀▀███▄                      ██                    ██
+ ▀████▄  ████▄  ▀▀█▄ ████▄ ▄█▀█▄ ▄████   ███▄▄███▀ ████▄ ▄███▄  ▀▀█▄ ▄████ ▄████  ▀▀█▄ ▄█▀▀▀ ▀██▀▀ ▄█▀▀▀
+   ▀████ ██ ██ ▄█▀██ ██ ▀▀ ██▄█▀ ██ ██   ███  ███▄ ██ ▀▀ ██ ██ ▄█▀██ ██ ██ ██    ▄█▀██ ▀███▄  ██   ▀███▄
+███████▀ ██ ██ ▀█▄██ ██    ▀█▄▄▄ ▀████   ████████▀ ██    ▀███▀ ▀█▄██ ▀████ ▀████ ▀█▄██ ▄▄▄█▀  ██   ▄▄▄█▀
+
+ broadcasts that can appear on more than one channel should be placed here, mostly used for ads
+ --------------------------------------------------------------------------------------------------------*/
+
+//     ▄▄▄  ▄▄▄▄  ▄▄ ▄▄ ▄▄▄▄▄ ▄▄▄▄  ▄▄▄▄▄▄ ▄▄▄▄
+//    ██▀██ ██▀██ ██▄██ ██▄▄  ██▄█▄   ██  ███▄▄
+//    ██▀██ ████▀  ▀█▀  ██▄▄▄ ██ ██   ██  ▄▄██▀
+// 📺════════════📺═════════════📺════════════📺 SHARED
+

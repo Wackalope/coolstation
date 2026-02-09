@@ -222,12 +222,29 @@ var/list/list/by_cat = list()
 #define TR_CAT_CLOWN_DISBELIEF_MOBS "clown_disbelief_mobs"
 #define TR_CAT_SPIDER_FILTER_MOBS "spider_filter_mobs"
 #define TR_CAT_PHOTOSENSITIVE_MOBS "photosensitive_mobs"
+//Broadcast channels
+#define TR_CAT_BROADCAST_NT13_NEWS "nt13_news"
+#define TR_CAT_BROADCAST_VARIETY_CHANNEL "variety_channel"
+#define TR_CAT_BROADCAST_WEATHER_CHANNEL "weather_channel"
+#define TR_CAT_BROADCAST_YUM_NETWORK "yum_network"
+
+
+/*
 #define TR_CAT_RADIO_BROADCAST_RECEIVERS "radio_receivers" //default radio channel
 #define TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS "radio2_receivers" //second radio channel
 //#define TR_CAT_FINITE_BROADCAST_RECEIVERS "finite_radio_receivers" //demo channel
 #define TR_CAT_TEEVEE_BROADCAST_RECEIVERS "teevee_receivers" //default television channel
 #define TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS "teevee2_receivers" //second television channel
 #define TR_CAT_CEILING_BROADCAST_DEFAULT "ceiling_speakers" //maybe make this the same as the generic radio cat?
+*/
+
+//Broadcast stuff
+#define TR_CAT_BROADCAST_NT13_NEWS "nt13_news"
+#define TR_CAT_BROADCAST_VARIETY_CHANNEL "variety_channel"
+#define TR_CAT_BROADCAST_WEATHER_CHANNEL "weather_channel"
+#define TR_CAT_BROADCAST_YUM_NETWORK "yum_network"
+
+
 // powernets? processing_items?
 // mobs? ai-mobs?
 
