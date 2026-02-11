@@ -258,108 +258,6 @@ ABSTRACT_TYPE(/datum/directed_broadcast)
 	priority = 3
 	messages = list("High priority interrupt.")
 
-/datum/directed_broadcast/ad
-	id = "generic_ad"
-	loops_remaining = 1
-	priority = DEFAULT_PROGRAMMING_PRIORITY
-	group_messages = TRUE
-	//direct children of this can go both on radios and TVs
-	//broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
-	dispose_on_end = TRUE // same ad might play on multiple channels at different times, need to be instantiated
-
-	speakers = list("announcer" = list("Announcer", "#d600d6"), "consumer" = list("Consumer", "#003eb3"))
-	messages = list(\
-		list("*static*", 2 SECONDS, null, "test"),\
-		list("Have you considered...", 6 SECONDS, "announcer", "cigarettes-A"),\
-		list("Buying product?", 6 SECONDS, "announcer", "cigarettes-A"),\
-		list("Oh, I'd love to do that! I'll go do that right now!", 8 SECONDS, "consumer", "cigarettes-B"),\
-		list("Products. Available wherever goods are sold.", 10 SECONDS, "announcer", "cigarettes-B"),\
-		list("*static*", 2 SECONDS, null, "test"),\
-	)
-
-
-/datum/directed_broadcast/ad/tv_only
-	id = "generic_ad_tv"
-	broadcast_channels = list(TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
-
-	speakers = list("announcer" = list("Voice-over", "#d600d6"), "consumer" = list("Consumer", "#003eb3"))
-	messages = list(\
-		list("*static*", 2 SECONDS, null, "asdsdgfa"),\
-		list("Remember to spend your money wisely.", 7 SECONDS, "announcer", "gun"),\
-		list("Buy more guns. Guns. Gunse. Gunse.", 6 SECONDS, "announcer", "gun"),\
-		list("But I have a family to feed!", 6 SECONDS, "consumer", "sadman"),\
-		list("Gunse. Yours is waiting out there for you.", 10 SECONDS, "announcer", "gun"),\
-	)
-
-
-/datum/directed_broadcast/ad/cigarettes
-	id = "cigarette_ad"
-	speakers = list("hank" = list("Thank", "#A2DD77"), "rachelle" = list("Grachelle", "#DDA277"))
-	messages = list(\
-		list("*static*", 2 SECONDS, null, "test"),\
-		list("Smoke...", 6 SECONDS, "hank", "cigarettes-A"),\
-		list("Smoke cigarettes today!", 6 SECONDS, "hank", "cigarettes-A"),\
-		list("Oh, they're so smooth! I love smoking cigarettes!", 8 SECONDS, "rachelle", "cigarettes-B"),\
-		list("Cigarettes- available at your nearest cigarette vending machine.", 10 SECONDS, "hank", "cigarettes-B"),\
-		list("*static*", 2 SECONDS, null, "test"),\
-	)
-
-/datum/directed_broadcast/ad/hotdogs
-	id = "hotdog_ad"
-	speakers = list("Frank" = list("Frank", "#d3374c"))
-	messages = list(\
-		list("*static*", 2 SECONDS, null, "test"),\
-		list("Hey...", 6 SECONDS, "Frank", "hotdogs-A"),\
-		list("Uh, d'you like hotdogs?", 6 SECONDS, "Frank", "hotdogs-A"),\
-		list("If you like hot dogs come to the mall, we're a restaurant that specializes in hot dogs.", 10 SECONDS, "Frank", "hotdogs-A"),\
-		list("It's pretty much all we got. You'd need to bring your own soda or something to drink.", 10 SECONDS, "Frank", "hotdogs-A"),\
-		list("You're not really supposed to do that either but it's whatever.", 7 SECONDS, "Frank", "hotdogs-A"),\
-		list("Come down and get some dogs in you.", 8 SECONDS, "Frank", "hotdogs-B"),\
-		list("Probably safe!", 4 SECONDS, "Frank", "test-D"),\
-		list("*static*", 2 SECONDS, null, "test"),\
-	)
-
-/datum/directed_broadcast/ad/radio_only
-	id = "generic_ad_radio"
-	broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS,  TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS)
-	speakers = list("announcer" = list("Voice-over", "#d600d6"), "consumer" = list("Consumer", "#003eb3"))
-	messages = list(\
-		list("*static*", 2 SECONDS, null),\
-		list("You know you want it.", 3 SECONDS, "announcer"),\
-		list("You know you need it.", 3 SECONDS, "announcer"),\
-		list("Huh? What?", 2 SECONDS, "consumer"),\
-		list("Products. Available wherever goods are sold.", 10 SECONDS, "announcer"),\
-		)
-
-/datum/directed_broadcast/ad/radio_only/schweewa1
-	id = "schweewa_ad_1"
-	speakers = list("announcer" = list("Voice-over", "#d600d6"), "dad" = list("Your actual dad(???)", "#d1320b"))
-	messages = list(\
-		list("*Greasy jingle*", 2 SECONDS),\
-		list("Schweewa.", 2 SECONDS, "announcer"),\
-		list("We've got fucking food in here.", 5 SECONDS, "announcer"),\
-		list("Come stuff your mouth!", 4 SECONDS, "announcer"),\
-		list("Like a burger or whatever. Buy our shit.", 5 SECONDS, "announcer"),\
-		list("You love to eat at Schweewa.", 5 SECONDS, "announcer"),\
-		list("Don't disappoint me this time.", 5 SECONDS, "dad"),\
-		list("Eat at Schweewa.", 4 SECONDS, "dad"),\
-		list("Schweewa: Found wherever asteroid mining takes place.", 8 SECONDS, "announcer"),\
-	)
-
-/datum/directed_broadcast/ad/radio_only/schweewa2
-	id = "schweewa_ad_2"
-	speakers = list("announcer" = list("Voice-over", "#d600d6"))
-	messages = list(\
-		list("*Greasy jingle*", 2 SECONDS),\
-		list("Schweewa cares for the community.", 5 SECONDS, "announcer"),\
-		list("Just in 2053 alone we donated over 70 burnt-out deep fryers to children in need!", 10 SECONDS, "announcer"),\
-		list("Every day, our customers find physical and mental support in the bins they eat our food off of.", 10 SECONDS, "announcer"),\
-		list("So come on down and join in.", 5 SECONDS, "announcer"),\
-		list("You might just find the family you were missing inside here!", 7 SECONDS, "announcer"),\
-		list("And if not, there's at least fried chicken.", 6 SECONDS, "announcer"),\
-		list("So, so much fried chicken.", 4 SECONDS, "announcer"),\
-		list("Schweewa: A beacon of hope in the darkness of space.", 8 SECONDS, "announcer"),\
-	)
 
 /datum/directed_broadcast/programme
 	priority = DEFAULT_PROGRAMMING_PRIORITY
@@ -667,6 +565,72 @@ ABSTRACT_TYPE(/datum/directed_broadcast/ad/variety)
 		list("That means you get the same great taste with half as much chewing! Buy now!", 6 SECONDS, "announcer"),\
 		list("Discount Dan's noodle soups!", 4 SECONDS, "announcer"),\
 	)
+
+
+/datum/directed_broadcast/ad/variety/schweewa1
+	id = "schweewa_ad_1"
+	speakers = list("announcer" = list("Voice-over", "#d600d6"), "dad" = list("Your actual dad(???)", "#d1320b"))
+	messages = list(\
+		list("*Greasy jingle*", 2 SECONDS),\
+		list("Schweewa.", 2 SECONDS, "announcer"),\
+		list("We've got fucking food in here.", 5 SECONDS, "announcer"),\
+		list("Come stuff your mouth!", 4 SECONDS, "announcer"),\
+		list("Like a burger or whatever. Buy our shit.", 5 SECONDS, "announcer"),\
+		list("You love to eat at Schweewa.", 5 SECONDS, "announcer"),\
+		list("Don't disappoint me this time.", 5 SECONDS, "dad"),\
+		list("Eat at Schweewa.", 4 SECONDS, "dad"),\
+		list("Schweewa: Found wherever asteroid mining takes place.", 8 SECONDS, "announcer"),\
+	)
+
+/datum/directed_broadcast/ad/variety/schweewa2
+	id = "schweewa_ad_2"
+	speakers = list("announcer" = list("Voice-over", "#d600d6"))
+	messages = list(\
+		list("*Greasy jingle*", 2 SECONDS),\
+		list("Schweewa cares for the community.", 5 SECONDS, "announcer"),\
+		list("Just in 2053 alone we donated over 70 burnt-out deep fryers to children in need!", 10 SECONDS, "announcer"),\
+		list("Every day, our customers find physical and mental support in the bins they eat our food off of.", 10 SECONDS, "announcer"),\
+		list("So come on down and join in.", 5 SECONDS, "announcer"),\
+		list("You might just find the family you were missing inside here!", 7 SECONDS, "announcer"),\
+		list("And if not, there's at least fried chicken.", 6 SECONDS, "announcer"),\
+		list("So, so much fried chicken.", 4 SECONDS, "announcer"),\
+		list("Schweewa: A beacon of hope in the darkness of space.", 8 SECONDS, "announcer"),\
+	)
+
+	/datum/directed_broadcast/ad/variety/cigarettes2
+	id = "cigarette_ad_2"
+	loops_remaining = 1
+	priority = DEFAULT_PROGRAMMING_PRIORITY
+	group_messages = TRUE
+	//direct children of this can go both on radios and TVs
+	//broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
+	dispose_on_end = TRUE // same ad might play on multiple channels at different times, need to be instantiated
+
+	speakers = list("announcer" = list("Announcer", "#d600d6"), "consumer" = list("Consumer", "#003eb3"))
+	messages = list(\
+		list("*static*", 2 SECONDS, null, "test"),\
+		list("Have you considered...", 6 SECONDS, "announcer", "cigarettes-A"),\
+		list("Buying product?", 6 SECONDS, "announcer", "cigarettes-A"),\
+		list("Oh, I'd love to do that! I'll go do that right now!", 8 SECONDS, "consumer", "cigarettes-B"),\
+		list("Products. Available wherever goods are sold.", 10 SECONDS, "announcer", "cigarettes-B"),\
+		list("*static*", 2 SECONDS, null, "test"),\
+	)
+
+
+/datum/directed_broadcast/ad/variety/gunse
+	id = "gunse_ad"
+	broadcast_channels = list(TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
+
+	speakers = list("announcer" = list("Voice-over", "#d600d6"), "consumer" = list("Consumer", "#003eb3"))
+	messages = list(\
+		list("*static*", 2 SECONDS, null, "asdsdgfa"),\
+		list("Remember to spend your money wisely.", 7 SECONDS, "announcer", "gun"),\
+		list("Buy more guns. Guns. Gunse. Gunse.", 6 SECONDS, "announcer", "gun"),\
+		list("But I have a family to feed!", 6 SECONDS, "consumer", "sadman"),\
+		list("Gunse. Yours is waiting out there for you.", 10 SECONDS, "announcer", "gun"),\
+	)
+
+
 
 
 /*▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃
