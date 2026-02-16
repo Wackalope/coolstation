@@ -198,18 +198,6 @@ ABSTRACT_TYPE(/datum/directed_broadcast)
 
 
 
-/datum/directed_broadcast/testing
-	id = "demo"
-	group_messages = TRUE
-	//Mixing entries like this would be bad form I feel, but to demonstrate that it functions
-	messages = list(\
-		list("This is the first message for this test broadcast. It has a longer delay than default.", 9 SECONDS),\
-		list("If the code works right, you should see this."),\
-		"BatElite wuz here",\
-		"After this message, the broadcast should loop.",\
-	)
-
-	broadcast_channels = TR_CAT_RADIO_BROADCAST_RECEIVERS
 /*
 /datum/directed_broadcast/testing_finite
 	id = "demo_finite"
@@ -223,7 +211,7 @@ ABSTRACT_TYPE(/datum/directed_broadcast)
 	)
 
 	broadcast_channels = TR_CAT_FINITE_BROADCAST_RECEIVERS
-*/
+
 /datum/directed_broadcast/queue_test_series
 	id = "Q"
 	loops_remaining = 1
@@ -257,14 +245,7 @@ ABSTRACT_TYPE(/datum/directed_broadcast)
 	default_maptext_colour = "#AAAAAA"
 	priority = 3
 	messages = list("High priority interrupt.")
-
-
-/datum/directed_broadcast/programme
-	priority = DEFAULT_PROGRAMMING_PRIORITY
-	loops_remaining = 1
-	dispose_on_end = TRUE // same programme might play on multiple channels at different times, need to be instantiated
-	broadcast_channels = list(TR_CAT_RADIO_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_RADIO_ALT_BROADCAST_RECEIVERS, TR_CAT_TEEVEE_ALT_BROADCAST_RECEIVERS)
-
+*/
 
 /datum/directed_broadcast/emergency
 	var/station_name
@@ -295,21 +276,7 @@ ABSTRACT_TYPE(/datum/directed_broadcast)
 	progress_when_silent = FALSE //just in case :(
 	messages = list("Please stand by for an emergency broadcast.", 6 SECONDS, null, "emergency-A")
 
-	broadcast_channels = list(TR_CAT_TEEVEE_BROADCAST_RECEIVERS, TR_CAT_CEILING_BROADCAST_DEFAULT , TR_CAT_RADIO_BROADCAST_RECEIVERS)
-
-/datum/directed_broadcast/signoff
-	id = "signoff"
-
-	messages = list(\
-		list("That is it for our programming schedule.", 6 SECONDS, null, "emergency-A"),\
-		list("This is CoolTV, signing off.", 6 SECONDS, null, "emergency-A"),\
-		list("*shitty corporate jingle*", 6 SECONDS, null, "emergency-A"),\
-		)
-
-	priority = 1 //last one to play
-	progress_when_silent = FALSE
-
-	broadcast_channels = list(TR_CAT_TEEVEE_BROADCAST_RECEIVERS)
+	broadcast_channels = list(TR_CAT_BROADCAST_VARIETY_CHANNEL, TR_CAT_BROADCAST_NT13_NEWS, TR_CAT_BROADCAST_WEATHER_CHANNEL, TR_CAT_BROADCAST_YUM_NETWORK)
 
 ABSTRACT_TYPE(/datum/directed_broadcast/interstitial)
 /datum/directed_broadcast/interstitial
