@@ -79,7 +79,7 @@
 #define GAS_IMG_RAD 2
 
 /// Enables gas overlays to have continuous opacity based on molarity
-#define ALPHA_GAS_OVERLAYS
+#define ALPHA_GAS_OVERLAYS 1
 /// Factor that reduces the number of gas opacity levels, higher = better performance and worse visuals
 #define ALPHA_GAS_COMPRESSION 4
 
@@ -88,7 +88,7 @@
 #define UPDATE_GAS_MIXTURE_GRAPHIC(VISUALS_STATE, OVERLAY_ID, MOLES) do { \
 	var/_base_alpha = 0; \
 	if(UNLINT(OVERLAY_ID == GAS_IMG_N2O)) {if(MOLES > MOLES_GAS_VISIBLE / 2) _base_alpha = 95 + MOLES / 8 * 180;} \
-	else {if(MOLES > MOLES_GAS_VISIBLE) _base_alpha = 30 + MOLES / 40 * 125;} \
+	else {if(MOLES > MOLES_GAS_VISIBLE) _base_alpha = 95 + MOLES / 40 * 125;} \
 	VISUALS_STATE |= (round(min(255, _base_alpha) / ALPHA_GAS_COMPRESSION) << (OVERLAY_ID * 8)); \
 	} while(0)
 /// Given the VISUALS_STATE bit field and gas overlay id as defined above it possibly adds the right overlay to TILE_GRAPHIC
