@@ -617,7 +617,7 @@
 	item_state = "shard-glass"
 	flags = TABLEPASS | FPRINT
 	tool_flags = TOOL_CUTTING
-	w_class = W_CLASS_NORMAL
+	w_class = W_CLASS_TINY
 	hit_type = DAMAGE_CUT
 	hitsound = 'sound/impact_sounds/Flesh_Stab_1.ogg'
 	force = 5.0

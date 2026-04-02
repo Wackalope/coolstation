@@ -897,21 +897,21 @@
 
 	whirlwind
 		cooldown = 20
-		restrainDuration = 5
+		restrainDuration = 1
 		image = "whirlwind"
 		name = "Whirlwind"
 		desc = "Hit all enemies around you."
 
 		onMouseUp(atom/target,location,control,params)
-			if(!target || (!isturf(target.loc) && !isturf(target))) return
+			if(!isturf(target.loc) && !isturf(target)) return
 			if(!usable()) return
 			var/list/parameters = params2list(params)
-			if(parameters["left"] && master && params["ai"] || get_dist_pixel_squared(usr, target, params) > ITEMSPECIAL_PIXELDIST_SQUARED)
+			if(parameters["left"] && master && get_dist_pixel_squared(usr, target, params) > ITEMSPECIAL_PIXELDIST_SQUARED)
 				preUse(usr)
 				var/list/attacked = list()
 
 				for(var/turf/T in orange(2,get_turf(master)))
-					for(var/atom/A in T)
+					for(var/atom/A in  atoms_in_combat_range(T))
 						if(A in attacked) continue
 						if(isTarget(A))
 							A.Attackby(master, usr, params, 1)
@@ -919,8 +919,11 @@
 
 				showEffect("whirlwind", NORTH)
 				afterUse(usr)
-				playsound(master, 'sound/effects/swoosh_double.ogg', 100, 0)
+				playsound(master, 'sound/effects/swoosh_double.ogg', 100, FALSE)
 			return
+
+
+
 
 	//Disarm and Harm are odd ones out. They have no master item, they are attached to a limb. As such, some vars (like all of our item damage/crit modifiers) won't affect these. See the top of the limb.dm file if you want to adjust how they are enacted
 	//kind of messying things up, sorry!!

@@ -146,9 +146,9 @@
 	desc = "A small pouch containing some essential security supplies. Keep out of reach of the clown."
 	icon_state = "ammopouch-sec"
 	w_class = W_CLASS_SMALL
-	slots = 6
+	slots = 4
 	opens_if_worn = TRUE
-	spawn_contents = list(/obj/item/handcuffs = 4,\
+	spawn_contents = list(/obj/item/handcuffs = 2,\
 	/obj/item/device/flash,\
 	/obj/item/instrument/whistle)
 

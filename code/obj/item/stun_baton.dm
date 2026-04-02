@@ -373,6 +373,18 @@
 	cell_type = /obj/item/ammo/power_cell
 	w_class = W_CLASS_SMALL
 
+	do_stun(mob/user, mob/victim, type, stun_who)
+		user.visible_message("<span class='alert'><B>[victim] has been beaten with the [src.name] by [user]!</B></span>")
+		playsound(src, "swing_hit", 50, 1, SOUND_RANGE_STANDARD)
+		random_brute_damage(victim, src.force, 1) // Necessary since the item/attack() parent wasn't called.
+		if(victim.getStatusDuration("disorient") > 4 SECONDS)
+			victim.do_disorient(src.disorient_stamina_damage, weakened = src.stun_normal_weakened * 10, disorient = 60)
+		else
+			victim.changeStatus("disorient", 2 SECOND)
+
+
+
+
 /obj/item/baton/mobsecbot/beepsky
 	can_swap_cell = FALSE
 	rechargable = TRUE

@@ -44,6 +44,9 @@ obj/item/cable_coil/abilities = list(/obj/ability_button/cable_toggle)
 
 	New(loc, length = STARTCOIL)
 		src.amount = length
+		src.setItemSpecial(/datum/item_special/whirlwind)
+		src.special.animation_color = src.color
+
 		updateicon()
 		..(loc)
 		if (spawn_conductor_name)

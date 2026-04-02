@@ -177,8 +177,21 @@
 	..()
 	light = new /datum/light/point
 	light.attach(src)
-	light.set_brightness(0.4)
+	light.set_brightness(4)
 	light.set_height(0.5)
+	light.disable()
+
+/obj/machinery/flasher/proc/flash_lighting_effect(var/mult = 1)
+	light.enable()
+	SPAWN_DBG(0.1 SECONDS)
+		light.set_brightness(2)
+		sleep(0.1 SECONDS)
+		light.set_brightness(1.5)
+		sleep(0.1 SECONDS)
+		light.set_brightness(1)
+		sleep(0.1 SECONDS)
+		light.disable()
+
 
 /obj/machinery/flasher/power_change()
 	if ( powered() )
@@ -215,6 +228,7 @@
 
 	playsound(src.loc, "sound/weapons/flash.ogg", 100, 1)
 	flick("[base_state]_flash", src)
+	flash_lighting_effect()
 	src.last_flash = world.time
 	use_power(1000)
 
@@ -242,12 +256,11 @@
 		src.anchored = !src.anchored
 
 		if (!src.anchored)
-			light.disable()
+
 			user.show_message(text("<span class='alert'>[src] can now be moved.</span>"))
 			src.UpdateOverlays(null, "anchor")
 
 		else if (src.anchored)
 			if ( powered() )
-				light.enable()
 			user.show_message(text("<span class='alert'>[src] is now secured.</span>"))
 			src.UpdateOverlays(image(src.icon, "[base_state]-s"), "anchor")
