@@ -261,7 +261,7 @@
 		update_upgrades()
 		update_equipment()
 
-		pda = create_screen("pda", "Cyborg PDA", 'icons/ui/hud_ai.dmi', "pda", "WEST, NORTH+0.5", HUD_LAYER)
+		pda = create_screen("pda", "Cyborg PDA", 'icons/ui/hud_ai.dmi', "pda", "EAST, NORTH-2.5", HUD_LAYER)
 		pda.underlays += "button"
 
 		mainframe = create_screen("mainframe", "Return to Mainframe", 'icons/ui/screen1.dmi', "x", "SOUTH,EAST", HUD_LAYER)
@@ -611,6 +611,39 @@
 					i++
 			last_upgrades = master.upgrades.Copy()
 
+		update_ability_hotbar()
+			if (!master.client)
+				return
+			if(isdead(master))
+				return
+
+			for(var/atom/movable/screen/ability/topBar/genetics/G in master.client.screen)
+				master.client.screen -= G
+			for(var/atom/movable/screen/pseudo_overlay/PO in master.client.screen)
+				master.client.screen -= PO
+			for(var/obj/ability_button/B in master.client.screen)
+				master.client.screen -= B
+			var/pos_x = 1
+			var/pos_y = 0
+
+			for(var/obj/ability_button/B2 in master.item_abilities)
+				B2.screen_loc = "NORTH-[pos_y],[pos_x]"
+				master.client.screen += B2
+				pos_x++
+				if(pos_x > 15)
+					pos_x = 1
+					pos_y++
+
+			if (istype(master.loc,/obj/vehicle/))
+				var/obj/vehicle/V = master.loc
+				for(var/obj/ability_button/B2 in V.ability_buttons)
+					B2.screen_loc = "NORTH-[pos_y],[pos_x]"
+					master.client.screen += B2
+					pos_x++
+					if(pos_x > 15)
+						pos_x = 1
+						pos_y++
+
 	proc/handle_event(var/event, var/sender)
 		if (event == "icon_updated") // this is only ever emitted by atoms
 			var/atom/senderAtom = sender
@@ -622,4 +655,5 @@
 		if(src.hud && istype(src.hud, /datum/hud/robot))
 			var/datum/hud/robot/H = src.hud
 			H.update_status_effects()
+			H.update_ability_hotbar()
 		return

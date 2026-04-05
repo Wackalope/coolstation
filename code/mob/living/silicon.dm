@@ -14,7 +14,7 @@
 	var/weapon_lock = 0
 	var/weaponlock_time = 120
 	var/obj/item/card/id/botcard //An ID card that the robot "holds" invisibly
-
+	var/mob/living/silicon/master
 	var/mob/living/silicon/ai/mainframe = null // where to go back to when we die, if we have one, for hivebots/robots
 	var/dependent = 0 // if we're host to a mainframe's mind
 	var/shell = 0 // are we available for use as a shell for an AI

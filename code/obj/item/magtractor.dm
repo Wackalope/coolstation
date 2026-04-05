@@ -9,7 +9,7 @@
 	density = 0
 	anchored = UNANCHORED
 	flags = FPRINT | TABLEPASS| CONDUCT | EXTRADELAY
-	force = 10.0
+	force = 1
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 5
@@ -22,7 +22,7 @@
 	var/working = 0
 	var/mob/holder //this is hacky way to get the user without looping through all mobs in process
 	var/processHeld = 0
-	var/highpower = 0 //high power mode (holding during movement)
+	var/highpower = 1 //high power mode (holding during movement)
 
 	var/datum/action/holdAction
 
@@ -41,12 +41,18 @@
 			processHeld = 0
 		return
 
-	pickup(mob/user)
+	pickup(var/mob/user)
 		..()
 		src.holder = user
 		src.verbs |= /obj/item/magtractor/proc/toggleHighPower
 		src.set_mob(user)
 		src.show_buttons()
+
+		if (issilicon(user))
+			var/mob/living/silicon/robot/H = user
+			if (H.hud)
+				H.hud.update_ability_hotbar()
+
 
 	dropped(mob/user)
 		..()

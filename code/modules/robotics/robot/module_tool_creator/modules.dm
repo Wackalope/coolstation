@@ -11,26 +11,38 @@
 // security officer. bartender. clown.
 /datum/robot/module_tool_creator/recursive/module/brobocop
 	definitions = list(
-		/obj/item/noisemaker,
-		/obj/item/robot_foodsynthesizer,
-		/obj/item/reagent_containers/food/drinks/bottle/beer/borg,
-		/obj/item/reagent_containers/food/drinks/drinkingglass/pitcher,
-		/obj/item/pen/crayon/random/robot,
-		/obj/item/coin_bot,
-		/obj/item/dice/robot,
-		/obj/item/device/light/zippo/borg,
-		/obj/item/pen, // TODO: make more versatile version
+		/obj/item/magtractor,
 		/obj/item/device/prisoner_scanner,
-		/obj/item/item_box/assorted/stickers/robot,
-		// TODO: security grenade fabricator?!
-		// /obj/item/handcuffs/tape_roll/crappy,
-		/obj/item/c_tube, // TODO: make slightly buffed version?
 		/obj/item/device/detective_scanner,
 		/obj/item/device/audio_log, // TODO: make larger and non-ejectable version?
 		/obj/item/device/camera_viewer,
 		/obj/item/hand_labeler,
+		/obj/item/device/narco,
+		/obj/item/device/flash/cyborg,
 		/obj/item/device/ticket_writer,
+		/obj/item/paper/book/from_file/space_law,
+		/obj/item/extinguisher,
+		/obj/item/handcuffs/guardbot,
+
 	)
+
+//clown
+/datum/robot/module_tool_creator/recursive/module/clown
+	definitions = list(
+		/obj/item/noisemaker,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/spray_paint,
+		/obj/item/item_box/assorted/stickers/robot,
+		/obj/item/coin_bot,
+		/obj/item/pen/crayon/random/robot,
+		/obj/item/magtractor,
+		/obj/item/robot_foodsynthesizer,
+		/obj/item/spraybottle/cleaner/robot/lube,
+		/obj/item/rubber_hammer,
+
+	)
+
+//clown
 
 // scientist.
 /datum/robot/module_tool_creator/recursive/module/chemistry
