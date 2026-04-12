@@ -56,8 +56,9 @@ var/global/list/job_start_locations = list()
 
 /obj/landmark/start
 	name = "start"
-	icon_state = "x"
+	icon_state = "jobstart"
 	add_to_landmarks = FALSE
+	icon = 'icons/map-editing/mapeditor.dmi'
 
 	New()
 		if (job_start_locations)

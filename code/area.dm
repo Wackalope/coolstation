@@ -1014,11 +1014,59 @@ ABSTRACT_TYPE(/area/adventure)
 	icon_state = "yellow"
 	expandable = 0
 	is_atmos_simulated = TRUE
+	sound_environment = EAX_HANGAR
+	lightswitch = 0
 
 /area/buddyfactory/mainframe
 	name = "Old Computer Core"
 	icon_state = "purple"
 	is_atmos_simulated = TRUE
+	sound_environment = EAX_BATHROOM
+
+/area/buddyfactory/lobby
+	name = "lobby"
+	icon_state = "green"
+	is_atmos_simulated = TRUE
+	sound_environment = EAX_CARPETED_HALLWAY
+
+/area/buddyfactory/control_room
+	name = "control room"
+	icon_state = "blue"
+	is_atmos_simulated = TRUE
+	sound_environment = EAX_ROOM
+
+/area/buddyfactory/bathroom
+	name = "bathroom"
+	icon_state = "blue"
+	is_atmos_simulated = TRUE
+	sound_environment = EAX_BATHROOM
+
+/area/buddyfactory/breakroom
+	name = "breakroom"
+	icon_state = "blue"
+	is_atmos_simulated = TRUE
+	sound_environment = EAX_ROOM
+
+/area/buddyfactory/office_1
+	name = "office"
+	icon_state = "blue"
+	is_atmos_simulated = TRUE
+	sound_environment = EAX_PADDED_CELL
+
+/area/buddyfactory/office_2
+	name = "office"
+	icon_state = "orange"
+	is_atmos_simulated = TRUE
+	sound_environment = EAX_PADDED_CELL
+
+/area/buddyfactory/podbay
+	name = "podbay"
+	icon_state = "blue"
+	is_atmos_simulated = TRUE
+	sound_environment = EAX_STONEROOM
+
+
+
 
 /area/space_hive
 	name = "Space Bee Hive"

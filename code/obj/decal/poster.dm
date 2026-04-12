@@ -675,6 +675,19 @@
 			imgh = 275
 			img = "browserassets/images/arts/posters/tiger.png"
 
+		poster_dontuse
+			name = "strange basketball poster"
+			desc = "You have no idea of what the hell this is"
+			icon = 'icons/ui/misc.dmi'
+			icon_state = "dont_use"
+			popup_win = 1
+			imgw = 300
+			imgh = 455
+			img = "browserassets/images/arts/posters/dontuse.png"
+			New()
+				icon = 'icons/obj/decals/posters.dmi'
+				..()
+
 		newspaper_gg
 			name = "newspaper clipping"
 			desc = "Whoever pinned this to the wall went to the trouble to cut off all the margins."

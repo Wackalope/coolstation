@@ -465,6 +465,17 @@
 	req_access = list(access_ghostdrone)
 	color = MAINTENANCE
 
+/obj/access_spawn/thinktronics_l1
+	name = "thinktronics l1 access spawn"
+	req_access = list(access_think_one)
+	color = MAINTENANCE
+
+/obj/access_spawn/thinktronics_l2
+	name = "thinktronics l2 access spawn"
+	req_access = list(access_think_two)
+	color = MAINTENANCE
+
+
 #undef MEDICAL
 #undef SECURITY
 #undef MORGUE_BLACK

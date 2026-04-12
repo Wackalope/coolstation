@@ -520,3 +520,22 @@ GAUNTLET CARDS
 		name = "security identification pass"
 		icon_state = "soviet_medres"
 		access = list(access_soviet_public, access_soviet_private, access_soviet_research, access_soviet_medical)
+
+/obj/item/card/id/thinktronics
+	name = "thinktronics ID card L1"
+	icon_state = "tt_l1"
+	generic_name = "ID card"
+	access = list(access_think_one)
+	New()
+		access += list(access_think_one)
+		..()
+
+	level_2
+		name = "thinktronics ID card L2"
+		icon_state = "tt_l2"
+		generic_name = "ID card"
+		access = list(access_think_one, access_think_two)
+		New()
+			access += list(access_think_one, access_think_two)
+			..()
+
