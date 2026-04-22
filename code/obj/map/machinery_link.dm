@@ -129,6 +129,11 @@
 					if (_id)
 						CS.id = _id
 					continue
+				if (istype(O, /obj/machinery/card_reader))
+					var/obj/machinery/card_reader/CR = O
+					if (_id)
+						CR.id = _id
+					continue
 				if (istype(O, /obj/airbridge_controller)) //airbridge comp doesn't need special handling beyond what the generic computer code does
 					var/obj/airbridge_controller/AC = O
 					if (_id)

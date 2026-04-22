@@ -1043,3 +1043,110 @@
 		signal.source = src
 
 		SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, signal)
+
+
+////////////////////////////////////////////////////////
+//////////////  CARD READER	///////////////////////////
+//////////////////////////////////////////////////////
+/obj/machinery/card_reader
+	name = "Card Reader"
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "cardreader"
+	desc = "A wall mounted card reader."
+	var/id = null
+	var/timer = 0
+	var/cooldown = 0 SECONDS
+	var/inuse = FALSE
+	var/no_access = 0
+	anchored = ANCHORED
+	layer = EFFECTS_LAYER_UNDER_1
+	plane = PLANE_NOSHADOW_ABOVE
+	req_access = list()
+
+
+	New()
+		..()
+		UnsubscribeProcess()
+
+	attack_ai(mob/user as mob)
+		return src.Attackhand(user)
+
+	attackby(obj/item/W, mob/user as mob)
+		if(istype(W, /obj/item/device/detective_scanner))
+			return
+		if(istype(W, /obj/item/card))
+			interact_particle(user, W)
+			if((status & (NOPOWER|BROKEN)) || inuse)
+				return
+
+			if (user.getStatusDuration("stunned") || user.getStatusDuration("weakened") || user.stat)
+				return
+
+
+			if (!check_access(W)) //nope :)
+				flick("cardreader_deny",src)
+				playsound(src, 'sound/machines/airlock_deny_temp.ogg', 100, 0)
+				return
+			.= ..()
+
+			use_power(5)
+			flick("cardreader_accept",src)
+
+			if (!src.id)
+				return
+
+			logTheThing("station", user, null, "toggled the [src.name] at [log_loc(src)].")
+
+			for (var/obj/machinery/door/poddoor/M in by_type[/obj/machinery/door])
+				if (M.id == src.id)
+					if (M.density)
+						M.open()
+						if (src.timer)
+							SPAWN_DBG(src.timer)
+								M.close()
+					else
+						M.close()
+						if (src.timer)
+							SPAWN_DBG(src.timer)
+								M.open()
+
+			for (var/obj/machinery/door/airlock/M in by_type[/obj/machinery/door])
+				if (M.id == src.id)
+					if (M.density)
+						M.open()
+					else
+						M.close()
+
+			for (var/obj/machinery/conveyor/M as anything in machine_registry[MACHINES_CONVEYORS]) // Workaround for the stacked conveyor belt issue (Convair880).
+				if (M.id == src.id)
+					if (M.operating)
+						M.operating = 0
+						if (src.timer)
+							SPAWN_DBG(src.timer)
+								M.operating = 1
+					else
+						M.operating = 1
+						if (src.timer)
+							SPAWN_DBG(src.timer)
+								M.operating = 0
+					M.setdir()
+
+			if(src.cooldown)
+				inuse = TRUE
+				sleep(src.cooldown)
+				inuse = FALSE
+
+			src.add_fingerprint(user)
+
+			return src.Attackhand(user)
+
+
+
+/*	power_change()
+		..()
+		if(status & NOPOWER)
+			icon_state = "doorctrl-p"
+		else
+			icon_state = "doorctrl0"
+
+*/
