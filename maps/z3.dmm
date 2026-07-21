@@ -4324,10 +4324,6 @@
 	icon_state = "1-2"
 	},
 /obj/window/classic/east,
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
-	dir = 1
-	},
 /obj/decal/cleanable/rust/jen/grime,
 /turf/floor/grey/blackgrime{
 	icon_state = "robar"
@@ -18049,10 +18045,6 @@
 /turf/floor/black,
 /area/juicer/club)
 "fYl" = (
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
-	dir = 1
-	},
 /obj/window/classic/east,
 /obj/decal/cleanable/rust/jen/grime,
 /turf/floor/grey/blackgrime{
@@ -18209,9 +18201,6 @@
 /turf/floor/plating,
 /area/juicer/club/outside)
 "gph" = (
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red"
-	},
 /obj/window/classic/west,
 /obj/decal/cleanable/rust/jen/grime,
 /turf/floor/grey/blackgrime{
@@ -19738,15 +19727,12 @@
 /turf/space,
 /area/space)
 "kgO" = (
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red"
-	},
-/obj/window/classic/west,
 /obj/decal/cleanable/rust/jen/grime,
 /obj/decal/cleanable/mess/maple{
 	pixel_y = -1;
 	pixel_x = 19
 	},
+/obj/window/classic/west,
 /turf/floor/grey/blackgrime{
 	icon_state = "robar"
 	},
@@ -19804,12 +19790,14 @@
 	},
 /area/diner/jucer_trader)
 "kob" = (
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
-	dir = 4
-	},
 /obj/window/classic/west,
 /obj/decal/cleanable/rust/jen/grime,
+/obj/decal/fakeobjects{
+	icon = "icons\misc\32x64.dmi";
+	icon_state = "boothR";
+	layer = 3.1;
+	name = "booth"
+	},
 /obj/landmark/spawner{
 	name = "father_jack"
 	},
@@ -20109,12 +20097,14 @@
 /turf/floor/plating,
 /area/buddyfactory)
 "kXH" = (
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
-	dir = 4
-	},
 /obj/window/classic/west,
 /obj/decal/cleanable/rust/jen/grime,
+/obj/decal/fakeobjects{
+	icon = "icons\misc\32x64.dmi";
+	icon_state = "boothR";
+	layer = 3.1;
+	name = "booth"
+	},
 /turf/floor/grey/blackgrime{
 	icon_state = "robar"
 	},
@@ -21507,10 +21497,6 @@
 /turf/floor/grey,
 /area/buddyfactory)
 "obs" = (
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
-	dir = 1
-	},
 /obj/window/classic/east,
 /obj/decal/cleanable/rust/jen/grime,
 /obj/decal/cleanable/mess/fries,
@@ -22278,12 +22264,15 @@
 	name = "Bilateral Shop Ship"
 	})
 "pvn" = (
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
-	dir = 8
-	},
 /obj/window/classic/east,
 /obj/decal/cleanable/rust/jen/grime,
+/obj/decal/fakeobjects{
+	icon = "icons\misc\32x64.dmi";
+	icon_state = "boothR";
+	layer = 3.1;
+	name = "booth";
+	dir = 8
+	},
 /turf/floor/grey/blackgrime{
 	icon_state = "robar"
 	},
@@ -22295,12 +22284,14 @@
 	name = "jons the catte";
 	randomize_cat = 0
 	},
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
-	dir = 4
-	},
 /obj/window/classic/west,
 /obj/decal/cleanable/rust/jen/grime,
+/obj/decal/fakeobjects{
+	icon = "icons\misc\32x64.dmi";
+	icon_state = "boothR";
+	layer = 3.1;
+	name = "booth"
+	},
 /turf/floor/grey/blackgrime{
 	icon_state = "robar"
 	},
@@ -22790,11 +22781,14 @@
 	icon_state = "1-2"
 	},
 /obj/window/classic/east,
-/obj/stool/chair/couch/red{
-	icon_state = "chair_couch_ew-red";
+/obj/decal/cleanable/rust/jen/grime,
+/obj/decal/fakeobjects{
+	icon = "icons\misc\32x64.dmi";
+	icon_state = "boothR";
+	layer = 3.1;
+	name = "booth";
 	dir = 8
 	},
-/obj/decal/cleanable/rust/jen/grime,
 /turf/floor/grey/blackgrime{
 	icon_state = "robar"
 	},
