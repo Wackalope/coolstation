@@ -173,6 +173,11 @@ var/global/mob/twitch_mob = 0
 
 /world/proc/load_rules()
 	rules = file2text("config/rules.html")
+	/*
+	//TODO: fix this shit
+	//okay so the below is misbehaving suddenly after a month without changes
+	//see https://github.com/coolstation/coolstation/actions/runs/35627202563/job/106424368403#step:12:104 for example
+	//using the simplified rules.html for now to kill this permanent runtime (especially as it's defaulting to rules.html *anyway* due to failure)
 	SPAWN_DBG(0)
 		rules = world.Export("https://wiki.coolstation.space/w/api.php?action=parse&page=Rules&format=json")
 		if(rules && rules["CONTENT"])
@@ -182,9 +187,10 @@ var/global/mob/twitch_mob = 0
 			else
 				rules = "<html><head><title>Rules</title><body>There are no rules! Go nuts!</body></html>"
 		else
-	//rules = {"<meta http-equiv="refresh" content="0; url=https://wiki.coolstation.space/wiki/Rules">"} //this was temporary workaround
+	*/
+	//rules = {"<meta http-equiv="refresh" content="0; url=https://wiki.coolstation.space/wiki/Rules">"} //this was temporary workaround which, eh
 	if (!rules)
-		rules = "<html><head><title>Rules</title><body>There are no rules! Go nuts!</body></html>" //lol sure why not
+		rules = "<html><head><title>Rules</title><body>There are no rules! Go nuts!</body></html>"
 
 /world/proc/load_admins()
 	set background = 1
@@ -856,8 +862,8 @@ var/f_color_selector_handler/F_Color_Selector
 	shutdown()
 #endif
 	var/newround = 'sound/misc/NewRound.ogg'
-	if (prob(40))
-		newround = pick('sound/misc/NewRound0.ogg','sound/misc/NewRound1.ogg','sound/misc/NewRound2.ogg', 'sound/misc/NewRound3.ogg', 'sound/misc/NewRound4.ogg', 'sound/misc/NewRound5.ogg', 'sound/misc/NewRound6.ogg', 'sound/misc/NewRound7.ogg', 'sound/misc/NewRound8.ogg', 'sound/misc/NewRound9.ogg', 'sound/misc/NewRound1.ogg', 'sound/misc/TimeForANewRound.ogg', 'sound/misc/NewRound11.ogg')
+	if (prob(75)) //we have so many fuckin' good new round sounds. let's hear them more often than 40%.
+		newround = pick('sound/misc/NewRound0.ogg','sound/misc/NewRound1.ogg','sound/misc/NewRound2.ogg', 'sound/misc/NewRound3.ogg', 'sound/misc/NewRound4.ogg', 'sound/misc/NewRound5.ogg', 'sound/misc/NewRound6.ogg', 'sound/misc/NewRound7.ogg', 'sound/misc/NewRound8.ogg', 'sound/misc/NewRound9.ogg', 'sound/misc/NewRound10.ogg', 'sound/misc/TimeForANewRound.ogg', 'sound/misc/NewRound11.ogg', 'sound/misc/NewRound12.ogg')
 
 	SPAWN_DBG(world.tick_lag)
 		for (var/client/C)
@@ -920,7 +926,7 @@ var/f_color_selector_handler/F_Color_Selector
 
 	if (map_settings)
 		var/map_name = istext(map_settings.display_name) ? "[map_settings.display_name]" : "[map_settings.name]"
-		//var/map_link_str = map_settings.goonhub_map ? "<a href=\"[map_settings.goonhub_map]\">[map_name]</a>" : "[map_name]"
+		//var/map_link_str = map_settings.coolstation_map ? "<a href=\"[map_settings.coolstation_map]\">[map_name]</a>" : "[map_name]"
 		s += "Map: <b>[map_name]</b><br>"
 
 	var/list/features = list()

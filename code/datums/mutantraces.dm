@@ -1250,7 +1250,12 @@
 			mob.AddComponent(/datum/component/consume/organheal)
 			mob.AddComponent(/datum/component/consume/can_eat_inedible_organs, 1) // can also eat heads
 			mob.mob_flags |= SHOULD_HAVE_A_TAIL
+			//maybe since below is no longer a thing we should make them faster
 			mob.add_stam_mod_max("werewolf", 40) // Gave them a significant stamina boost, as they're melee-orientated (Convair880).
+			//like so: better at pulling stuff around and moving on the floor and a bit resistant to damage slowdown
+			//HOWEVER once readding silver bullets for the chaplain/ammo bench whatever, implanted should definitely more than negate all the speedups and make them easier to fight
+			//consider this commit and comment motivation to implement such measures soonish
+			APPLY_MOVEMENT_MODIFIER(mob, /datum/movement_modifier/werewolf, "werewolf")
 			APPLY_ATOM_PROPERTY(mob, PROP_STAMINA_REGEN_BONUS, "werewolf", 9) //mbc : these increase as they feast now. reduced!
 			APPLY_ATOM_PROPERTY(mob, PROP_STUN_RESIST, "werewolf", 40)
 			APPLY_ATOM_PROPERTY(mob, PROP_STUN_RESIST_MAX, "werewolf", 40)
@@ -1260,7 +1265,7 @@
 			mob.real_name = "werewolf"
 
 			mob.bioHolder.AddEffect("protanopia", null, null, 0, 1)
-			mob.bioHolder.AddEffect("accent_scoob_nerf", null, null, 0, 1)
+			//mob.bioHolder.AddEffect("accent_scoob_nerf", null, null, 0, 1) //funny for a while but i feel like we can get a better snarly accent
 			mob.bioHolder.AddEffect("regenerator_wolf", null, null, 0, 1)
 
 	disposing()
@@ -1270,13 +1275,14 @@
 			var/datum/component/D = mob.GetComponent(/datum/component/consume/can_eat_inedible_organs)
 			D?.RemoveComponent(/datum/component/consume/can_eat_inedible_organs)
 			mob.remove_stam_mod_max("werewolf")
+			REMOVE_MOVEMENT_MODIFIER(mob, /datum/movement_modifier/werewolf, "werewolf")
 			REMOVE_ATOM_PROPERTY(mob, PROP_STAMINA_REGEN_BONUS, "werewolf")
 			REMOVE_ATOM_PROPERTY(mob, PROP_STUN_RESIST, "werewolf")
 			REMOVE_ATOM_PROPERTY(mob, PROP_STUN_RESIST_MAX, "werewolf")
 			mob.max_health -= 50
 			health_update_queue |= mob
 			mob.bioHolder.RemoveEffect("protanopia")
-			mob.bioHolder.RemoveEffect("accent_scoob_nerf")
+			//mob.bioHolder.RemoveEffect("accent_scoob_nerf") //counterpoint to above, change when we got a good monster accent. awoo! uwu
 			mob.bioHolder.RemoveEffect("regenerator_wolf")
 
 			if (!isnull(src.original_name))
@@ -1569,6 +1575,7 @@
 		. = ..()
 		if(ishuman(M))
 			M.mob_flags |= SHOULD_HAVE_A_TAIL
+			M.replace_blood_with("hemolymph")
 		APPLY_ATOM_PROPERTY(M, PROP_RADPROT, src, 100)
 
 	say_verb()
@@ -1956,6 +1963,48 @@
 	New()
 		..()
 		emote_overrides = chicken_emotes
+
+/datum/mutantrace/moth
+	name = "Moth"
+	icon = 'icons/mob/moth.dmi'
+	icon_state = "body_m"
+	override_attack = 0
+	voice_override = "moth"
+	race_mutation = /datum/bioEffect/mutantrace/moth
+	mutant_folder = 'icons/mob/moth.dmi'
+	special_head = HEAD_MOTH
+	special_head_state = "head"
+	eye_state = "eyes_moth"
+	r_limb_arm_type_mutantrace = /obj/item/parts/human_parts/arm/mutant/moth/right
+	l_limb_arm_type_mutantrace = /obj/item/parts/human_parts/arm/mutant/moth/left
+	r_limb_leg_type_mutantrace = /obj/item/parts/human_parts/leg/mutant/moth/right
+	l_limb_leg_type_mutantrace = /obj/item/parts/human_parts/leg/mutant/moth/left
+	mutant_appearance_flags = (NOT_DIMORPHIC | HAS_HUMAN_EYES | HAS_SPECIAL_HAIR | BUILT_FROM_PIECES | FIX_COLORS | TORSO_HAS_SKINTONE | SKINTONE_USES_PREF_COLOR_1 | HAS_EXTRA_DETAILS | WEARS_UNDERPANTS)
+	dna_mutagen_banned = FALSE
+
+	typevulns = list("blunt" = 1.5, "crush" = 1.5)
+
+	special_hair_3_icon = 'icons/mob/moth.dmi'
+	special_hair_3_state = "chest_detail_fluff"
+	special_hair_3_color = CUST_3
+
+	special_hair_1_icon = 'icons/mob/moth.dmi'
+	special_hair_1_state = "head_detail_ears"
+	special_hair_1_color = CUST_2
+
+
+	say_verb()
+		return "flutters"
+
+	sight_modifier()
+		mob.see_in_dark = SEE_DARK_HUMAN + 1
+		mob.see_invisible = 1
+
+	New(mob/living/carbon/human/M)
+		. = ..()
+		if(ishuman(M))
+			M.replace_blood_with("hemolymph")
+
 
 /datum/mutantrace/birb
 	name = "Birb"

@@ -1,3 +1,7 @@
+//unrefined ores and shit like that
+//contrary to sense these are not raw materials, they're just materials, the refined materials are raw materials and oh no i hate it
+//for chunks of refined materials see /code/modules/materials/Mat_RawMaterials.dm
+
 /obj/item/raw_material/
 	name = "construction materials"
 	desc = "placeholder item!"
@@ -7,6 +11,8 @@
 	value = 70 //base commodity price
 	burn_type = 1
 	stack_type = /obj/item/raw_material/
+	quality = 10 //for bits of raw ore, it's how many pieces of refined material you get when processing divided by 10.
+	//10 for 1 complete piece. this allows partial pieces to be made, which can be added together as a running remainder when smelting big stacks, and spits out as a partial block when done processing
 
 	var/material_name = "Ore" //text to display for this ore in manufacturers
 	var/initial_material_name = null // used to store what the ore is
@@ -204,6 +210,18 @@
 		src.setMaterial(getMaterial("mauxite"), appearance = FALSE, setname = FALSE)
 		return ..()
 
+/obj/item/raw_material/chromium
+	name = "chromium ore"
+	desc = "A chunk of chromium, a shiny metal used in refining."
+	icon_state = "chromium"
+	material_name = "Chromium"
+	metal = 1
+	value = 80 //base commodity price
+
+	setup_material()
+		src.setMaterial(getMaterial("chromium"), appearance = FALSE, setname = FALSE)
+		return ..()
+
 /obj/item/raw_material/molitz
 	name = "molitz crystal"
 	desc = "A crystal of Molitz, a common crystalline substance."
@@ -399,8 +417,8 @@
 
 /obj/item/raw_material/gemstone
 	name = "gem"
-	desc = "A gemstone. It's definitely pretty valuable!"
-	icon_state = "gem"
+	desc = "A gemstone. It's probably pretty valuable!"
+	icon_state = "gem2"
 	material_name = "Gem"
 	force = 1
 	throwforce = 3
@@ -415,14 +433,42 @@
 			if(1 to 10)
 				picklist = list("diamond","ruby","topaz","emerald","sapphire","amethyst")
 				value = 1500
+				icon_state = "gem3"
 			if(11 to 40)
 				picklist = list("jasper","garnet","peridot","malachite","lapislazuli","alexandrite")
 			else
 				picklist = list("onyx","rosequartz","citrine","jade","aquamarine","iolite")
 				value = 500
+				icon_state = "gem1"
 
 		var/datum/material/M = getMaterial(pick(picklist))
-		src.setMaterial(M, appearance = TRUE, setname = TRUE)// why was this set to not update the name/appearance??
+		src.setMaterial(M, appearance = TRUE, setname = TRUE)
+
+/obj/item/raw_material/big_gemstone
+	name = "large gem"
+	desc = "A very large gemstone. It's definitely pretty valuable!"
+	icon_state = "biggem1"
+	material_name = "Gem"
+	force = 1
+	throwforce = 5
+	crystal = 1
+	value = 5000
+
+	setup_material()
+		..()
+		var/list/picklist
+		if(prob(30))
+			picklist = list("diamond","ruby","topaz","emerald","sapphire","amethyst")
+			value = 7500
+			icon_state = "biggem2"
+		else
+			picklist = list("jasper","garnet","peridot","malachite","lapislazuli","alexandrite")
+
+
+		var/datum/material/M = getMaterial(pick(picklist))
+		src.setMaterial(M, appearance = TRUE, setname = TRUE)
+
+
 
 /obj/item/raw_material/uqill // relate this to ancients
 	name = "uqill nugget"
@@ -832,6 +878,11 @@
 
 // Material-related Machinery
 
+// Takes a single ore and turns it into a single block or bar, with queue handling
+// Eventually make this process ores into blocks, and bars into blocks
+// I think this should be a portable basic smelter and materials handler in fab closets
+// a reclaimer should be more of an advanced disassembly machine (both in foundry area and disposals) in my imo
+
 /obj/machinery/portable_reclaimer
 	name = "portable reclaimer"
 	desc = "A sophisticated piece of machinery that quickly processes minerals into bars."
@@ -848,6 +899,7 @@
 	var/sound/sound_process = sound('sound/effects/pop.ogg')
 	var/sound/sound_grump = sound('sound/machines/buzz-two.ogg')
 	var/atom/output_location = null
+	//todo: list with remainders that fills up and empties during a queue
 
 	attack_hand(var/mob/user as mob)
 		if (active)
@@ -921,6 +973,7 @@
 		icon_state = "reclaimer"
 		src.visible_message("<b>[src]</b> finishes working and shuts down.")
 
+	//process an item, divided by optional modifier, and optionally include another material (explicitly for handling dual material cables)
 	proc/output_bar_from_item(obj/item/O, var/amount_modifier = 1, var/extra_mat)
 		if (!O || !O.material)
 			return

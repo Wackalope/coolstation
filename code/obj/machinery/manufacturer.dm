@@ -1003,7 +1003,7 @@
 				I = P.ID_card
 		if (istype(I, /obj/item/card/id))
 			var/obj/item/card/id/ID = I
-			boutput(usr, "<span class='notice'>You swipe the ID card in the card reader.</span>")
+			boutput(usr, "<span class='notice'>You wipe the ID card in the card reader.</span>")
 			var/datum/db_record/account = null
 			account = FindBankAccountByName(ID.registered)
 			if(account)
@@ -1970,9 +1970,11 @@
 	name = "General Manufacturer"
 	desc = "A manufacturing unit calibrated to produce tools and general purpose items."
 	free_resource_amt = 5
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/rubber/synthrubber)
 	available = list(/datum/manufacture/screwdriver,
 		/datum/manufacture/wirecutters,
 		/datum/manufacture/wrench,
@@ -2016,7 +2018,8 @@
 		/datum/manufacture/bikehorn,
 		//datum/manufacture/bullet_22,
 		//datum/manufacture/fog_grenade,
-		/datum/manufacture/stapler)
+		/datum/manufacture/stapler,
+		/datum/manufacture/maskingtape)
 
 /obj/machinery/manufacturer/glasswares
 	name = "Glass Manufacturer"
@@ -2024,8 +2027,9 @@
 	icon_state = "fab-glass"
 	icon_base = "glass"
 	free_resource_amt = 4
-	free_resources = list(/obj/item/material_piece/glass,
-		/obj/item/material_piece/copper)
+	free_resources = list(/obj/item/material_piece/molitz,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/plastic)
 	available = list(/datum/manufacture/light_bulb,
 		/datum/manufacture/red_bulb,
 		/datum/manufacture/yellow_bulb,
@@ -2053,9 +2057,11 @@
 	icon_state = "fab-robotics"
 	icon_base = "robotics"
 	free_resource_amt = 5
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/surgsteel,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/plastic)
 
 	available = list(/datum/manufacture/robo_frame,
 	/datum/manufacture/full_cyborg_standard,
@@ -2154,10 +2160,14 @@
 	icon_state = "fab-med"
 	icon_base = "med"
 	free_resource_amt = 2
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass,
-		/obj/item/material_piece/cloth/cottonfabric)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/steel,
+		/obj/item/material_piece/surgsteel,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/cloth/cottonfabric,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/rubber/latex)
 
 	available = list(
 		/datum/manufacture/scalpel,
@@ -2222,9 +2232,14 @@
 	icon_state = "fab-mining"
 	icon_base = "mining"
 	free_resource_amt = 2
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/steel,
+		/obj/item/material_piece/cloth/cottonfabric,
+		/obj/item/material_piece/rubber/latex,
+		/obj/item/material_piece/rubber/synthrubber)
 	available = list(/datum/manufacture/pick,
 	/datum/manufacture/powerpick,
 	/datum/manufacture/blastchargeslite,
@@ -2275,9 +2290,10 @@
 	icon_state = "fab-hangar"
 	icon_base = "hangar"
 	free_resource_amt = 2
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/molitz)
 	available = list(
 #ifdef UNDERWATER_MAP
 		/datum/manufacture/sub/engine,
@@ -2318,7 +2334,9 @@
 	icon_state = "fab-jumpsuit"
 	icon_base = "jumpsuit"
 	free_resource_amt = 5
-	free_resources = list(/obj/item/material_piece/cloth/cottonfabric)
+	free_resources = list(/obj/item/material_piece/cloth/cottonfabric,
+		/obj/item/material_piece/rubber/latex,
+		/obj/item/material_piece/plastic)
 	accept_blueprints = 0
 	available = list(UNIFORM_LIST)
 	hidden = list(/datum/manufacture/breathmask,
@@ -2445,9 +2463,11 @@
 	icon_state = "fab-hangar"
 	icon_base = "hangar"
 	free_resource_amt = 2
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/rubber/synthrubber)
 
 /obj/machinery/manufacturer/personnel
 	name = "Personnel Equipment Manufacturer"
@@ -2455,9 +2475,11 @@
 	icon_state = "fab-access"
 	icon_base = "access"
 	free_resource_amt = 2
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/rubber/latex)
 	available = list(/datum/manufacture/id_card, /datum/manufacture/implant_access,	/datum/manufacture/implanter) //hey if you update these please remember to add it to /hop_and_uniform's list too
 	hidden = list(/datum/manufacture/id_card_gold, /datum/manufacture/implant_access_infinite)
 
@@ -2469,10 +2491,12 @@
 	icon_state = "fab-access"
 	icon_base = "access"
 	free_resource_amt = 5
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass,
-		/obj/item/material_piece/cloth/cottonfabric)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/cloth/cottonfabric,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/rubber/latex)
 	accept_blueprints = 0
 	available = list(/datum/manufacture/id_card, /datum/manufacture/implant_access,	/datum/manufacture/implanter, UNIFORM_LIST)
 
@@ -2488,7 +2512,9 @@
 	icon_state = "fab-crates"
 	icon_base = "crates"
 	free_resource_amt = 5
-	free_resources = list(/obj/item/material_piece/steel)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/organic/wood)
 	accept_blueprints = 0
 	available = list(/datum/manufacture/crate,
 	/datum/manufacture/packingcrate,
@@ -2506,9 +2532,12 @@
 	icon_state = "fab-engi"
 	icon_base = "engi"
 	free_resource_amt = 5
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass)
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/rubber/latex,
+		/obj/item/material_piece/rubber/synthrubber)
 
 	available = list(/datum/manufacture/screwdriver,
 	/datum/manufacture/wirecutters,
@@ -2559,9 +2588,11 @@
 	icon_state = "fab-crates"
 	icon_base = "crates"
 	free_resource_amt = 50
-	free_resources = list(/obj/item/material_piece/steel,
-		/obj/item/material_piece/copper,
-		/obj/item/material_piece/glass,
+	free_resources = list(/obj/item/material_piece/mauxite,
+		/obj/item/material_piece/pharosium,
+		/obj/item/material_piece/molitz,
+		/obj/item/material_piece/plastic,
+		/obj/item/material_piece/organic/wood,
 		/obj/item/material_piece/cloth/cottonfabric)
 	accept_blueprints = 0
 	available = list(

@@ -877,7 +877,7 @@
 				break
 
 			var/turf/wall/asteroid/AST = pick(turfs)
-			if (!istype(AST))
+			if (!istype(AST) || AST.ore) //only asteroid tiles without ore
 				turfs -= AST
 				continue
 			ore_tiles--
@@ -886,8 +886,6 @@
 			AST.amount = rand(O.amount_per_tile_min,O.amount_per_tile_max)
 			var/image/ore_overlay = image('icons/turf/asteroid.dmi',O.name)
 			ore_overlay.transform = turn(ore_overlay.transform, pick(0,90,180,-90))
-			ore_overlay.pixel_x += rand(-6,6)
-			ore_overlay.pixel_y += rand(-6,6)
 			AST.overlays += ore_overlay
 			O.onGenerate(AST)
 			AST.mining_health = O.mining_health
@@ -944,7 +942,7 @@
 				break
 
 			var/turf/wall/asteroid/AST = pick(turfs)
-			if (!istype(AST))
+			if (!istype(AST) || AST.ore)
 				turfs -= AST
 				continue
 			ore_tiles--
@@ -953,8 +951,6 @@
 			AST.amount = rand(O.amount_per_tile_min,O.amount_per_tile_max)
 			var/image/ore_overlay = image('icons/turf/asteroid.dmi',O.name)
 			ore_overlay.transform = turn(ore_overlay.transform, pick(0,90,180,-90))
-			ore_overlay.pixel_x += rand(-6,6)
-			ore_overlay.pixel_y += rand(-6,6)
 			AST.overlays += ore_overlay
 			O.onGenerate(AST)
 			AST.mining_health = O.mining_health

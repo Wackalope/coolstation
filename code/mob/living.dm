@@ -265,7 +265,7 @@
 		</div>
 		<div style=" text-align: center;">
 			[!gibbed ? {"
-				<a href="byond://winset?command=Ghost" style="display: inline-block; font-size: 130%; font-weight: bold;">Become a Ghost</a>
+				<a href="byond://winset?command=Ghost" style="display: inline-block; font-size: 130%; font-weight: bold;">Become a [prob(1) ? "Boo Berry" : "Ghost"]</a>
 				<br><em style="color: #666; font-size: 75%;">You can also use the "<a href="byond://winset?command=Ghost" style="font-family: 'Consolas', monospace;">Ghost</a>" command to observe.</em><br><br>
 			"} : ""]
 		<strong>You may be revived if someone clones you.</strong>
@@ -2273,9 +2273,12 @@ var/global/icon/human_static_base_idiocy_bullshit_crap = icon('icons/mob/human.d
 
 	var/obj/item/I = src.equipped()
 
-	if (!I || !isitem(I) || I.cant_drop || src.a_intent == INTENT_HARM)
-		slidekick(target)
-		return
+	if (!I || !isitem(I) || I.cant_drop) //so this needs to be two levels check or else you will *always* slide kick when on harm intent and drop your shit
+		if (src.a_intent == INTENT_HARM) //or do a runtime thing if not on harm intent (and you try to do it in one if statement)
+			slidekick(target)			 //i could absolutely be wrong and there's a better way to handle this but it's a priority fix
+			return						 //thank you for loving pupkin
+		else
+			return
 
 	if (istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
