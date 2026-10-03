@@ -63,6 +63,7 @@ ABSTRACT_TYPE(/obj/item/parts)
 	var/brute_dam = 0
 	var/burn_dam = 0
 	var/tox_dam = 0
+	var/rad_dam = 0
 	var/siemens_coefficient = 1
 	var/step_image_state = null // for legs, we leave footprints in this style (located in blood.dmi)
 	var/accepts_normal_human_overlays = 1 //for avoiding istype in update icon

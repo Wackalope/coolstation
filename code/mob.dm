@@ -2631,8 +2631,8 @@
 /mob/proc/get_oxygen_deprivation()
 	return 0
 
-///mob/proc/get_radiation()
-//	return radiation
+mob/proc/get_radiation_damage()
+	return 0
 
 /mob/UpdateName()
 	if (src.real_name)

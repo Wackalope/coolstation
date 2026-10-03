@@ -43,19 +43,21 @@
 	var/tox = M.get_toxin_damage()
 	var/burn = M.get_burn_damage()
 	var/brute = M.get_brute_damage()
+	var/rad = M.get_radiation_damage()
 
 	// contained here in order to change them easier
 	var/oxy_font = "<span style='color:#1F75D1'>"
 	var/tox_font = "<span style='color:#138015'>"
 	var/burn_font = "<span style='color:#CC7A1D'>"
 	var/brute_font = "<span style='color:#E60E4E'>"
+	var/rad_font = "<span style='color:#ff8000'>"
 
 	var/oxy_data = "[oxy > 50 ? "<span class='alert'>" : "[oxy_font]"][oxy]</span>"
 	var/tox_data = "[tox > 50 ? "<span class='alert'>" : "[tox_font]"][tox]</span>"
 	var/burn_data = "[burn > 50 ? "<span class='alert'>" : "[burn_font]"][burn]</span>"
 	var/brute_data = "[brute > 50 ? "<span class='alert'>" : "[brute_font]"][brute]</span>"
+	var/rad_data = "[rad > 50 ? "<span class='alert'>" : "[rad_font]"][rad]</span>"
 
-	var/rad_data = null
 	var/nrad_data = null
 	var/blood_data = null
 	var/brain_data = null
@@ -229,8 +231,8 @@
 	var/data = "--------------------------------<br>\
 	Analyzing Results for <span class='notice'>[M]</span>:<br>\
 	&emsp; Overall Status: [death_state > 1 ? "<span class='alert'>DEAD</span>" : "[colored_health]% healthy"]<br>\
-	&emsp; Damage Specifics: [oxy_data] - [tox_data] - [burn_data] - [brute_data]<br>\
-	&emsp; Key: [oxy_font]Suffocation</span>/[tox_font]Toxin</span>/[burn_font]Burns</span>/[brute_font]Brute</span><br>\
+	&emsp; Damage Specifics: [oxy_data] - [tox_data] - [burn_data] - [brute_data] - [rad_data]<br>\
+	&emsp; Key: [oxy_font]Suffocation</span>/[tox_font]Toxin</span>/[burn_font]Burns</span>/[brute_font]Brute</span>/[rad_font]Radiation</span><br>\
 	Body Temperature: [colored_temp]\
 	[rad_data ? "<br>[rad_data]" : null]\
 	[nrad_data ? "<br>[nrad_data]" : null]\
@@ -327,8 +329,9 @@
 		var/tox = round(M.get_toxin_damage())
 		var/burn = round(M.get_burn_damage())
 		var/brute = round(M.get_brute_damage())
+		var/rad = round(M.get_radiation_damage())
 
-		var/popup_text = "<span class='ol c pixel'><span class='vga'>[h_pct]%</span>\n<span style='color: #40b0ff;'>[oxy]</span> - <span style='color: #33ff33;'>[tox]</span> - <span style='color: #ffee00;'>[burn]</span> - <span style='color: #ff6666;'>[brute]</span></span>"
+		var/popup_text = "<span class='ol c pixel'><span class='vga'>[h_pct]%</span>\n<span style='color: #40b0ff;'>[oxy]</span> - <span style='color: #33ff33;'>[tox]</span> - <span style='color: #ffee00;'>[burn]</span> - <span style='color: #ff6666;'>[brute]</span> - <span style='color: #ff8000;'>[rad]</span></span>"
 		chat_text = make_chat_maptext(M, popup_text, force = 1)
 		if(chat_text)
 			chat_text.measure(C.client)

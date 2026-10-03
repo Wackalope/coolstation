@@ -6,6 +6,7 @@
 	var/oxyloss = 0
 	var/toxloss = 0
 	var/brainloss = 0
+	var/radloss = 0
 	//var/brain_op_stage = 0.0
 	//var/heart_op_stage = 0.0
 
@@ -308,3 +309,5 @@
 /mob/living/carbon/get_oxygen_deprivation()
 	return src.oxyloss
 
+/mob/living/carbon/get_radiation_damage()
+	return src.radloss

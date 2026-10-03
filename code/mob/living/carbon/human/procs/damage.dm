@@ -301,7 +301,7 @@
 	src.UpdateDamageIcon()
 	return
 
-/mob/living/carbon/human/TakeDamage(zone, brute, burn, tox, damage_type, disallow_limb_loss, var/bypass_reversal = FALSE)
+/mob/living/carbon/human/TakeDamage(zone, brute, burn, tox, rad, damage_type, disallow_limb_loss, var/bypass_reversal = FALSE)
 	if (src.nodamage) return
 
 	if (src.traitHolder && src.traitHolder.hasTrait("scienceteam"))
@@ -312,7 +312,7 @@
 	hit_twitch(src)
 
 	if (src.traitHolder && src.traitHolder.hasTrait("reversal") && !bypass_reversal)
-		src.HealDamage(zone, brute, burn, tox, TRUE)
+		src.HealDamage(zone, brute, burn, tox, rad, TRUE)
 		return
 
 	if (src.traitHolder && src.traitHolder.hasTrait("deathwish"))
@@ -421,10 +421,10 @@
 	*///Begone, message spam. Nobody asked for this
 	TakeDamage(zone, max(brute, 0), max(burn, 0), 0, damage_type)
 
-/mob/living/carbon/human/HealDamage(zone, brute, burn, tox, var/bypass_reversal = FALSE)
+/mob/living/carbon/human/HealDamage(zone, brute, burn, tox, rad, var/bypass_reversal = FALSE)
 
 	if (src.traitHolder && src.traitHolder.hasTrait("reversal"))
-		src.TakeDamage(zone, brute, burn, tox, null, FALSE, TRUE)
+		src.TakeDamage(zone, brute, burn, tox, rad, null, FALSE, TRUE)
 
 	src.take_toxin_damage(-tox)
 
@@ -432,6 +432,7 @@
 		var/bruteOrganCount = 0.0 		//How many organs have brute damage?
 		var/burnOrganCount = 0.0		//How many organs have burn damage?
 		var/toxOrganCount = 0.0			// gurbage
+		var/radOrganCount = 0.0			// bleughghbklskdjf
 
 		//Let's find out
 		for (var/organName in src.organs)
@@ -444,6 +445,8 @@
 					burnOrganCount ++
 				if (O.tox_dam > 0)
 					toxOrganCount ++
+				if (O.rad_dam > 0)
+					radOrganCount ++
 			else if (istype(extOrgan, /obj/item/parts))
 				var/obj/item/parts/O = extOrgan
 				if (O.brute_dam > 0)
@@ -452,8 +455,10 @@
 					burnOrganCount ++
 				if (O.tox_dam > 0)
 					toxOrganCount ++
+				if (O.rad_dam > 0)
+					radOrganCount ++
 
-		if (!bruteOrganCount && !burnOrganCount && !toxOrganCount) //No damage
+		if (!bruteOrganCount && !burnOrganCount && !toxOrganCount && !radOrganCount) //No damage
 			return
 
 		//This is ugly, but necessary
@@ -472,6 +477,10 @@
 		else
 			tox = 0
 
+		if (radOrganCount > 0)
+			rad = rad / radOrganCount
+		else
+			rad = 0
 
 		var/update = 0
 		for (var/organName in src.organs)
@@ -606,6 +615,18 @@
 			var/obj/item/parts/O = externalOrgan
 			tox += O.tox_dam
 	return tox
+
+/mob/living/carbon/human/get_radiation_damage()
+	var/rad = src.radloss
+	for (var/organName in src.organs)
+		var/obj/item/externalOrgan = src.organs["[organName]"]
+		if (istype(externalOrgan, /obj/item/organ))
+			var/obj/item/organ/O = externalOrgan
+			rad += O.rad_dam
+		else if (istype(externalOrgan, /obj/item/parts))
+			var/obj/item/parts/O = externalOrgan
+			rad += O.rad_dam
+	return rad
 
 /mob/living/carbon/human/get_eye_damage(var/tempblind = 0, var/side)
 	if (tempblind == 0)

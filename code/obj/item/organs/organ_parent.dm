@@ -49,6 +49,7 @@
 	var/brute_dam = 0
 	var/burn_dam = 0
 	var/tox_dam = 0
+	var/rad_dam = 0
 
 	var/robotic = 0
 	var/emagged = 0
